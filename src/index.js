@@ -5,6 +5,9 @@ const app = express();
 
 const PORT = 5050;
 
+//Express config
+app.use(express.static("src/public"));
+
 // Handlebars config
 app.engine("hbs", handlebars.engine({
     extname: "hbs",
