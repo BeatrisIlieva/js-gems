@@ -1,1 +1,26 @@
-<h1>Index page</h1>
+<main>
+  <form action="/" method="GET">
+    <input type="text" class="search" name="search" value="{{search}}" placeholder="Search..." />
+    <input
+      type="number"
+      name="from"
+      class="price"
+      value="{{from}}"
+      placeholder="Price from..."
+    />
+    <span>-</span>
+    <input
+      type="number"
+      name="to"
+      class="Price"
+      value="{{to}}"
+      placeholder="Price to..."
+    />
+    <input type="submit" value="search" />
+  </form>
+    {{#each earrings}}
+        {{>earringCard}}
+{{else}}
+<p>No earrings yet!</p>
+{{/each}}
+</main>
