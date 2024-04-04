@@ -4,7 +4,7 @@ const earringManager = require("../managers/earringManager");
 router.get("/", (req, res) => {
     const {search, from , to} = req.query;
   const earrings = earringManager.getAll(search, from, to);
-  res.render("index", {earrings});
+  res.render("index", {earrings, search, from , to});
 });
 
 router.get("/", (req, res) => {
