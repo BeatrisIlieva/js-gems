@@ -13,5 +13,9 @@ router.post("/register", async (req, res) => {
     res.redirect("/users/login");
 })
 
+router.get("/login", async (req, res) => {
+    res.render("users/login");
+});
+
 
 module.exports = router;
