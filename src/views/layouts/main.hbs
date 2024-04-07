@@ -33,18 +33,22 @@
           <li>
             <a href="/rings">Rings</a>
           </li>
-          <li>
-            <a href="users/shopping-bag">Shopping Bag</a>
-          </li>
-          <li>
-            <a href="users/login">Login</a>
-          </li>
-          <li>
-            <a href="users/register">Register</a>
-          </li>
-          <li>
-            <a href="users/logout">Logout</a>
-          </li>
+          {{#if isAuthenticated}}
+            <li>
+              <a href="shopping-bag/{{user._id}}">Shopping Bag</a>
+            </li>
+            <li>
+              <a href="users/logout">Logout</a>
+            </li>
+            <li>{{user.username}}</li>
+          {{else}}
+            <li>
+              <a href="users/login">Login</a>
+            </li>
+            <li>
+              <a href="users/register">Register</a>
+            </li>
+          {{/if}}
         </ul>
       </nav>
     </header>
