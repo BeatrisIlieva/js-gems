@@ -1,0 +1,9 @@
+{{#each earrings}}
+  <div>
+    <img src="{{imageUrl}}" />
+    <p>{{name}}</p>
+    <p><span>Price:</span> {{price}}</p>
+    <p><span>Description:</span> {{description}}</p>
+    <a class="btn" href="/earrings/{{_id}}/details">Details</a>
+  </div>
+{{/each}}

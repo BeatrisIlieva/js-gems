@@ -1,18 +1,10 @@
 const router = require("express").Router();
-const earringManager = require("../managers/earringManager");
+// const earringManager = require("../managers/earringManager");
 
 router.get("/", (req, res) => {
     const {search, from , to} = req.query;
-  const earrings = earringManager.getAll(search, from, to);
-  res.render("index", {earrings, search, from , to});
-});
-
-router.get("/", (req, res) => {
-  res.render("shopping-bag");
-});
-
-router.get("/earrings", (req, res) => {
-  res.render("earrings");
+  res.render("index", {search, from , to});
+  // res.render("index", {earrings, search, from , to});
 });
 
 router.get("/404", (req, res) => {

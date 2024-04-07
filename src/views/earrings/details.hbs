@@ -1,0 +1,10 @@
+<main>
+  <h1>name: {{earring.name}}</h1>
+  <img src="{{earring.imageUrl}}" alt="" />
+  <p>{{earring.description}}</p>
+  <p>{{earring.price}}</p>
+  <a href="/earrings/all">Back</a>
+  <form action="/shopping-bag/{{earring._id}}" method="POST">
+    <input type="submit" value="Add To Bag" />
+  </form>
+</main>

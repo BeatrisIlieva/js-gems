@@ -2,34 +2,19 @@ const router = require("express").Router();
 
 const earringManager = require("../managers/earringManager");
 
-router.get("/earrings", (req, res) => {
-  res.render("earrings");
+router.get("/all", async (req, res) => {
+  const earrings = await earringManager.getAll();
+  res.render("earrings/all", {earrings});
 });
 
-router.get("/add-to-bag", (req, res) => {
-  res.redirect("/shopping-bag");
-});
-
-router.post("/add-to-bag", (req, res) => {
-  const { name, description, imageUrl, price } = req.body;
-
-  earringManager.create({
-    name,
-    description,
-    imageUrl,
-    price: Number(price),
-  });
-
-  res.redirect("/shopping-bag");
-});
-
-router.get("/:earringId/details", (req, res) => {
-  const earring = earringManager.getOne(req.params.earringId);
+router.get("/:earringId/details", async (req, res) => {
+  const earring = await earringManager.getOne(req.params.earringId).lean();
   if (!earring) {
     return res.redirect("/404");
   }
   
-  res.render("earringDetails", { earring });
+  res.render("earrings/details", { earring });
 });
+
 
 module.exports = router;
