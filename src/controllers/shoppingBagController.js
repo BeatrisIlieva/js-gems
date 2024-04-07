@@ -20,8 +20,7 @@ router.post("/:jewelryId", isAuth, async (req, res) => {
     userId,
     jewelryId,
   });
-
-  res.redirect("shopping-bag/:userId");
+  res.redirect(`/shopping-bag/${userId}`);
 });
 
 module.exports = router;

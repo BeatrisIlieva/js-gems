@@ -1,4 +1,4 @@
-const Earring = require("../models/Earring");
+const Earring = require("../models/Jewelry");
 
 exports.getAll = async () => {
     let earrings = await Earring.find().lean();

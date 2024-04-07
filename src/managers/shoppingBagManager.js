@@ -1,5 +1,5 @@
 const ShoppingBag = require("../models/ShoppingBag");
-const Earring = require("../models/Earring");
+const Earring = require("../models/Jewelry");
 
 exports.create = async (data) => {
     const shoppingBag = new ShoppingBag(data);
