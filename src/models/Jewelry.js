@@ -17,6 +17,10 @@ const jewelrySchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  quantity: {
+    type: Number,
+    required: true,
+  },
   categoryId: {
     type: mongoose.Types.ObjectId,
     ref: "Category",
@@ -30,6 +34,7 @@ const jewelrySchema = new mongoose.Schema({
   goldCaratWeightId: {
     type: mongoose.Types.ObjectId,
     ref: "GoldCaratWeight",
+    required: false,
   },
   stoneTypeId: {
     type: mongoose.Types.ObjectId,
@@ -44,11 +49,7 @@ const jewelrySchema = new mongoose.Schema({
   stoneCaratWeightId: {
     type: mongoose.Types.ObjectId,
     ref: "StoneCaratWeight",
-  },
-  sizeId: {
-    type: mongoose.Types.ObjectId,
-    ref: "Size",
-    required: true,
+    required: false,
   },
 });
 
