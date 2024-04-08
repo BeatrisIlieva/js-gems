@@ -31,43 +31,54 @@ const jewelrySchema = new mongoose.Schema({
     ref: "Category",
     required: true,
   },
-  metals: [{
-    type: mongoose.Types.ObjectId,
-    ref: "Metal",
-    required: true,
-  }],
+  metals: [
+    {
+      kind: {
+        type: mongoose.Types.ObjectId,
+        ref: "Metal",
+        required: true,
+      },
+      caratWeight: {
+        type: mongoose.Decimal128,
+        required: false,
+      },
+    },
+  ],
   goldCaratWeight: {
     type: mongoose.Types.ObjectId,
     ref: "GoldCaratWeight",
     required: false,
   },
-  stones: [{
-    kind: {
+  stones: [
+    {
+      kind: {
+        type: mongoose.Types.ObjectId,
+        ref: "StoneType",
+        required: true,
+      },
+      color: {
+        type: mongoose.Types.ObjectId,
+        ref: "StoneColor",
+        required: true,
+      },
+      caratWeight: {
+        type: mongoose.Decimal128,
+        required: false,
+      },
+    },
+  ],
+  sizes: [
+    {
       type: mongoose.Types.ObjectId,
-      ref: "StoneType",
+      ref: "Size",
       required: true,
     },
-    color: {
-      type: mongoose.Types.ObjectId,
-      ref: "StoneColor",
-      required: true,
-    },
-    caratWeight: {
-      type: mongoose.Decimal128,
-      required: false,
-    },
-  }],
-  sizes: [{
-    type: mongoose.Types.ObjectId,
-    ref: "Size",
-    required: true,
-  }],
+  ],
 });
 
 const jewelry = mongoose.model("Jewelry", jewelrySchema);
 
 module.exports = jewelry;
-
 
 // const mongoose = require("mongoose");
 

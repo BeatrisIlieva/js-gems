@@ -49,6 +49,10 @@
               <a href="users/register">Register</a>
             </li>
           {{/if}}
+          <form method="GET">
+            <input type="text" id="searchInput" value="{{search}}" name="search" placeholder="Find Jewelry" />
+            <button id="searchButton">Search</button>
+          </form>
         </ul>
       </nav>
     </header>

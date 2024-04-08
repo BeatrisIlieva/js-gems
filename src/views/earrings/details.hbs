@@ -4,7 +4,10 @@
   <p><span>Price:</span> {{earring.price}}</p>
   <p><span>Category:</span> {{earring.category.title}}</p>
   {{#each earring.metals}}
-    <p><span>Metal:</span> {{title}}</p>
+        <p><span>Metals: </span>{{#if
+        this.caratWeight
+      }}{{this.caratWeight}}ct.{{/if}}
+      {{kind.title}}</p>
   {{/each}}
   {{#each earring.stones}}
     <p><span>Stone Type: </span>{{#if

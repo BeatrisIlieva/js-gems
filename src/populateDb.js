@@ -157,13 +157,13 @@ async function populateDb() {
     price: 48000.0,
     quantity: 20,
     category: allCategories[0],
-    metals: allMetals[3],
-    // goldCaratWeightId: "",
+    metals: [
+      {kind: allMetals[3], caratWeight: 0.56},
+    ],
     stones: [
       {kind: allStoneTypes[1], color: allStoneColors[4], caratWeight: 0.43 },
       {kind: allStoneTypes[4], color: allStoneColors[6] },
     ],
-    // stoneCaratWeightId: "",
     sizes: [allSizes[0], allSizes[1], allSizes[2]],
   });
 }

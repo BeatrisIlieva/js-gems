@@ -17,7 +17,8 @@ exports.getAll = async () => {
 exports.getOne = async (earringId) => {
     const earring = await Jewelry.findById(earringId)
     .populate("category")
-    .populate("metals")
+    .populate("metals.kind")
+    .populate("metals.caratWeight")
     .populate("stones.kind")
     .populate("stones.color")
     .populate("stones.caratWeight")
