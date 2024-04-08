@@ -17,6 +17,9 @@
   <p>Size: {{size.measurement}}</p>
   <p>Quantity: {{quantity}}</p>
   <div class="quantity-input">
-  <input type="number" class="quantity-field" value="{{quantity}}" min="{{minQuantity}}" max="{{maxQuantity}}">
+  <form action="/shopping-bag/{{jewelry._id}}/{{size._id}}/update" method="POST">
+    <input type="number" class="quantity-field" name="updatedQuantity" value="{{quantity}}" min="{{minQuantity}}" max="{{maxQuantity}}">
+    <input type="submit" value="Update">
+  </form>
 </div>
 {{/each}}

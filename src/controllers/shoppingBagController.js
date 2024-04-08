@@ -43,4 +43,18 @@ router.post("/:jewelryId", isAuth, async (req, res) => {
   res.redirect(`/shopping-bag/${userId}`);
 });
 
+router.post("/:jewelryId/:sizeId/update", async (req, res) => {
+  const userId = req.user._id;
+  const jewelryId = req.params.jewelryId;
+  const sizeId = req.params.sizeId;
+
+  const {updatedQuantity} = req.body;
+
+  await shoppingBagManager.updateQuantity(userId, jewelryId, sizeId, updatedQuantity);
+
+  res.redirect(`/shopping-bag/${userId}`);
+})
+
 module.exports = router;
+
+
