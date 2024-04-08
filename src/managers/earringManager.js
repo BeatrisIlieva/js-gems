@@ -1,9 +1,29 @@
-const Earring = require("../models/Jewelry");
+const Jewelry = require("../models/Jewelry");
+const Category = require("../models/Category");
+const Metal = require("../models/Metal");
+const Size = require("../models/Size");
+const StoneType = require("../models/StoneType");
+const StoneColor = require("../models/StoneColor");
 
 exports.getAll = async () => {
-    let earrings = await Earring.find().lean();
+  const categoryName = await Category.findOne({ title: "Earring" });
+  category = categoryName._id;
 
-    return earrings;
+  const earrings = await Jewelry.find({ category, quantity: { $gt: 0 } }).lean();
+
+  return earrings;
 };
 
-exports.getOne = (earringId) => Earring.findById(earringId);
+exports.getOne = async (earringId) => {
+    const earring = await Jewelry.findById(earringId)
+    .populate("category")
+    .populate("metals")
+    .populate("stones.kind")
+    .populate("stones.color")
+    .populate("stones.caratWeight")
+    .populate("sizes")
+    .lean();
+
+    return earring;
+}
+

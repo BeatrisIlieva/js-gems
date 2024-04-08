@@ -1,5 +1,22 @@
 <h1>Shopping Bag</h1>
 {{#each jewelries}}
-{{name}}
-<img src="{{imageUrl}}" alt="">
+  <img src="{{jewelry.firstImageUrl}}" />
+  <p>{{jewelry.title}}</p>
+  <p><span>Price:</span> {{jewelry.price}}</p>
+  <p><span>Category:</span> {{jewelry.category.title}}</p>
+  {{#each jewelry.metals}}
+    <p><span>Metal:</span> {{title}}</p>
+  {{/each}}
+  {{#each jewelry.stones}}
+    <p><span>Stone Type: </span>{{#if
+        this.caratWeight
+      }}{{this.caratWeight}}ct.{{/if}}
+      {{color.title}}
+      {{kind.title}}</p>
+  {{/each}}
+  <p>Size: {{size.measurement}}</p>
+  <p>Quantity: {{quantity}}</p>
+  <div class="quantity-input">
+  <input type="number" class="quantity-field" value="{{quantity}}" min="{{minQuantity}}" max="{{maxQuantity}}">
+</div>
 {{/each}}

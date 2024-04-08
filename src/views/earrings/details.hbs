@@ -1,10 +1,26 @@
-<main>
-  <h1>name: {{earring.name}}</h1>
-  <img src="{{earring.imageUrl}}" alt="" />
-  <p>{{earring.description}}</p>
-  <p>{{earring.price}}</p>
-  <a href="/earrings/all">Back</a>
+<div>
+  <img src="{{earring.firstImageUrl}}" />
+  <p>{{earring.title}}</p>
+  <p><span>Price:</span> {{earring.price}}</p>
+  <p><span>Category:</span> {{earring.category.title}}</p>
+  {{#each earring.metals}}
+    <p><span>Metal:</span> {{title}}</p>
+  {{/each}}
+  {{#each earring.stones}}
+    <p><span>Stone Type: </span>{{#if
+        this.caratWeight
+      }}{{this.caratWeight}}ct.{{/if}}
+      {{color.title}}
+      {{kind.title}}</p>
+  {{/each}}
   <form action="/shopping-bag/{{earring._id}}" method="POST">
+    <label for="size">Size:</label>
+    <select id="size" name="size">
+      {{#each earring.sizes}}
+        <option value="{{this._id}}">{{this.measurement}}</option>
+      {{/each}}
+    </select>
     <input type="submit" value="Add To Bag" />
   </form>
-</main>
+  <a href="/earrings/all">Back</a>
+</div>
