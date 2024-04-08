@@ -21,24 +21,12 @@ router.post("/:jewelryId", isAuth, async (req, res) => {
 
   const {size} = req.body;
 
-  const jewelry = await Jewelry.findById(jewelryId);
-  oldJewelryQuantity = Number(jewelry.quantity);
-  newJewelryQuantity = oldJewelryQuantity - DEFAULT_ADD_QUANTITY;
-  await jewelry.updateOne({quantity: newJewelryQuantity});
-
-  const bagItem = await ShoppingBag.findOne({ userId: userId, jewelryId: jewelryId, sizeId: size });
-  
-  if (!bagItem) {
-    await shoppingBagManager.create({
-      userId,
-      jewelryId,
-      sizeId: size,
-      quantity: DEFAULT_ADD_QUANTITY,
-    });
-  } else {
-    newQuantity = Number(bagItem.quantity) + DEFAULT_ADD_QUANTITY;
-    await bagItem.updateOne({quantity: newQuantity});
-  }
+  await shoppingBagManager.createOrUpdate({
+    userId,
+    jewelryId,
+    sizeId: size,
+    quantity: DEFAULT_ADD_QUANTITY,
+  })
 
   res.redirect(`/shopping-bag/${userId}`);
 });
