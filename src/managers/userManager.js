@@ -3,7 +3,14 @@ const jwt = require("../lib/jwt");
 const User = require("../models/User");
 const {SECRET} = require("../config/config");
 
-exports.register = (userData) => User.create(userData);
+exports.register = async (userData) => {
+  const user = await User.findOne({email: userData.email});
+
+  if (user) {
+    throw new Error("Email already exists!");
+  }
+  return User.create(userData);
+};
 
 exports.login = async (email, password) => {
   const user = await User.findOne({ email });
