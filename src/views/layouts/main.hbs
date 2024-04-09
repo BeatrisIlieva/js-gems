@@ -15,11 +15,13 @@
       <nav>
         <ul>
           <li>
-            <img
-              class="logo"
-              src="https://res.cloudinary.com/deztgvefu/image/upload/v1707847670/template_images/Screenshot_2024-02-13_at_20.06.31-modified_pyjryy.png"
-              alt="logo"
-            />
+            <a href="/">
+              <img
+                class="logo"
+                src="https://res.cloudinary.com/deztgvefu/image/upload/v1707847670/template_images/Screenshot_2024-02-13_at_20.06.31-modified_pyjryy.png"
+                alt="logo"
+              />
+            </a>
           </li>
           <li>
             <a href="/earrings/all">Earrings</a>
@@ -50,12 +52,23 @@
             </li>
           {{/if}}
           <form method="GET">
-            <input type="text" id="searchInput" value="{{search}}" name="search" placeholder="Find Jewelry" />
+            <input
+              type="text"
+              id="searchInput"
+              value="{{search}}"
+              name="search"
+              placeholder="Find Jewelry"
+            />
             <button id="searchButton">Search</button>
           </form>
         </ul>
       </nav>
     </header>
+    {{#each errorMessages}}
+      <div id="notifications">
+        <p id="notification-message">{{this}}</p>
+      </div>
+    {{/each}}
     {{{body}}}
   </body>
 </html>
