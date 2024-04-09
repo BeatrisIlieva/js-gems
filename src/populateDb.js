@@ -103,7 +103,7 @@ async function populateDb() {
   });
 
   await Size.create({
-    measurement: 5.86,
+    measurement: 4.86,
   });
 
   await Size.create({
@@ -127,7 +127,7 @@ async function populateDb() {
   });
 
   await Size.create({
-    measurement: 20.3,
+    measurement: 19.3,
   });
 
   await Size.create({
