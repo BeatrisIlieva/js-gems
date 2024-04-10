@@ -9,7 +9,12 @@ exports.register = async (userData) => {
   if (user) {
     throw new Error("Email already exists!");
   }
-  return User.create(userData);
+  
+  const createdUser = await User.create(userData);
+
+  const token = await generateToken(createdUser);
+
+  return token;
 };
 
 exports.login = async (email, password) => {
@@ -25,6 +30,12 @@ exports.login = async (email, password) => {
     throw new Error("Cannot find email or password!");
   }
 
+  const token = await generateToken(user);
+
+  return token;
+};
+
+async function generateToken(user) {
   const payload = {
     _id: user._id,
     email: user.email,
@@ -33,4 +44,4 @@ exports.login = async (email, password) => {
   const token = await jwt.sign(payload, SECRET, {expiresIn: "7d"});
 
   return token;
-};
+}

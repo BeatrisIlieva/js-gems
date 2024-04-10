@@ -11,11 +11,14 @@ router.post("/register", async (req, res) => {
   const { email, password, repeatPassword } = req.body;
 
   try {
-    await userManager.register({ email, password, repeatPassword });
+    const token = await userManager.register({ email, password, repeatPassword });
 
-    res.redirect("/users/login");
+    res.cookie(TOKEN_KEY, token);
+    res.redirect("/");
+
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
+
     res.status(404).render("users/register", { errorMessages });
   }
 });
@@ -25,18 +28,33 @@ router.get("/login", async (req, res) => {
 });
 
 router.post("/login", async (req, res, next) => {
-  const { email, password } = req.body;
+    const { email, password } = req.body;
+  
+    try {
+      const token = await userManager.login(email, password);
+  
+      res.cookie(TOKEN_KEY, token, { httpOnly: true });
+  
+      res.redirect("/");
+    } catch (err) {
+        const errorMessages = extractErrorMessages(err);
+        res.status(404).render("users/login", { errorMessages });
+    }
+  });
 
-  try {
-    const token = await userManager.login(email, password);
+// router.post("/login", async (req, res, next) => {
+//   const { email, password } = req.body;
 
-    res.cookie(TOKEN_KEY, token, { httpOnly: true });
+//   try {
+//     const token = await userManager.login(email, password);
 
-    res.redirect("/");
-  } catch (error) {
-    next(error);
-  }
-});
+//     res.cookie(TOKEN_KEY, token, { httpOnly: true });
+
+//     res.redirect("/");
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 router.get("/logout", (req, res) => {
   res.clearCookie("auth");

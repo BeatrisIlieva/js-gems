@@ -2,7 +2,7 @@ const express = require("express");
 
 const expressConfig = require("./config/expressConfig");
 const handlebarsConfig = require("./config/handlebarsConfig");
-const errorHandler = require("./middlewares/errorHandlerMiddleware");
+const {errorHandler} = require("./middlewares/errorHandlerMiddleware");
 const dbConnect = require("./config/dbConfig");
 const routes = require("./routes");
 
@@ -21,6 +21,6 @@ dbConnect()
 
 app.use(routes);
 
-app.use(errorHandler);
+// app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`));
