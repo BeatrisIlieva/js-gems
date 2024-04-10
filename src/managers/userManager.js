@@ -44,4 +44,6 @@ async function generateToken(user) {
   const token = await jwt.sign(payload, SECRET, {expiresIn: "7d"});
 
   return token;
-}
+};
+
+exports.delete = (userId) => User.findByIdAndDelete(userId);

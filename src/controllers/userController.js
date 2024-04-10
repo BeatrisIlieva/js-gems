@@ -8,7 +8,7 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  const { email, password, repeatPassword } = req.body;
+  const { email, password, repeatPassword} = req.body;
 
   try {
     const token = await userManager.register({ email, password, repeatPassword });
@@ -19,7 +19,7 @@ router.post("/register", async (req, res) => {
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
 
-    res.status(404).render("users/register", { errorMessages });
+    res.status(404).render("users/register", { errorMessages, email });
   }
 });
 
@@ -42,23 +42,21 @@ router.post("/login", async (req, res, next) => {
     }
   });
 
-// router.post("/login", async (req, res, next) => {
-//   const { email, password } = req.body;
-
-//   try {
-//     const token = await userManager.login(email, password);
-
-//     res.cookie(TOKEN_KEY, token, { httpOnly: true });
-
-//     res.redirect("/");
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 router.get("/logout", (req, res) => {
-  res.clearCookie("auth");
+  res.clearCookie(TOKEN_KEY);
   res.redirect("/users/login");
 });
+
+router.get("/:userId/delete", async (req, res) => {
+  try {
+    userId = req.params.userId;
+    await userManager.delete(userId);
+    res.clearCookie(TOKEN_KEY);
+    res.redirect("/users/register");
+  } catch(err){
+    res.redirect("/", {error: "Unsuccessful deletion!"});
+  }
+
+})
 
 module.exports = router;

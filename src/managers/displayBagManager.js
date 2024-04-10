@@ -3,48 +3,17 @@ const Size = require("../models/Size");
 const { DEFAULT_MIN_QUANTITY } = require("../constants/shoppingBag");
 const Jewelry = require("../models/Jewelry");
 
-exports.createOrUpdate = async ({
-  userId,
-  jewelryId,
-  sizeId: size,
-  quantity: DEFAULT_ADD_QUANTITY,
-}) => {
-  const jewelry = await Jewelry.findById(jewelryId);
-  oldJewelryQuantity = Number(jewelry.quantity);
-  newJewelryQuantity = oldJewelryQuantity - DEFAULT_ADD_QUANTITY;
-  await jewelry.updateOne({ quantity: newJewelryQuantity });
-
-  let bagItem = await ShoppingBag.findOne({
-    userId: userId,
-    jewelryId: jewelryId,
-    sizeId: size,
-  });
-
-  if (!bagItem) {
-    bagItem = await ShoppingBag.create({
-      userId,
-      jewelryId,
-      sizeId: size,
-      quantity: DEFAULT_ADD_QUANTITY,
-    });
-  } else {
-    newQuantity = Number(bagItem.quantity) + DEFAULT_ADD_QUANTITY;
-    await bagItem.updateOne({ quantity: newQuantity });
-  }
-
-  return bagItem;
-};
-
 exports.getAll = async (userId) => {
   const result = await ShoppingBag.find({ userId });
 
-  const jewelries = {};
+  const bagItems = {};
   for (let i = 0; i < result.length; i++) {
     const jewelryId = result[i].jewelryId.toString();
     const bagItemId = result[i]._id;
     const jewelry = await Jewelry.findById(jewelryId)
       .populate("category")
-      .populate("metals")
+      .populate("metals.kind")
+      .populate("metals.caratWeight")
       .populate("stones.kind")
       .populate("stones.color")
       .populate("stones.caratWeight")
@@ -53,7 +22,8 @@ exports.getAll = async (userId) => {
     const size = await Size.findById(sizeId).populate("measurement").lean();
     const quantity = result[i].quantity;
     const maxQuantity = jewelry.quantity + quantity;
-    jewelries[bagItemId] = {
+    bagItems[bagItemId] = {
+      bagItemId,
       jewelry: jewelry,
       size: size,
       quantity: quantity,
@@ -62,15 +32,13 @@ exports.getAll = async (userId) => {
     };
   }
 
-  return jewelries;
+  return bagItems;
 };
 
-exports.updateQuantity = async (userId, jewelryId, sizeId, updatedQuantity) => {
-  const bagItem = await ShoppingBag.findOne({
-    userId: userId,
-    jewelryId: jewelryId,
-    sizeId: sizeId,
-  });
+exports.updateQuantity = async (bagItemId, updatedQuantity) => {
+  const bagItem = await ShoppingBag.findById(bagItemId);
+
+  const jewelryId = bagItem.jewelryId.toString();
 
   const jewelry = await Jewelry.findById(jewelryId);
 
@@ -97,7 +65,7 @@ exports.updateQuantity = async (userId, jewelryId, sizeId, updatedQuantity) => {
       if (Number(updatedQuantity) === 0) {
         await bagItem.deleteOne();
       }
-      await jewelry.updateOne({ quantity: newQuantity });
     }
+    await jewelry.updateOne({ quantity: newQuantity });
   }
 };

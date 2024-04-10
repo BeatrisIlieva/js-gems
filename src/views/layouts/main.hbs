@@ -37,10 +37,13 @@
           </li>
           {{#if isAuthenticated}}
             <li>
-              <a href="shopping-bag/{{user._id}}">Shopping Bag</a>
+              <a href="display-bag/{{user._id}}">Shopping Bag</a>
             </li>
             <li>
               <a href="users/logout">Logout</a>
+            </li>
+            <li>
+                <a href="/users/{{user._id}}/delete">Delete Profile</a>
             </li>
             <li>{{user.email}}</li>
           {{else}}

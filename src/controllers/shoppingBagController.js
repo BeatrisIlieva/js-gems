@@ -1,52 +1,61 @@
-const router = require("express").Router();
-const { isAuth } = require("../middlewares/authMiddleware");
-const {
-  DEFAULT_ADD_QUANTITY,
-  DEFAULT_MIN_QUANTITY,
-} = require("../constants/shoppingBag");
+// const router = require("express").Router();
+// const { isAuth } = require("../middlewares/authMiddleware");
+// const {
+//   DEFAULT_ADD_QUANTITY,
+//   DEFAULT_MIN_QUANTITY,
+// } = require("../constants/shoppingBag");
+// const { extractErrorMessages } = require("../utils/errorHelpers");
 
-const shoppingBagManager = require("../managers/shoppingBagManager");
+// const shoppingBagManager = require("../managers/shoppingBagManager");
 
-router.get("/:userId", isAuth, async (req, res) => {
-  const userId = req.params.userId;
+// router.get("/:userId", isAuth, async (req, res) => {
+//   const userId = req.params.userId;
 
-  const jewelries = await shoppingBagManager.getAll(userId);
+//   const jewelries = await shoppingBagManager.getAll(userId);
 
-  res.render("bag/display", { jewelries, DEFAULT_MIN_QUANTITY });
-});
+//   res.render("bag/display", { jewelries, DEFAULT_MIN_QUANTITY});
+// });
 
-router.post("/:jewelryId", isAuth, async (req, res) => {
-  const userId = req.user._id;
+// router.post("/:jewelryId", isAuth, async (req, res) => {
+//   const userId = req.user._id;
 
-  const jewelryId = req.params.jewelryId;
+//   const jewelryId = req.params.jewelryId;
 
-  const { size } = req.body;
+//   const { size } = req.body;
 
-  await shoppingBagManager.createOrUpdate({
-    userId,
-    jewelryId,
-    sizeId: size,
-    quantity: DEFAULT_ADD_QUANTITY,
-  });
+//   await shoppingBagManager.createOrUpdate({
+//     userId,
+//     jewelryId,
+//     sizeId: size,
+//     quantity: DEFAULT_ADD_QUANTITY,
+//   });
 
-  res.redirect(`/shopping-bag/${userId}`);
-});
+//   res.redirect(`/shopping-bag/${userId}`);
+// });
 
-router.post("/:jewelryId/:sizeId/update", isAuth, async (req, res) => {
-  const userId = req.user._id;
-  const jewelryId = req.params.jewelryId;
-  const sizeId = req.params.sizeId;
+// router.post("/:jewelryId/:sizeId/update", isAuth, async (req, res) => {
+//   const userId = req.user._id;
+//   const jewelryId = req.params.jewelryId;
+//   const sizeId = req.params.sizeId;
 
-  const { updatedQuantity } = req.body;
+//   const { updatedQuantity } = req.body;
 
-  await shoppingBagManager.updateQuantity(
-    userId,
-    jewelryId,
-    sizeId,
-    updatedQuantity
-  );
+//   try {
+//     await shoppingBagManager.updateQuantity(
+//       userId,
+//       jewelryId,
+//       sizeId,
+//       updatedQuantity
+//     );
+  
+//     res.redirect(`/shopping-bag/${userId}`);
+//   } catch (err) {
+//       const errorMessages = extractErrorMessages(err);
 
-  res.redirect(`/shopping-bag/${userId}`);
-});
+//       res.redirect(`/shopping-bag/${userId}`);
 
-module.exports = router;
+//       // res.status(404).render("bag/display", jewelries, DEFAULT_MIN_QUANTITY, { errorMessages });
+//   }
+// });
+
+// module.exports = router;

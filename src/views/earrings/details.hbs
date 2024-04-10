@@ -16,7 +16,7 @@
       {{color.title}}
       {{kind.title}}</p>
   {{/each}}
-  <form action="/shopping-bag/{{earring._id}}" method="POST">
+  <form action="/add-to-bag/{{earring._id}}" method="POST">
     <label for="size">Size:</label>
     <select id="size" name="size">
       {{#each earring.sizes}}

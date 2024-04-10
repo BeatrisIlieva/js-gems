@@ -9,7 +9,8 @@ router.get("/all", async (req, res) => {
 });
 
 router.get("/:earringId/details", async (req, res) => {
-  const earring = await earringManager.getOne(req.params.earringId);
+  const earringId = req.params.earringId;
+  const earring = await earringManager.getOne(earringId);
 
   if (!earring) {
     return res.redirect("/404");
