@@ -216,7 +216,7 @@ async function populateDb() {
     quantity: 20,
     category: allCategories[1],
     metals: [
-      {kind: allMetals[2], caratWeight: null},
+      {kind: allMetals[1], caratWeight: null},
     ],
     stones: [
       {kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 2.01 },
@@ -240,7 +240,7 @@ async function populateDb() {
     stones: [
       {kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 0.90 },
     ],
-    sizes: [allSizes[2]],
+    sizes: [allSizes[1]],
   });
 
   await Jewelry.create({
@@ -302,21 +302,41 @@ async function populateDb() {
   });
 
   await Jewelry.create({
-    title: "Daytime",
+    title: "Chandelier",
     firstImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703179269/earrings/8/classics_earrings_diamond_eadpdrmedw_e-1_vptn8c.webp",
+      "https://res.cloudinary.com/deztgvefu/image/upload/v1703167483/earrings/1/diamond_chandelier_earrings.webp",
     secondImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703179268/earrings/8/classics_earrings_diamond_eadpdrmedw_e-2_h1edi3.webp",
-    price: 27000.00,
+      "https://res.cloudinary.com/deztgvefu/image/upload/v1703167483/earrings/1/diamond_chandelier_earrings_eadpchsmct.webp",
+    price: 120000.00,
     quantity: 20,
     category: allCategories[1],
     metals: [
       {kind: allMetals[3], caratWeight: null},
     ],
     stones: [
-      {kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 6.41 },
+      {kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 16.81 },
     ],
-    sizes: [allSizes[1]],
+    sizes: [allSizes[2]],
+  });
+
+  await Jewelry.create({
+    title: "Unforgettable",
+    firstImageUrl:
+      "https://res.cloudinary.com/deztgvefu/image/upload/v1703262109/bracelets/8/forget_me_not_bracelet_diamond_and_sapphire_brsprfflrfmn_e_1_bc0a5y.webp",
+    secondImageUrl:
+      "https://res.cloudinary.com/deztgvefu/image/upload/v1703262106/bracelets/8/forget_me_not_bracelet_diamond_and_sapphire_brsprfflrfmn_e_2_yli2iv.webp",
+    price: 24000.00,
+    quantity: 20,
+    category: allCategories[0],
+    metals: [
+      {kind: allMetals[3], caratWeight: null},
+    ],
+    stones: [
+      {kind: allStoneTypes[3], color: allStoneColors[2], caratWeight: 4.43 },
+      {kind: allStoneTypes[4], color: allStoneColors[0], caratWeight: 3.22 },
+      {kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 4.37 },
+    ],
+    sizes: [allSizes[6], allSizes[7], allSizes[8]],
   });
 }
 
