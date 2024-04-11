@@ -1,9 +1,5 @@
 const Jewelry = require("../models/Jewelry");
 const Category = require("../models/Category");
-const Metal = require("../models/Metal");
-const Size = require("../models/Size");
-const StoneType = require("../models/StoneType");
-const StoneColor = require("../models/StoneColor");
 
 exports.getAll = async () => {
   const categoryName = await Category.findOne({ title: "Earring" });

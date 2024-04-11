@@ -1,4 +1,3 @@
-const User = require("../models/User");
 const Profile = require("../models/Profile");
 
 exports.createProfile = async (userId) => {
@@ -15,25 +14,10 @@ exports.findProfile = async (userId) => {
   return profile;
 };
 
-exports.updateProfile = async (
-  userId,
-  firstName,
-  lastName,
-  phoneNumber,
-  country,
-  city,
-  address
-) => {
-  
-  const profileData = {
-    firstName,
-    lastName,
-    phoneNumber,
-    country,
-    city,
-    address,
-  };
-  const profile = await Profile.findOneAndUpdate({user: userId}, profileData).lean();
-
-  return profile;
+exports.updateProfile = async (userId, profileData) => {
+   await Profile.findOneAndUpdate(
+    { user: userId },
+    profileData,
+    { runValidators: true, new: true }
+  );
 };

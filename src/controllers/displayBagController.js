@@ -9,11 +9,15 @@ const { extractErrorMessages } = require("../utils/errorHelpers");
 const displayBagManager = require("../managers/displayBagManager");
 
 router.get("/:userId", isAuth, async (req, res) => {
-  const userId = req.params.userId;
+  try{
+    const userId = req.params.userId;
 
-  const bagItems = await displayBagManager.getAll(userId);
-
-  res.render("bag/display", { bagItems, DEFAULT_MIN_QUANTITY});
+    const bagItems = await displayBagManager.getAll(userId);
+  
+    res.render("bag/display", { bagItems, DEFAULT_MIN_QUANTITY});
+  } catch(err) {
+    res.render('500');
+  }
 });
 
 router.post("/:userId", isAuth, async (req, res) => {

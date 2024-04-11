@@ -11,14 +11,18 @@ router.post("/:jewelryId", isAuth, async (req, res) => {
 
   const { size } = req.body;
 
-  await addToBagManager.createOrUpdate({
-    userId,
-    jewelryId,
-    sizeId: size,
-    quantity: DEFAULT_ADD_QUANTITY,
-  });
-
-  res.redirect(`/display-bag/${userId}`);
+  try {
+    await addToBagManager.createOrUpdate({
+      userId,
+      jewelryId,
+      sizeId: size,
+      quantity: DEFAULT_ADD_QUANTITY,
+    });
+  
+    res.redirect(`/display-bag/${userId}`);
+  } catch(err) {
+    res.render('500');
+  }
 });
 
 module.exports = router;

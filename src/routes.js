@@ -15,6 +15,10 @@ router.use("/profiles", profileController);
 router.use("/add-to-bag", addToBagController);
 router.use("/display-bag", displayBagController);
 
+router.get("*", (req, res) => {
+    res.render("500");
+});
+
 // router.get("*", (req, res) => {
 //   res.redirect("/404");
 // });

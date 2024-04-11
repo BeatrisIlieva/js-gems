@@ -1,17 +1,20 @@
 const router = require("express").Router();
+const ShoppingBag = require("../models/ShoppingBag");
 
-router.get("/", (req, res) => {
-  res.render("index");
+router.get("/", async (req, res) => {
+  const userId = req.user?._id;
+  try {
+    const items = await ShoppingBag.find({ userId }).lean();
+
+    bagCount = items.length;
+    res.render("index", { bagCount });
+  } catch (err) {
+    res.render("500");
+  }
 });
 
-// router.get("/search", async (req, res) => {
-//   const {search} = req.query;
-//   const jewelries = await searchManager.getAll(search);
-//   res.render("searchResults", {jewelries, search})
-// })
-
 router.get("/404", (req, res) => {
-    res.render("404");
-})
+  res.render("404");
+});
 
 module.exports = router;
