@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("../lib/jwt");
 const User = require("../models/User");
+const profileManager = require("./profileManager");
 const {SECRET} = require("../config/config");
 
 exports.register = async (userData) => {
@@ -13,6 +14,8 @@ exports.register = async (userData) => {
   const createdUser = await User.create(userData);
 
   const token = await generateToken(createdUser);
+
+  await profileManager.createProfile(createdUser._id);
 
   return token;
 };

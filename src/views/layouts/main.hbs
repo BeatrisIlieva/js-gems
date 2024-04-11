@@ -43,7 +43,10 @@
               <a href="users/logout">Logout</a>
             </li>
             <li>
-                <a href="/users/{{user._id}}/delete">Delete Profile</a>
+              <a href="/users/{{user._id}}/delete">Delete Profile</a>
+            </li>
+            <li>
+              <a href="/profiles/{{user._id}}/edit">Edit Profile</a>
             </li>
             <li>{{user.email}}</li>
           {{else}}
