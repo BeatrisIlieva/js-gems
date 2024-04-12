@@ -1,4 +1,4 @@
-{{#each earrings}}
+{{#each jewelries}}
   <div>
     <img src="{{firstImageUrl}}" />
     <p>{{title}}</p>
@@ -10,6 +10,6 @@
     {{#each stones}}
     <p><span>Stone Type:</span>{{#if this.caratWeight }}{{this.caratWeight}}ct.{{/if}} {{color.title}} {{kind.title}}</p>
     {{/each}}
-    <a class="btn" href="/earrings/{{_id}}/details">Details</a>
+    <a class="btn" href="/jewelries/{{_id}}/details">Details</a>
   </div>
 {{/each}}

@@ -1,29 +1,29 @@
 <div>
-  <img src="{{earring.firstImageUrl}}" />
+  <img src="{{jewelry.firstImageUrl}}" />
   <p>{{earring.title}}</p>
-  <p><span>Price:</span> {{earring.price}}</p>
-  <p><span>Category:</span> {{earring.category.title}}</p>
-  {{#each earring.metals}}
+  <p><span>Price:</span> {{jewelry.price}}</p>
+  <p><span>Category:</span> {{jewelry.category.title}}</p>
+  {{#each jewelry.metals}}
         <p><span>Metals: </span>{{#if
         this.caratWeight
       }}{{this.caratWeight}}ct.{{/if}}
       {{kind.title}}</p>
   {{/each}}
-  {{#each earring.stones}}
+  {{#each jewelry.stones}}
     <p><span>Stone Type: </span>{{#if
         this.caratWeight
       }}{{this.caratWeight}}ct.{{/if}}
       {{color.title}}
       {{kind.title}}</p>
   {{/each}}
-  <form action="/add-to-bag/{{earring._id}}" method="POST">
+  <form action="/add-to-bag/{{jewelry._id}}" method="POST">
     <label for="size">Size:</label>
     <select id="size" name="size">
-      {{#each earring.sizes}}
+      {{#each jewelry.sizes}}
         <option value="{{this._id}}">{{this.measurement}}</option>
       {{/each}}
     </select>
     <input type="submit" value="Add To Bag" />
   </form>
-  <a href="/earrings/all">Back</a>
+  <a href="/jewelries/{{jewelryType}}">Back</a>
 </div>
