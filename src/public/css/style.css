@@ -1,3 +1,9 @@
-body {
-    background-color: pink;
-}
+@import "https://use.fontawesome.com/releases/v6.5.1/css/all.css";
+@import "base.css";
+@import "logo.css";
+@import "nav.css";
+@import "forms.css";
+@import "button.css";
+@import "error-messages.css";
+@import "colors.css";
+

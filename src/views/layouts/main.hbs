@@ -3,22 +3,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JSGems</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/colors.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/icons.css"/>
     <link
       rel="shortcut icon"
       type="image/x-icon"
       href="https://res.cloudinary.com/deztgvefu/image/upload/v1707847670/template_images/Screenshot_2024-02-13_at_20.06.31-modified_pyjryy.png"
     />
   </head>
-  <body>
-    <header>
+  <body class="body">
+    <header class="header">
+        <div class="logo-img-container">
+      <a href="/">
+        <img
+          class="logo-img"
+          src="https://res.cloudinary.com/deztgvefu/image/upload/v1707745660/template_images/Screenshot_2024-02-12_at_15.46.17_fqqkeh.png"
+          alt="logo"
+        />
+      </a>
+    </div>
       {{>nav}}
+      {{>icons}}
     </header>
+    <div class="error-container">
+    <label for="closeError" class="close-button">×</label>
     {{#each errorMessages}}
+        <input type="checkbox" id="errorCheckbox{{ forloop.index }}" class="error-checkbox" >
+        <div class="error" id="errorContainer{{ forloop.index }}">
+            <label for="errorCheckbox{{ forloop.index }}" class="close-button">×</label>
+            {{this}}
+        </div>
+        {{/each}}
+</div>
+    {{!-- {{#each errorMessages}}
       <div id="notifications">
         <p id="notification-message">{{this}}</p>
       </div>
-    {{/each}}
+    {{/each}} --}}
     {{{body}}}
   </body>
+  <footer class="footer">
+    <div>
+        © 2024 Django Gems | Beatris Ilieve | beatrisilieve@icloud.com
+    </div>
+</footer>
 </html>

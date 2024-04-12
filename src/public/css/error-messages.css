@@ -1,0 +1,38 @@
+.error-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.error {
+    background-color: var(--red-pink);
+    font-size: 18px;
+    text-shadow: var(--shade);
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.close-button {
+    position: absolute;
+    margin-top: 12px;
+    top: 0;
+    right: 20px;
+    cursor: pointer;
+}
+
+.error-checkbox {
+    display: none;
+}
+
+.error-checkbox:checked ~ .error {
+    opacity: 0;
+}
+
+.error-checkbox:checked ~ .error .close-button {
+    display: none;
+}

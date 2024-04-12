@@ -1,0 +1,10 @@
+<div class="error-container">
+    <label for="closeError" class="close-button">×</label>
+    {{#each errorMessages}}
+        <input type="checkbox" id="errorCheckbox{{ forloop.index }}" class="error-checkbox" >
+        <div class="error" id="errorContainer{{ forloop.index }}">
+            <label for="errorCheckbox{{ forloop.index }}" class="close-button">×</label>
+            {{this}}
+        </div>
+        {{/each}}
+</div>

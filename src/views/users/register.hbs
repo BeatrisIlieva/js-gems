@@ -1,4 +1,44 @@
-<main>
+<main class="main">
+    <section class="form-container-login-or-register">
+        <div class="left-login-or-register-container">
+            <form method="post" action="/users/register">
+                <h4 class="form-login-or-register-title">New Customer</h4>
+                <ul role="list">
+                    <li class="form-item">
+                        <input type="text" id="email" placeholder="Enter your email" value="{{email}}" name="email" />
+                    </li>
+                    <li class="form-item">
+                        <input type="password" id="password" placeholder="Enter your password" name="password" />
+                    </li>
+                    <li class="form-item">
+                        <input type="password" id="repeatPassword" placeholder="Confirm your password" name="repeatPassword" />
+                    </li>
+                </ul>
+                <input type="hidden" name="next"/>
+                <button class="register-button button filled_green">Register</button>
+            </form>
+        </div>
+        <div class="right-login-or-register-container">
+            <h4 class="form-login-or-register-title">Password Requirements:</h4>
+            <form>
+                <ul role="list">
+                    <li class="form-item">
+                        Your password must contain at least 8 characters.
+                    </li>
+                      <li class="form-item">
+                        Your password can't be entirely numeric.
+                    </li>
+                    </li>
+                    <li class="form-item">
+                        Your password can't be entirely alphabetic.
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </section>
+</main>
+
+{{!-- <main>
   <h1>Register Form</h1>
   <div class="form">
     <form method="POST">
@@ -16,4 +56,4 @@
   <div>
     <p>Have an account already? <a href="/users/login">Login</a></p>
   </div>
-</main>
+</main> --}}

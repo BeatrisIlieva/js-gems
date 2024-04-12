@@ -1,16 +1,7 @@
-<nav>
-  <ul>
-    <li>
-      <a href="/">
-        <img
-          class="logo"
-          src="https://res.cloudinary.com/deztgvefu/image/upload/v1707847670/template_images/Screenshot_2024-02-13_at_20.06.31-modified_pyjryy.png"
-          alt="logo"
-        />
-      </a>
-    </li>
-    <li>
-      <a href="/jewelries/earrings">Earrings</a>
+<nav class="navigation">
+  <ul class="nav-list" role="list">
+    <li class="nav-item">
+      <a class="zoom-text" href="/jewelries/earrings">Earrings</a>
     </li>
     <li>
       <a href="/jewelries/necklaces">Necklaces</a>
@@ -21,40 +12,5 @@
     <li>
       <a href="/jewelries/rings">Rings</a>
     </li>
-    {{#if isAuthenticated}}
-      <li>
-        <a href="/display-bag/{{user._id}}">Shopping Bag</a>
-      </li>
-      <li>
-        <a href="/users/logout">Logout</a>
-      </li>
-      <li>
-        <a href="/users/{{user._id}}/delete">Delete Profile</a>
-      </li>
-      <li>
-        <a href="/profiles/edit">Edit Profile</a>
-      </li>
-      <li>{{user.email}}</li>
-      {{#if bagCount}}
-        <li><span>{{bagCount}}</span></li>
-      {{/if}}
-    {{else}}
-      <li>
-        <a href="/users/login">Login</a>
-      </li>
-      <li>
-        <a href="/users/register">Register</a>
-      </li>
-    {{/if}}
-    <form method="GET">
-      <input
-        type="text"
-        id="searchInput"
-        value="{{search}}"
-        name="search"
-        placeholder="Find Jewelry"
-      />
-      <button id="searchButton">Search</button>
-    </form>
   </ul>
 </nav>

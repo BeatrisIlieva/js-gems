@@ -1,0 +1,54 @@
+<ul class="icon-list" role="list">
+  <li class="nav-icon">
+    <form method="GET">
+      <input
+        type="checkbox"
+        id="search-toggle"
+        class="search-toggle"
+        value="{{search}}"
+        name="search"
+        placeholder="Find Jewelry"
+      />
+      <input
+        class="search"
+        name="search"
+        value="{{search}}"
+        placeholder="Find a Jewelry"
+        style="text-align: center"
+      />
+      <label for="search-toggle" class="search-icon">
+        <i
+          class="button-no-margin-left icon-button fa-solid fa-magnifying-glass"
+        ></i>
+      </label>
+    </form>
+  </li>
+  {{#if isAuthenticated}}
+    <li class="nav-icon">
+      <a href="/display-bag/{{user._id}}">Shopping Bag
+          {{#if bagCount}} <i class="icon-button fa-solid fa-bag-shopping"></i>
+      <span>{{bagCount}}</span>
+    {{/if}}
+    </a>
+    </li>
+    <li class="nav-icon">
+      <a href="/users/logout">Logout</a>
+    </li>
+    <li class="nav-icon">
+      <a href="/users/{{user._id}}/delete">Delete Profile</a>
+    </li>
+    <li class="nav-icon">
+      <a href="/profiles/edit">Edit Profile</a>
+    </li>
+    <li>{{user.email}}</li>
+
+  {{else}}
+    <li class="nav-icon">
+      <a href="/users/login"><i class="icon-button fa-regular fa-user"></i></a>
+    </li>
+    <li class="nav-icon">
+      <a href="/users/register">Register</a>
+    </li>
+  {{/if}}
+
+</ul>
