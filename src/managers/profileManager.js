@@ -15,9 +15,10 @@ exports.findProfile = async (userId) => {
 };
 
 exports.updateProfile = async (userId, profileData) => {
-   await Profile.findOneAndUpdate(
+   const profile = await Profile.findOneAndUpdate(
     { user: userId },
     profileData,
     { runValidators: true, new: true }
   );
+  return profile;
 };

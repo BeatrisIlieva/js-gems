@@ -20,6 +20,25 @@ router.get("/", isAuth, async (req, res) => {
   
         res.status(404).render("orders/completeOrder", { errorMessages });
     }
-})
+});
+
+router.post("/", isAuth, async(req, res) => {
+    const userId = req.user._id;
+
+    profileData = req.body;
+
+    try {
+        await profileManager.updateProfile(userId, profileData);
+
+        res.redirect("/complete-transaction");
+
+    } catch(err) {
+        const errorMessages = extractErrorMessages(err);
+
+        const profile = await profileManager.findProfile(userId);
+  
+        res.status(404).render("orders/completeOrder", { errorMessages, profile });
+    }
+});
 
 module.exports = router;

@@ -1,1 +1,96 @@
-{{>profileDetailsForm}}
+<section class="form-container">
+  <div>
+    <form method="POST">
+      <h4 class="form-title">Personal Information</h4>
+      <ul role="list">
+        <li class="form-item">
+          Your First Name
+        </li>
+        <li class="form-item">
+          <input
+            type="text"
+            id="firstName"
+            value="{{profile.firstName}}"
+            name="firstName"
+            placeholder="Enter Your First Name"
+          />
+        </li>
+        <li class="form-item">
+          Your Surname
+        </li>
+        <li class="form-item">
+          <input
+            type="lastName"
+            id="lastName"
+            value="{{profile.lastName}}"
+            name="lastName"
+            placeholder="Enter Your Last Name"
+          />
+        </li>
+        <li class="form-item">
+          Your Phone Number
+        </li>
+        <li class="form-item">
+          <input
+            type="phoneNumber"
+            id="phoneNumber"
+            value="{{profile.phoneNumber}}"
+            name="phoneNumber"
+            placeholder="Enter Your Phone Number"
+          />
+        </li>
+      </ul>
+      <h4 class="form-title">Delivery Information</h4>
+      <ul role="list">
+        <li class="form-item">
+          Country
+        </li>
+        <li class="form-item">
+          <input
+            type="country"
+            id="country"
+            value="{{profile.country}}"
+            name="country"
+            placeholder="Enter Your Country"
+          />
+        </li>
+        <li class="form-item">
+          City
+        </li>
+        <li class="form-item">
+          <input
+            type="city"
+            id="city"
+            value="{{profile.city}}"
+            name="city"
+            placeholder="Enter Your City"
+          />
+        </li>
+        <li class="form-item">
+          Address
+        </li>
+        <li class="form-item">
+          <input
+            type="address"
+            id="address"
+            value="{{profile.address}}"
+            name="address"
+            placeholder="Enter Your Address"
+          />
+        </li>
+      </ul>
+      <button class="edit-btn button hover filled_green" type="submit"><i
+          class="fa-regular fa-floppy-disk"
+        ></i>
+        Confirm and Save
+      </button>
+    </form>
+  </div>
+  <div class="form-img-container">
+    <img
+      class="form-img"
+      src="https://res.cloudinary.com/deztgvefu/image/upload/v1706522736/template_images/pink-delivery-car-deliver-express-with-cardboard-boxes-cartoon-shipping-transportation-concept-pink-background-3d-rendering_56104-1526_ttrakq.jpg"
+      alt="image"
+    />
+  </div>
+</section>
