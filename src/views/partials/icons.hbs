@@ -1,5 +1,43 @@
-<ul class="icon-list" role="list">
-  <li class="nav-icon">
+<div class="icon-container">
+  {{!-- {% if likes_count > 0 %}
+        <button class="btn">
+            <a class="zoom-text" href="{% url 'display_liked_jewelries' %}">
+                <i class="icon-button fa-regular fa-heart"
+                ><span class="likes-count-nav">({{ likes_count }})</span></i
+                >
+            </a>
+        </button>
+    {% else %} --}}
+  {{! <button class="btn">
+            <a class="zoom-text" href="{% url 'display_liked_jewelries' %}">
+                <i class="icon-button fa-regular fa-heart"></i>
+            </a>
+        </button>
+    {% endif %}  }}
+  {{#if bagCount}}
+    <a href="/display-bag/{{user._id}}">
+      <i class="icon-button fa-solid fa-bag-shopping"><span
+          class="cart-count-nav"
+        >({{bagCount}})</span></i>
+    </a>
+  {{else}}
+      <a href="/display-bag/{{user._id}}">
+        <i class="icon-button fa-solid fa-bag-shopping"></i>
+      </a>
+  {{/if}}
+  {{#unless isAuthenticated}}
+    <a href="/users/login">
+      <i class="icon-button fa-regular fa-user"></i>
+    </a>
+  {{else}}
+    <a href="/profiles/edit">
+      <i class="icon-button fa-regular fa-user"></i>
+    </a>
+  {{/unless}}
+</div>
+
+{{!-- <div class="icon-container">
+<button class="btn">
     <form method="GET">
       <input
         type="checkbox"
@@ -22,33 +60,18 @@
         ></i>
       </label>
     </form>
-  </li>
+</button>
   {{#if isAuthenticated}}
-    <li class="nav-icon">
-      <a href="/display-bag/{{user._id}}">Shopping Bag
-          {{#if bagCount}} <i class="icon-button fa-solid fa-bag-shopping"></i>
-      <span>{{bagCount}}</span>
+<button class="btn">
+          <a href="/display-bag/{{user._id}}">
+          {{#if bagCount}}
+          <i class="icon-button fa-solid fa-bag-shopping"></i>
+      <span class="cart-count-nav">{{bagCount}}</span>
+            {{/if}}
+</button>
+      {{else}}
+<button class="btn">
+    <a href="/users/login"><i class="icon-button fa-solid fa-bag-shopping"></i></a>
+</button>
     {{/if}}
-    </a>
-    </li>
-    <li class="nav-icon">
-      <a href="/users/logout">Logout</a>
-    </li>
-    <li class="nav-icon">
-      <a href="/users/{{user._id}}/delete">Delete Profile</a>
-    </li>
-    <li class="nav-icon">
-      <a href="/profiles/edit">Edit Profile</a>
-    </li>
-    <li>{{user.email}}</li>
-
-  {{else}}
-    <li class="nav-icon">
-      <a href="/users/login"><i class="icon-button fa-regular fa-user"></i></a>
-    </li>
-    <li class="nav-icon">
-      <a href="/users/register">Register</a>
-    </li>
-  {{/if}}
-
-</ul>
+</div> --}}

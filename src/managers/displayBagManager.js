@@ -2,14 +2,19 @@ const ShoppingBag = require("../models/ShoppingBag");
 const Size = require("../models/Size");
 const { DEFAULT_MIN_QUANTITY } = require("../constants/shoppingBag");
 const Jewelry = require("../models/Jewelry");
+const { Decimal128 } = require("bson");
 
 exports.getAll = async (userId) => {
   const result = await ShoppingBag.find({ userId });
 
   const bagItems = {};
+
+  let subTotal = 0;
+
   for (let i = 0; i < result.length; i++) {
     const jewelryId = result[i].jewelryId.toString();
     const bagItemId = result[i]._id;
+    
     const jewelry = await Jewelry.findById(jewelryId)
       .populate("category")
       .populate("metals.kind")
@@ -21,18 +26,21 @@ exports.getAll = async (userId) => {
     const sizeId = result[i].sizeId;
     const size = await Size.findById(sizeId).populate("measurement").lean();
     const quantity = result[i].quantity;
+    const total = quantity * jewelry.price;
     const maxQuantity = jewelry.quantity + quantity;
     bagItems[bagItemId] = {
       bagItemId,
       jewelry: jewelry,
       size: size,
       quantity: quantity,
+      total: total,
       maxQuantity: maxQuantity,
       minQuantity: DEFAULT_MIN_QUANTITY,
     };
+    subTotal += total;
   }
 
-  return bagItems;
+  return {bagItems, subTotal};
 };
 
 exports.updateQuantity = async (bagItemId, updatedQuantity) => {

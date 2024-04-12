@@ -5,7 +5,7 @@
 
 .header .nav-list {
     display: flex;
-    gap: 8px;
+    gap: 2vw;
 }
 
 .header .nav-list a {
@@ -23,74 +23,15 @@
     transform: scale(1.2);
 }
 
-
-.header .icon-list {
+.header .icon-container {
     display: flex;
-    gap: 8px;
-};
-
-.dropdown-content a:hover {
-    color: var(--dark-pink);
-    text-decoration-color: var(--dark-blue);
+    justify-content: space-between;
+    gap: 1vw;
 }
 
-
-
-.search-toggle {
-    display: none;
-}
-
-.search {
-    display: none;
-    position: absolute;
-    top: 144px;
-    right: 180px;
-    z-index: 1;
-    border-radius: 12px;
-    border-color: var(--white);
-    width: 30vw;
-}
-
-.search input {
-    border-radius: 12px;
-}
-
-.search-toggle:checked + .search {
-    display: inline-block;
-}
-
-label.search-icon {
-    cursor: pointer;
-}
-
-.icon-item {
-    display: inline-block;
-}
-
-.icon-container {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-
-.icon-button {
+.header .icon-container a {
     color: var(--white);
-    margin-left: 10px;
-}
-
-.button-no-margin-left {
-    margin-left: 0px;
-}
-
-
-.header .dropdown-content i {
-    color: var(--dark-blue);
-    margin-left: 18px;
-}
-
-.header i:hover, .header li:hover {
-    color: var(--dark-pink);
+    text-decoration: none;
 }
 
 .likes-count-nav {
@@ -105,39 +46,6 @@ label.search-icon {
     font-weight: 200;
 }
 
-.icon-dropdown {
-    left: -262px;
-    top: 48px;
-    color: white;
-    min-width: 300px;
-    max-width: 400px;
-    justify-content: left;
-    text-align: left;
-}
-
-#profile-item-drop-down-name {
-    color: var(--dark-blue);
-    font-size: 20px;
-    background-color: var(--dark-pink);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-    padding-top: 8px;
-    padding-bottom: 0px;
-    padding-left: 8px;
-    padding-right: 8px;
-    text-align: center;
-    cursor: default;
-}
-
-#profile-item-drop-down-email {
-    color: var(--dark-blue);
-    font-size: 16px;
-    background-color: var(--dark-pink);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-    padding: 8px;
-    text-align: center;
-    cursor: default;
+.header i:hover, .header li:hover {
+    color: var(--dark-pink);
 }

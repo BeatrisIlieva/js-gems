@@ -5,16 +5,19 @@ const {
   DEFAULT_MIN_QUANTITY,
 } = require("../constants/shoppingBag");
 const { extractErrorMessages } = require("../utils/errorHelpers");
-
 const displayBagManager = require("../managers/displayBagManager");
+const {getBagCount} = require("../utils/bagCounterHelper");
 
 router.get("/:userId", isAuth, async (req, res) => {
   try{
     const userId = req.params.userId;
 
-    const bagItems = await displayBagManager.getAll(userId);
+    const {bagItems, subTotal} = await displayBagManager.getAll(userId);
+    bagCount = await getBagCount(userId);
+
+    const bagCountGreaterThanOne = bagCount > 1;
   
-    res.render("bag/display", { bagItems, DEFAULT_MIN_QUANTITY});
+    res.render("bag/display", { bagItems, DEFAULT_MIN_QUANTITY, bagCount, bagCountGreaterThanOne, subTotal});
   } catch(err) {
     res.render('500');
   }

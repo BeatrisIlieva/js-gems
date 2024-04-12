@@ -1,12 +1,10 @@
 const router = require("express").Router();
-const ShoppingBag = require("../models/ShoppingBag");
+const {getBagCount} = require("../utils/bagCounterHelper");
 
 router.get("/", async (req, res) => {
   const userId = req.user?._id;
   try {
-    const items = await ShoppingBag.find({ userId }).lean();
-
-    bagCount = items.length;
+    bagCount = await getBagCount(userId);
     res.render("index", { bagCount });
   } catch (err) {
     res.render("500");
