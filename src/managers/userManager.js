@@ -42,6 +42,8 @@ async function generateToken(user) {
   const payload = {
     _id: user._id,
     email: user.email,
+    shoppingBag: [],
+    wishlist: [],
   }
 
   const token = await jwt.sign(payload, SECRET, {expiresIn: "7d"});

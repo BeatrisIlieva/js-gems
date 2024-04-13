@@ -7,6 +7,7 @@ const profileController = require("./controllers/profileController");
 const addToBagController = require("./controllers/addToBagController");
 const displayBagController = require("./controllers/displayBagController");
 const completeOrderController = require("./controllers/completeOrderController");
+const completeTransactionController = require("./controllers/completeTransactionController");
 
 
 router.use(homeController);
@@ -16,6 +17,7 @@ router.use("/profiles", profileController);
 router.use("/add-to-bag", addToBagController);
 router.use("/display-bag", displayBagController);
 router.use("/complete-order", completeOrderController);
+router.use("/complete-transaction", completeTransactionController);
 
 router.get("*", (req, res) => {
     res.render("500");

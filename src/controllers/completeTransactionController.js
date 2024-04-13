@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { isAuth } = require("../middlewares/authMiddleware");
 const { extractErrorMessages } = require("../utils/errorHelpers");
+const completeTransactionManager = require("../managers/completeTransactionManager");
 
 router.get("/", isAuth, async (req, res) => {
     try {
@@ -19,7 +20,7 @@ router.post("/", isAuth, async(req, res) => {
     cardData = req.body;
 
     try {
-        await cardManager.verifyCardDetails(userId, cardData);
+        await completeTransactionManager.verifyCardDetails(cardData);
 
         res.redirect("/");
 

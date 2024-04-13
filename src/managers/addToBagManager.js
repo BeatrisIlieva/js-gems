@@ -31,6 +31,9 @@ exports.createOrUpdate = async ({
     await bagItem.updateOne({ quantity: newQuantity });
   }
 
+  payload.shoppingBag.push(bagItem);
+  console.log(bagItem);
+
   return bagItem;
 };
 
