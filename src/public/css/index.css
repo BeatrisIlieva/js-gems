@@ -1,0 +1,42 @@
+.hero {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 24px 96px;
+}
+
+.hero-wrapper {
+    text-align: center;
+    width: 40%;
+}
+
+.hero-img-container {
+    height: calc(66vh - 48px);
+    width: calc(66vh - 48px);
+    aspect-ratio: 1 / 1;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16%;
+
+}
+
+.hero-wrapper .hero-title {
+    padding-bottom: 2px;
+    font-size: 22px;
+    font-style: italic;
+}
+
+.hero-wrapper .hero-sub-title {
+    padding-bottom:8px;
+    font-size: 20px;
+    font-style: italic;
+}
+
+.hero-wrapper .hero-desc {
+    font-size: 18px;
+    padding-bottom: 12px;
+}
