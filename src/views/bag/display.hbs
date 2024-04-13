@@ -20,7 +20,6 @@
       />
     </div>
   </div>
-{{/unless}}
 <section class="shopping-cart-wrapper">
   <div class="left-container">
     {{#if bagCountGreaterThanOne}}
@@ -76,10 +75,10 @@
           </div>
           <div class="price-and-quantity">
             <p class="item-price">
-              {{total}}
+              {{totalPrice}}
             </p>
             <div class="item-quantity">
-              <form method="POST">
+              <form method="POST" action="/bag/{{jewelry._id}}/update">
                 <label>
                   <input
                     type="number"
@@ -91,6 +90,7 @@
                   />
                 </label>
                 <input type="hidden" name="bagItemId" value="{{bagItemId}}" />
+                <input type="hidden" name="sizeId" value="{{size._id}}" />
                 <button
                   type="submit"
                   name="update_quantity"
@@ -139,3 +139,4 @@
     </div>
   </div>
 </section>
+{{/unless}}

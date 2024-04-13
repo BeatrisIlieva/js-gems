@@ -26,18 +26,18 @@ exports.getAll = async (userId) => {
     const sizeId = result[i].sizeId;
     const size = await Size.findById(sizeId).populate("measurement").lean();
     const quantity = result[i].quantity;
-    const total = quantity * jewelry.price;
+    const totalPrice = result[i].totalPrice;
     const maxQuantity = jewelry.quantity + quantity;
     bagItems[bagItemId] = {
       bagItemId,
       jewelry: jewelry,
       size: size,
       quantity: quantity,
-      total: total,
+      totalPrice: TotalPrice,
       maxQuantity: maxQuantity,
       minQuantity: DEFAULT_MIN_QUANTITY,
     };
-    subTotal += total;
+    subTotal += totalPrice;
   }
 
   return {bagItems, subTotal};
@@ -61,7 +61,8 @@ exports.updateQuantity = async (bagItemId, updatedQuantity) => {
       `Please choose quantity between ${DEFAULT_MIN_QUANTITY} and ${availableQuantity}`
     );
   } else {
-    await bagItem.updateOne({ quantity: updatedQuantity });
+    totalPrice = jewelry.price * Decimal128(updatedQuantity);
+    await bagItem.updateOne({ quantity: updatedQuantity,  totalPrice});
 
     if (alreadyAddedQuantity < updatedQuantity) {
       difference = updatedQuantity - alreadyAddedQuantity;

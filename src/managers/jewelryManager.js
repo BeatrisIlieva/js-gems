@@ -24,6 +24,7 @@ exports.getOne = async (jewelryId) => {
     .populate("stones.color")
     .populate("stones.caratWeight")
     .populate("sizes")
+    .populate("price")
     .lean();
 
   return jewelry;

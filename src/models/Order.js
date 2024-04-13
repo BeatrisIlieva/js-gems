@@ -1,31 +1,27 @@
 const mongoose = require("mongoose");
 
-const shoppingBagSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
   user: {
     type: mongoose.Types.ObjectId,
     ref: "User",
     required: true,
   },
-  jewelry: {
+  jewelryId: {
     type: mongoose.Types.ObjectId,
     ref: "Earring",
     required: true,
   },
-  size: {
+  sizeId: {
     type: mongoose.Types.ObjectId,
     ref: "Size",
     required: true,
   },
   quantity: {
     type: Number,
-    default: 0,
+    required: true,
   },
-  totalPrice: {
-    type: Number,
-    default: 0,
-  }
 });
 
-const shoppingBag = mongoose.model("ShoppingBag", shoppingBagSchema);
+const order = mongoose.model("Order", orderSchema);
 
-module.exports = shoppingBag;
+module.exports = order;

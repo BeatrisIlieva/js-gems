@@ -1,11 +1,14 @@
 const ShoppingBag = require("../models/ShoppingBag");
 const Size = require("../models/Size");
 const Jewelry = require("../models/Jewelry");
+const bagManager = require("../managers/bagManager");
+
+
 
 exports.createOrUpdate = async ({
-  userId,
-  jewelryId,
-  sizeId: size,
+  user,
+  jewelry,
+  size,
   quantity: DEFAULT_ADD_QUANTITY,
 }) => {
   const jewelry = await Jewelry.findById(jewelryId);
@@ -13,11 +16,7 @@ exports.createOrUpdate = async ({
   newJewelryQuantity = oldJewelryQuantity - DEFAULT_ADD_QUANTITY;
   await jewelry.updateOne({ quantity: newJewelryQuantity });
 
-  let bagItem = await ShoppingBag.findOne({
-    userId: userId,
-    jewelryId: jewelryId,
-    sizeId: size,
-  });
+  let bagItem = await bagManager.findOne({user, jewelry, size});
 
   if (!bagItem) {
     bagItem = await ShoppingBag.create({
@@ -31,9 +30,12 @@ exports.createOrUpdate = async ({
     await bagItem.updateOne({ quantity: newQuantity });
   }
 
+  totalPrice = jewelry.price * Decimal128(updatedQuantity);
+  await bagItem.updateOne({ quantity: updatedQuantity, totalPrice });
+
   payload.shoppingBag.push(bagItem);
-  console.log(bagItem);
 
   return bagItem;
 };
 
+exports.updateBagItemTotalPrice = (bagItemId) => {};

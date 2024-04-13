@@ -8,7 +8,7 @@ const Size = require("./models/Size");
 const Jewelry = require("./models/Jewelry");
 
 async function populateDb() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/JSgems");
+  await mongoose.connect("mongodb://127.0.0.1:27017/JSGems");
 
   await Category.create({
     title: "Bracelet",

@@ -24,6 +24,7 @@ router.get("/:jewelryId/details", async (req, res) => {
 
     res.render("jewelries/details", { jewelry });
   } catch (err) {
+    console.log(err.message);
     res.render("500");
   }
 });

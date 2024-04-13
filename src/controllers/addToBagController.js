@@ -5,17 +5,17 @@ const { DEFAULT_ADD_QUANTITY } = require("../constants/shoppingBag");
 const addToBagManager = require("../managers/addToBagManager");
 
 router.post("/:jewelryId", isAuth, async (req, res) => {
-  const userId = req.user._id;
+  const user = req.user._id;
 
-  const jewelryId = req.params.jewelryId;
+  const jewelry = req.params.jewelryId;
 
   const { size } = req.body;
 
   try {
     await addToBagManager.createOrUpdate({
-      userId,
-      jewelryId,
-      sizeId: size,
+      user,
+      jewelry,
+      size,
       quantity: DEFAULT_ADD_QUANTITY,
     });
   

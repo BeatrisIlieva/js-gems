@@ -16,7 +16,7 @@
       {{color.title}}
       {{kind.title}}</p>
   {{/each}}
-  <form action="/add-to-bag/{{jewelry._id}}" method="POST">
+  <form action="/bag/{{jewelry._id}}/create" method="POST">
     <label for="size">Size:</label>
     <select id="size" name="size">
       {{#each jewelry.sizes}}
