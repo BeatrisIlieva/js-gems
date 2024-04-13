@@ -1,0 +1,47 @@
+.orders-section {
+    text-align: center;
+    border-bottom-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+    border-bottom-style: dotted;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--dark-pink);
+}
+
+.orders-history-title {
+    text-align: center;
+    border-bottom-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+    border-bottom-style: dotted;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--dark-pink);
+}
+
+.orders-section .order-title {
+    font-size: 18px;
+    margin-bottom: 4px;
+
+}
+
+.orders-section .order-content {
+    font-size: 16px;
+    margin-bottom: 4px;
+    width: 50vh;
+}
+
+.order-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: center;
+    color: var(--dark-blue);
+}
+
+.order-title-content {
+    text-align: center;
+}
+
+.orders-history-container {
+    padding: 12px 96px;
+}
+
+

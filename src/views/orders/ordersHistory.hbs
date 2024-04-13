@@ -1,0 +1,50 @@
+
+{{#unless orderItems}}
+    <section class="hero">
+        <div class="hero-wrapper">
+            <h3 class="hero-title">
+                Start your shopping journey!
+            </h3>
+            <h4 class="hero-sub-title">
+                Make your first order today and discover amazing jewelries.
+            </h4>
+        </div>
+        <div class="hero-img-container">
+            <img
+                    class="hero-img"
+                    src="https://res.cloudinary.com/deztgvefu/image/upload/v1707674135/template_images/newshero19_candyny_gm6tqg.webp"
+                    alt=""
+            />
+        </div>
+    </section>
+{{else}}
+    <div class="orders-history-container">
+        <section class="orders-history-title">
+            <h2>My orders</h2>
+        </section>
+        {{#each orderItems}}
+            <section class="orders-section">
+                <div class="order-title-content">
+                    <h3 class="order-title">Order ID: {{ _id }}</h3>
+                    <h3 class="order-title">Status: {{ status }}</h3>
+                    <h3 class="order-title">Total Order Price: {{ subTotal }}</h3>
+                </div>
+                <div class="order-wrapper">
+                    {{#each jewelries}}
+                        <div class="order-content">
+                            <p>Price: {{ jewelry.price }}</p>
+                            <p>Quantity: {{ quantity }}</p>
+                            <p>Total Price per Jewelry: {{ totalPrice }}</p>
+                        </div>
+                        <div class="order-content">
+                            <p>
+                                <img class="order-image" src="{{ jewelry.firstImageUrl }}" alt="image">
+                            </p>
+                        </div>
+                    {{/each}}
+                </div>
+            </section>
+        {{/each}}
+    </div>
+{{/unless}}
+
