@@ -6,7 +6,9 @@ const orderSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  jewelries: [],
+  jewelries: {
+    type: Object,
+  },
   subTotal: {
     type: Number
   },
