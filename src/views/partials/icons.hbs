@@ -25,6 +25,9 @@
         <i class="icon-button fa-solid fa-bag-shopping"></i>
       </a>
   {{/if}}
+      <a href="/order-history/{{user._id}}">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+      </a>
   {{#unless isAuthenticated}}
     <a href="/users/login">
       <i class="icon-button fa-regular fa-user"></i>

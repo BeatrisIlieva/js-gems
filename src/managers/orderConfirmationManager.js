@@ -8,16 +8,10 @@ exports.create = async (userId) => {
 
   const order = await Order.create({
     user: userId,
+    status: "Pending",
   });
 
   order.jewelries = bagItems;
-
-//   for (let i = 0; i < bagItems.length; i++) {
-//     const bagItem = bagItems[i];
-//     console.log(bagItem);
-
-//     order.jewelries.push(bagItem);
-//     };
 
   order.subTotal = subTotal;
 
@@ -31,10 +25,3 @@ exports.getOne = async (userId) => {
     return order;
 }
 
-// exports.getProfileDetails = async (userId) => {
-//     const profile = Profile.findOne({user: userId});
-
-//     const firstName = profile.firstName;
-//     const lastName = profile.lastName;
-//     const phone_number = profile
-// }
