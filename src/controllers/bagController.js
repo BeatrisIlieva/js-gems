@@ -70,6 +70,7 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
     console.log(err.message);
     res.render("500");
   }
+//   payload.shoppingBag.push(bagItem);
 });
 
 router.post("/:jewelryId/update", isAuth, async (req, res) => {
