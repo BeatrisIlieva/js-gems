@@ -7,6 +7,7 @@ const profileController = require("./controllers/profileController");
 const completeOrderController = require("./controllers/completeOrderController");
 const completeTransactionController = require("./controllers/completeTransactionController");
 const bagController = require("./controllers/bagController");
+const orderConfirmationController = require("./controllers/orderConfirmationController");
 
 
 router.use(homeController);
@@ -16,6 +17,7 @@ router.use("/profiles", profileController);
 router.use("/bag", bagController);
 router.use("/complete-order", completeOrderController);
 router.use("/complete-transaction", completeTransactionController);
+router.use("/order-confirmation", orderConfirmationController);
 
 router.get("*", (req, res) => {
     res.render("500");

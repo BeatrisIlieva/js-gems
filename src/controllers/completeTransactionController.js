@@ -2,6 +2,9 @@ const router = require("express").Router();
 const { isAuth } = require("../middlewares/authMiddleware");
 const { extractErrorMessages } = require("../utils/errorHelpers");
 const completeTransactionManager = require("../managers/completeTransactionManager");
+const bagManager = require("../managers/bagManager");
+const Order = require("../models/Order");
+const orderConfirmationManager = require("../managers/orderConfirmationManager");
 
 router.get("/", isAuth, async (req, res) => {
     try {
@@ -21,8 +24,12 @@ router.post("/", isAuth, async(req, res) => {
 
     try {
         await completeTransactionManager.verifyCardDetails(cardData);
+        
+        await orderConfirmationManager.create(userId);
 
-        res.redirect("/");
+        
+
+        res.redirect("/order-confirmation");
 
     } catch(err) {
         const errorMessages = extractErrorMessages(err);

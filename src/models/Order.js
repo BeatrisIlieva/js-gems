@@ -6,19 +6,13 @@ const orderSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  jewelryId: {
-    type: mongoose.Types.ObjectId,
-    ref: "Earring",
-    required: true,
+  jewelries: [],
+  subTotal: {
+    type: Number
   },
-  sizeId: {
-    type: mongoose.Types.ObjectId,
-    ref: "Size",
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    required: true,
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 

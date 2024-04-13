@@ -8,7 +8,7 @@ const shoppingBagSchema = new mongoose.Schema({
   },
   jewelry: {
     type: mongoose.Types.ObjectId,
-    ref: "Earring",
+    ref: "Jewelry",
     required: true,
   },
   size: {

@@ -43,12 +43,6 @@ const profileSchema = new mongoose.Schema({
     minLength: [FIRST_NAME_MIN_LENGTH, FIRST_NAME_MIN_LENGTH_ERROR_MESSAGE],
     maxLength: [FIRST_NAME_MAX_LENGTH, FIRST_NAME_MAX_LENGTH_ERROR_MESSAGE],
     match: [/^[A-za-z]+$/, ONLY_LETTERS_FIRST_NAME_EXCEPTION_MESSAGE],
-  //   validate: {
-  //     validator: function(value) {
-  //         return /^[A-za-z]+$/.test(value);
-  //     },
-  //     message: `${ONLY_LETTERS_FIRST_NAME_EXCEPTION_MESSAGE}`
-  // },
   },
   lastName: {
     type: String,
@@ -56,7 +50,7 @@ const profileSchema = new mongoose.Schema({
     minLength: [LAST_NAME_MIN_LENGTH, LAST_NAME_MIN_LENGTH_ERROR_MESSAGE],
     maxLength: [LAST_NAME_MAX_LENGTH, LAST_NAME_MAX_LENGTH_ERROR_MESSAGE],
     match: [/^[A-za-z]+$/, ONLY_LETTERS_LAST_NAME_EXCEPTION_MESSAGE],
-  },
+  }, 
   phoneNumber: {
     type: String,
     // required: [true, "Phone Number is required!"],
