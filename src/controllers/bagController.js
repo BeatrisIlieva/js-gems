@@ -44,11 +44,11 @@ router.get("/:userId", isAuth, async (req, res) => {
 router.post("/:jewelryId/create", isAuth, async (req, res) => {
   const userId = req.user._id;
 
-  const jewelryId = req.params.jewelryId;
+  const jewelryId = Number(req.params.jewelryId);
 
   const { size } = req.body;
 
-  const sizeId = size;
+  const sizeId = Number(size);
 
   try {
     const bagItem = await bagManager.getOne({ userId, jewelryId, sizeId });
@@ -77,9 +77,10 @@ router.post("/:jewelryId/update", isAuth, async (req, res) => {
   const userId = req.user._id;
 
   const { updatedQuantity, bagItemId, sizeId } = req.body;
+  const sizeIdAsNumber = Number(sizeId) ;
 
   try {
-    await bagManager.update({ bagItemId, updatedQuantity, userId, sizeId });
+    await bagManager.update({ bagItemId, updatedQuantity, userId, sizeIdAsNumber });
 
     res.redirect(`/bag/${userId}`);
   } catch (err) {

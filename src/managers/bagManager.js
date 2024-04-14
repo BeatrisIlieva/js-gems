@@ -28,6 +28,15 @@ exports.create = async ({
     quantity: DEFAULT_ADD_QUANTITY,
   });
 
+  await Jewelry.findOneAndUpdate({_id: jewelryId}, { $inc: { quantity: -1 } }, { new: true } );
+
+  // const jewelry = await Jewelry.findById(jewelryId).updateOne(quantity, {});
+  // oldQuantity = jewelry.quantity;
+  // newQuantity = oldQuantity - 1;
+
+  // jewelry.quantity = newQuantity;
+  // await jewelry.save();
+
   await updateBagTotalPrice({userId, jewelryId, sizeId});
 };
 
@@ -76,7 +85,7 @@ exports.getAll = async (userId) => {
   let subTotal = 0;
 
   for (let i = 0; i < result.length; i++) {
-    const jewelryId = result[i].jewelry.toString();
+    const jewelryId = result[i].jewelry;
     const bagItemId = result[i]._id;
 
     const jewelry = await Jewelry.findById(jewelryId)

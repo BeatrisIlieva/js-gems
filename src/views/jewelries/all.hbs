@@ -1,15 +1,40 @@
-{{#each jewelries}}
+<section class="jewelry-cards">
+  {{#each jewelries}}
+    <article class="jewelry-card">
+      <div class="jewelry-card-thumbnail">
+        <a href="/jewelries/{{_id}}/details" title="{{title}}">
+          <img
+            class="jewelry-card-img"
+            src="{{firstImageUrl}}"
+            alt="{{title}} image"
+          />
+        </a>
+        {{! {% include 'wishlist/like-button.html' %} }}
+        {{!-- <div class="jewelry-card-content" onclick="window.location='{% url 'view_jewelry' jewelry.pk %}?page={{ page_obj.number }}'"> --}}
+        <div class="jewelry-card-content">
+          <p class="jewelry-card-description">
+            <ul class="jewelry-card-meta" role="list">
+              <li class="jewelry-card-meta-item">
+                {{title}}
+              </li>
+              <li class="jewelry-card-meta-item">
+                {{category.title}}
+              </li>
+              <li class="jewelry-card-meta-item">
+                <i class="price__icon fa-solid fa-sack-dollar"></i>
+                {{price}}
+              </li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </article>
+  {{/each}}
+</section>
+
+{{!-- {{#each jewelries}}
   <div>
     <img src="{{firstImageUrl}}" />
-    <p>{{title}}</p>
-    <p><span>Price:</span> {{price}}</p>
-    <p><span>Category:</span> {{category.title}}</p>
-    {{#each metals}}
-    <p><span>Metal:</span> {{metal.title}}</p>
-    {{/each}}
-    {{#each stones}}
-    <p><span>Stone Type:</span>{{#if this.caratWeight }}{{this.caratWeight}}ct.{{/if}} {{color.title}} {{kind.title}}</p>
-    {{/each}}
     <a class="btn" href="/jewelries/{{_id}}/details">Details</a>
   </div>
-{{/each}}
+{{/each}} --}}

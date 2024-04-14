@@ -1,12 +1,21 @@
 const Jewelry = require("../models/Jewelry");
 const Category = require("../models/Category");
 
-exports.getAll = async (jewelryType) => {
-  const categoryName =
-    jewelryType.charAt(0).toUpperCase() + jewelryType.slice(1, -1);
-  const category = await Category.findOne({ title: categoryName });
-  categoryId = category._id;
+// exports.getAll = async (jewelryType) => {
+//   const categoryName =
+//     jewelryType.charAt(0).toUpperCase() + jewelryType.slice(1, -1);
+//   const category = await Category.findOne({ title: categoryName });
+//   categoryId = category._id;
 
+//   const jewelries = await Jewelry.find({
+//     category: categoryId,
+//     quantity: { $gt: 0 },
+//   }).lean();
+
+//   return jewelries;
+// };
+
+exports.getAll = async (categoryId) => {
   const jewelries = await Jewelry.find({
     category: categoryId,
     quantity: { $gt: 0 },

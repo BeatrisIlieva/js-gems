@@ -31,14 +31,14 @@ const jewelrySchema = new mongoose.Schema({
     // required: true,
   },
   category: {
-    type: mongoose.Types.ObjectId,
+    type: Number,
     ref: "Category",
     // required: true,
   },
   metals: [
     {
       kind: {
-        type: mongoose.Types.ObjectId,
+        type: Number,
         ref: "Metal",
         // required: true,
       },
@@ -49,19 +49,19 @@ const jewelrySchema = new mongoose.Schema({
     },
   ],
   goldCaratWeight: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Decimal128,
     ref: "GoldCaratWeight",
     required: false,
   },
   stones: [
     {
       kind: {
-        type: mongoose.Types.ObjectId,
+        type: Number,
         ref: "StoneType",
         // required: true,
       },
       color: {
-        type: mongoose.Types.ObjectId,
+        type: Number,
         ref: "StoneColor",
         // required: true,
       },
@@ -73,15 +73,11 @@ const jewelrySchema = new mongoose.Schema({
   ],
   sizes: [
     {
-      type: mongoose.Types.ObjectId,
+      type: Number,
       ref: "Size",
       // required: true,
     },
   ],
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
 });
 
 jewelrySchema.pre("save", async function() {

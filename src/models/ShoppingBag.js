@@ -7,12 +7,12 @@ const shoppingBagSchema = new mongoose.Schema({
     required: true,
   },
   jewelry: {
-    type: mongoose.Types.ObjectId,
+    type: Number,
     ref: "Jewelry",
     required: true,
   },
   size: {
-    type: mongoose.Types.ObjectId,
+    type: Number,
     ref: "Size",
     required: true,
   },

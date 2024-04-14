@@ -4,7 +4,6 @@ const bagManager = require("../managers/bagManager");
 
 exports.create = async (userId) => {
   const {bagItems, subTotal} = await bagManager.getAll(userId);
-  console.groupCollapsed(bagItems);
 
   const order = await Order.create({
     user: userId,

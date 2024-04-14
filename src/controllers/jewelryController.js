@@ -2,13 +2,15 @@ const router = require("express").Router();
 
 const jewelryManager = require("../managers/jewelryManager");
 
-router.get("/:jewelryType", async (req, res) => {
+router.get("/:categoryId", async (req, res) => {
   try {
-    const jewelryType = await req.params.jewelryType;
-    const jewelries = await jewelryManager.getAll(jewelryType);
+    const category = await req.params.categoryId;
+    const categoryId = Number(category);
+    const jewelries = await jewelryManager.getAll(categoryId);
 
-    res.render("jewelries/all", { jewelries, jewelryType });
+    res.render("jewelries/all", { jewelries, categoryId });
   } catch (err) {
+    console.log(err.message);
     res.render("500");
   }
 });
