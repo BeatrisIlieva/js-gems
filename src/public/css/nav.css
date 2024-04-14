@@ -49,3 +49,30 @@
 .header i:hover, .header li:hover {
     color: var(--dark-pink);
 }
+
+.search-toggle {
+    display: none;
+}
+
+.search {
+    display: none;
+    position: absolute;
+    top: 144px;
+    right: 180px;
+    z-index: 1;
+    border-radius: 12px;
+    border-color: var(--white);
+    width: 30vw;
+}
+
+.search input {
+    border-radius: 12px;
+}
+
+.search-toggle:checked + .search {
+    display: inline-block;
+}
+
+label.search-icon {
+    cursor: pointer;
+}

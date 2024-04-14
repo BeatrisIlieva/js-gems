@@ -6,37 +6,41 @@ const StoneType = require("../models/StoneType");
 const StoneColor = require("../models/StoneColor");
 
 const jewelrySchema = new mongoose.Schema({
+  _id: {
+    type: Number,
+    default: 0,
+  },
   title: {
     type: String,
-    required: true,
+    // required: true,
   },
   firstImageUrl: {
     type: String,
-    required: true,
+    // required: true,
   },
   secondImageUrl: {
     type: String,
-    required: true,
+    // required: true,
   },
   price: {
     type: Number,
-    required: true,
+    // required: true,
   },
   quantity: {
     type: Number,
-    required: true,
+    // required: true,
   },
   category: {
     type: mongoose.Types.ObjectId,
     ref: "Category",
-    required: true,
+    // required: true,
   },
   metals: [
     {
       kind: {
         type: mongoose.Types.ObjectId,
         ref: "Metal",
-        required: true,
+        // required: true,
       },
       caratWeight: {
         type: mongoose.Decimal128,
@@ -54,12 +58,12 @@ const jewelrySchema = new mongoose.Schema({
       kind: {
         type: mongoose.Types.ObjectId,
         ref: "StoneType",
-        required: true,
+        // required: true,
       },
       color: {
         type: mongoose.Types.ObjectId,
         ref: "StoneColor",
-        required: true,
+        // required: true,
       },
       caratWeight: {
         type: mongoose.Decimal128,
@@ -71,75 +75,36 @@ const jewelrySchema = new mongoose.Schema({
     {
       type: mongoose.Types.ObjectId,
       ref: "Size",
-      required: true,
+      // required: true,
     },
   ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+jewelrySchema.pre("save", async function() {
+  const currentId = await setID();
+
+  this._id = currentId;
 });
 
 const jewelry = mongoose.model("Jewelry", jewelrySchema);
 
 module.exports = jewelry;
 
-// const mongoose = require("mongoose");
+const setID = async () => {
+  try {
+    let lastObj = await jewelry.findOne().sort({ _id: -1 });
 
-// const jewelrySchema = new mongoose.Schema({
-//   title: {
-//     type: String,
-//     required: true,
-//   },
-//   firstImageUrl: {
-//     type: String,
-//     required: true,
-//   },
-//   secondImageUrl: {
-//     type: String,
-//     required: true,
-//   },
-//   price: {
-//     type: Number,
-//     required: true,
-//   },
-//   quantity: {
-//     type: Number,
-//     required: true,
-//   },
-//   categoryId: {
-//     type: mongoose.Types.ObjectId,
-//     ref: "Category",
-//     required: true,
-//   },
-//   metalId: {
-//     type: mongoose.Types.ObjectId,
-//     ref: "Metal",
-//     required: true,
-//   },
-//   goldCaratWeightId: {
-//     type: mongoose.Types.ObjectId,
-//     ref: "GoldCaratWeight",
-//     required: false,
-//   },
-//   stoneTypeId: [{
-//     type: mongoose.Types.ObjectId,
-//     ref: "StoneType",
-//     required: true,
-//   }],
-//   stoneColorId: [{
-//     type: mongoose.Types.ObjectId,
-//     ref: "StoneColor",
-//     required: true,
-//   }],
-//   stoneCaratWeightId: {
-//     type: mongoose.Types.ObjectId,
-//     ref: "StoneCaratWeight",
-//     required: false,
-//   },
-//   sizeId: [{
-//     type: mongoose.Types.ObjectId,
-//     ref: "Size",
-//     required: true,
-//   }],
-// });
+    lastId = lastObj._id;
 
-// const jewelry = mongoose.model("Jewelry", jewelrySchema);
+    nextId = lastId + 1;
 
-// module.exports = jewelry;
+    return nextId;
+  } catch (err) {
+    return 1;
+  }
+};
+
