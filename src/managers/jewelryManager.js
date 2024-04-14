@@ -15,11 +15,17 @@ const Category = require("../models/Category");
 //   return jewelries;
 // };
 
-exports.getAll = async (categoryId) => {
-  const jewelries = await Jewelry.find({
+exports.getAll = async (categoryId, selection) => {
+  const query = {
     category: categoryId,
     quantity: { $gt: 0 },
-  }).lean();
+  };
+
+  if (selection) {
+    query['metals.kind'] = { $in: selection };
+  }
+
+  const jewelries = await Jewelry.find(query).lean();
 
   return jewelries;
 };
@@ -38,3 +44,29 @@ exports.getOne = async (jewelryId) => {
 
   return jewelry;
 };
+
+exports.getYellowGoldByCount = async (categoryId, metalId) => {
+  const result = await Jewelry.aggregate([
+    {
+      $match: {
+        category: categoryId,
+      },
+    },
+    {
+      $match: {
+        "metals.kind": metalId,
+      },
+    },
+    {
+      $count: "count",
+    },
+    // {
+    //   $set: {
+    //     "metals.kind": metalId,
+    //   },
+    // },
+  ]);
+  return result;
+};
+exports.getStoneTypesByCount = async (categoryId) => {};
+exports.getStoneColorsByCount = async (categoryId) => {};

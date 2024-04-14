@@ -1,0 +1,70 @@
+.center-container {
+    display: flex;
+    align-items: center;
+    margin: 12px 96px;
+    font-size: 18px;
+    color: var(--dark-blue);
+    border-bottom-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+    border-bottom-style: dotted;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--dark-pink);
+}
+
+.checkbox-list {
+    margin: auto;
+}
+
+
+.dropdown-checkboxes {
+    padding: 12px 48px;
+    display: inline-block;
+    margin-right: 22px;
+}
+
+.space {
+    margin-right: 10px;
+}
+
+.dropdown-checkboxes-content {
+    background-color: var(--white-pink);
+    color: var(--dark-blue);
+    text-align: left;
+    font-size: 18px;
+    display: none;
+    position: absolute;
+    min-width: 200px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    z-index: 1;
+    margin: auto;
+}
+
+.dropdown-subfield {
+    padding: 6px;
+    margin: 6px;
+}
+
+.dropdown-checkboxes:focus-within .dropdown-checkboxes-content {
+    display: block;
+}
+
+.drop-down-button {
+    display: flex;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.label-title {
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+label {
+    cursor: pointer;
+}
+

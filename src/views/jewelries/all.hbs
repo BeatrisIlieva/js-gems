@@ -1,3 +1,30 @@
+<form method="GET">
+  <div class="center-container">
+    <div class="checkbox-list">
+      <div class="dropdown-checkboxes" role="list" tabindex="0">
+        <label for="byMetal">
+          <strong class="label-title">By Metal</strong>
+          <i class="space fa-solid fa-sort-down"></i>
+          <div class="dropdown-checkboxes-content">
+            {{#if yellowGoldCount}}
+              <div class="dropdown-subfield">
+                <input
+                  type="checkbox"
+                  id="yellowGold"
+                  name="yellowGold"
+                  value="{{yellowGoldId}}"
+                />
+                <label for="yellowGold"> Yellow Gold ({{yellowGoldCount}})</label><br />
+              </div>
+            {{/if}}
+            <br />
+            <button class="drop-down-button button filled_pink">Apply</button>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+</form>
 <section class="jewelry-cards">
   {{#each jewelries}}
     <article class="jewelry-card">
