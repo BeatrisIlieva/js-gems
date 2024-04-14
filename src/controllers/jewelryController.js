@@ -1,34 +1,85 @@
 const router = require("express").Router();
 const jewelryManager = require("../managers/jewelryManager");
-const {
+const metalIds = ({
   yellowGoldId,
   roseGoldId,
   whiteGoldId,
   platinumId,
-} = require("../constants/jewelryComposition");
+} = require("../constants/jewelryComposition"));
 
 router.get("/:categoryId", async (req, res) => {
   try {
-    const selection =req.query;
+    const selection = req.query;
+    console.log(selection);
+    const selectionValuesAsInt = Object.values(selection).map((value) =>
+      Number(value)
+    );
 
-    const selectionAsInt = Number(Object.values(selection)[0]);
-    const category = await req.params.categoryId;
+    // const selectionAsInt = Number(Object.values(selection)[0]);
+    // const selectionValues = Object.values(selection[0]).map(Number);
+    // console.log(selectionValues);
+    const category = req.params.categoryId;
     const categoryId = Number(category);
-    const jewelries = await jewelryManager.getAll(categoryId, selectionAsInt);
+    const jewelries = await jewelryManager.getAll(
+      categoryId,
+      selectionValuesAsInt
+    );
 
-    yellowGoldAggregation = await jewelryManager.getYellowGoldByCount(categoryId, yellowGoldId);
-    console.log(yellowGoldAggregation);
-    yellowGoldCount = yellowGoldAggregation[0].count;
-    // stoneTypes = await jewelryManager.getStoneTypesByCount(categoryId);
+    // const metalsCount = {};
+
+    // metalIds.map(async (metalId) => {
+    //   const metalAggregation = await jewelryManager.getMetalsByCount(categoryId, metalId);
+    // }
+
+    // metalIds.forEach(metalId => {
+    //   jewelryManager.getMetalsByCount(
+    //     categoryId,
+    //     metalId
+    //   );
+    // });
+    let yellowGoldCount;
+    let roseGoldCount;
+    try {
+      const yellowGoldAggregation = await jewelryManager.getMetalsByCount(
+        categoryId,
+        yellowGoldId
+      );
+      if (yellowGoldAggregation.length > 0) {
+        yellowGoldCount = yellowGoldAggregation[0].count;
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+
+    try {
+      const roseGoldAggregation = await jewelryManager.getMetalsByCount(
+        categoryId,
+        roseGoldId
+      );
+      if (roseGoldAggregation.length > 0) {
+        roseGoldCount = roseGoldAggregation[0].count;
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+
+    // stoneTypesAggregation = await jewelryManager.getStoneTypesByCount(categoryId);
+    // stoneTypesCount = stoneTypesAggregation[0].count;
     // stoneColors = await jewelryManager.getStoneColorsByCount(categoryId);
-    context = {jewelries, categoryId, yellowGoldCount, yellowGoldId}
+    context = {
+      jewelries,
+      categoryId,
+      yellowGoldCount,
+      yellowGoldId,
+      roseGoldCount,
+      roseGoldId,
+    };
     res.render("jewelries/all", context);
   } catch (err) {
     console.log(err.message);
     res.render("500");
   }
 });
-
 
 router.get("/:jewelryId/details", async (req, res) => {
   const jewelryId = req.params.jewelryId;

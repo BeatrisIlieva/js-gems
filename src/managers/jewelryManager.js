@@ -21,12 +21,15 @@ exports.getAll = async (categoryId, selection) => {
     quantity: { $gt: 0 },
   };
 
-  if (selection) {
-    query['metals.kind'] = { $in: selection };
+  try {
+    if (selection.length > 0) {
+      query["metals.kind"] = { $in: selection };
+    }
+  } catch (err) {
+    console.log(err.message);
   }
-
+  
   const jewelries = await Jewelry.find(query).lean();
-
   return jewelries;
 };
 
@@ -45,7 +48,7 @@ exports.getOne = async (jewelryId) => {
   return jewelry;
 };
 
-exports.getYellowGoldByCount = async (categoryId, metalId) => {
+exports.getMetalsByCount = async (categoryId, metalId) => {
   const result = await Jewelry.aggregate([
     {
       $match: {
@@ -60,12 +63,8 @@ exports.getYellowGoldByCount = async (categoryId, metalId) => {
     {
       $count: "count",
     },
-    // {
-    //   $set: {
-    //     "metals.kind": metalId,
-    //   },
-    // },
   ]);
+  console.log(result);
   return result;
 };
 exports.getStoneTypesByCount = async (categoryId) => {};

@@ -14,7 +14,21 @@
                   name="yellowGold"
                   value="{{yellowGoldId}}"
                 />
-                <label for="yellowGold"> Yellow Gold ({{yellowGoldCount}})</label><br />
+                <label for="yellowGold">
+                  Yellow Gold ({{yellowGoldCount}})</label><br />
+              </div>
+
+            {{/if}}
+            {{#if roseGoldCount}}
+              <div class="dropdown-subfield">
+                <input
+                  type="checkbox"
+                  id="roseGold"
+                  name="roseGold"
+                  value="{{roseGoldId}}"
+                />
+                <label for="roseGold">
+                  Rose Gold ({{roseGoldCount}})</label><br />
               </div>
             {{/if}}
             <br />
