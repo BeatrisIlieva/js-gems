@@ -12,11 +12,11 @@ router.get("/:categoryId", async (req, res) => {
     const category = req.params.categoryId;
     const categoryId = Number(category);
     const selection = req.query;
-    const {jewelries, metalsByCount, stoneTypesByCount} = await jewelryManager.getAll(categoryId, selection);
+    const {jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount} = await jewelryManager.getAll(categoryId, selection);
     console.log(metalsByCount);
     console.log(stoneTypesByCount);
 
-    res.render("jewelries/all", {jewelries, metalsByCount, stoneTypesByCount});
+    res.render("jewelries/all", {jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount});
   } catch (err) {
     console.log(err.message);
     res.render("500");

@@ -26,13 +26,14 @@ exports.getAll = async (categoryId, selection) => {
   let stoneTypesByCount = await getCompositionsCounts(stoneTypes, categoryId, stoneTypeMatchReplacer);
   stoneTypesByCount = stoneTypesByCount.filter((item) => item.count !== 0);
 
-  // const stoneColors = await StoneColor.find().lean();
-  // let stoneColorsByCount = await getCompositionsCounts(stoneColors, categoryId, stoneTypeMatchReplacer);
-
+  const stoneColors = await StoneColor.find().lean();
+  stoneColorMatchReplacer = "stones.color";
+  let stoneColorsByCount = await getCompositionsCounts(stoneColors, categoryId, stoneColorMatchReplacer);
+  stoneColorsByCount = stoneColorsByCount.filter((item) => item.count !== 0);
   console.log(metalsByCount);
   console.log(stoneTypesByCount);
 
-  return {jewelries, metalsByCount, stoneTypesByCount} ;
+  return {jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount} ;
 };
 
 async function getCompositionsCounts(collection, categoryId, matchReplacer) {

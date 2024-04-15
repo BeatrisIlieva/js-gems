@@ -47,6 +47,29 @@
           </div>
         </label>
       </div>
+            <div class="dropdown-checkboxes" role="list" tabindex="0">
+        <label for="byStoneColor">
+          <strong class="label-title">By Stone Color</strong>
+          <i class="space fa-solid fa-sort-down"></i>
+          <div class="dropdown-checkboxes-content">
+            {{#each stoneColorsByCount}}
+              <div class="dropdown-subfield">
+                <input
+                  type="checkbox"
+                  id="{{title}}"
+                  name="{{title}}"
+                  value="{{_id}}"
+                />
+                <label for="{{title}}">
+                  {{title}}
+                  ({{count}})</label><br />
+              </div>
+            {{/each}}
+            <br />
+            <button class="drop-down-button button filled_pink">Apply</button>
+          </div>
+        </label>
+      </div>
     </div>
   </div>
 </form>
