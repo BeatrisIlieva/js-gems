@@ -14,32 +14,26 @@ exports.getAll = async (categoryId, selection) => {
   //   aggregatedSelection = getSelectionQuery(selection);
   // }
 
-  const jewelries = await Jewelry.find(query).lean();
-  let metals = await getCompositionByIdTitleAndCount(categoryId);
-  let stoneTypes = await getCompositionByIdTitleAndCount(categoryId);
+  let jewelries = await Jewelry.find(query).lean();
 
-  return { jewelries, metals, stoneTypes };
-};
-
-async function getCompositionByIdTitleAndCount(categoryId) {
-  let metals = await Metal.find().lean();
-  let stoneTypes = await StoneType.find().lean();
-  let stoneColors = await StoneColor.find().lean();
-
+  const metals = await Metal.find().lean();
   metalMatchReplacer = "metals.kind";
-  metals = await getCompositionsCounts(metals, categoryId, metalMatchReplacer);
-  metals = metals.filter((item) => item.count !== 0);
+  let metalsByCount = await getCompositionsCounts(metals, categoryId, metalMatchReplacer);
+  metalsByCount = metalsByCount.filter((item) => item.count !== 0);
 
+  const stoneTypes = await StoneType.find().lean();
   stoneTypeMatchReplacer = "stones.kind";
-  stoneTypes = await getCompositionsCounts(
-    stoneTypes,
-    categoryId,
-    stoneTypeMatchReplacer
-  );
-  stoneTypes = stoneTypes.filter((item) => item.count !== 0);
+  let stoneTypesByCount = await getCompositionsCounts(stoneTypes, categoryId, stoneTypeMatchReplacer);
+  stoneTypesByCount = stoneTypesByCount.filter((item) => item.count !== 0);
 
-  return { metals, stoneTypes };
-}
+  // const stoneColors = await StoneColor.find().lean();
+  // let stoneColorsByCount = await getCompositionsCounts(stoneColors, categoryId, stoneTypeMatchReplacer);
+
+  console.log(metalsByCount);
+  console.log(stoneTypesByCount);
+
+  return {jewelries, metalsByCount, stoneTypesByCount} ;
+};
 
 async function getCompositionsCounts(collection, categoryId, matchReplacer) {
   for (let i = 0; i < collection.length; i++) {
@@ -90,7 +84,6 @@ async function getCompositionsByCount(categoryId, itemId, matchReplacer) {
 
   if (!isArrayEmpty(result)) {
     const count = Object.values(result[0]).map(Number);
-    console.log(count);
     return count[0];
   } else {
     return 0;
