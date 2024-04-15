@@ -30,8 +30,6 @@ exports.getAll = async (categoryId, selection) => {
   stoneColorMatchReplacer = "stones.color";
   let stoneColorsByCount = await getCompositionsCounts(stoneColors, categoryId, stoneColorMatchReplacer);
   stoneColorsByCount = stoneColorsByCount.filter((item) => item.count !== 0);
-  console.log(metalsByCount);
-  console.log(stoneTypesByCount);
 
   return {jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount} ;
 };
