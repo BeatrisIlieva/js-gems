@@ -5,33 +5,47 @@ const StoneType = require("../models/StoneType");
 const StoneColor = require("../models/StoneColor");
 
 exports.getAll = async (categoryId, selection) => {
-  const query = {
+  let query = {
     category: categoryId,
     quantity: { $gt: 0 },
   };
 
-  // if (!isSelectionEmpty(selection)) {
-  //   aggregatedSelection = getSelectionQuery(selection);
-  // }
+  if (!isSelectionEmpty(selection)) {
+    query = updateSelectionQuery(selection, query);
+  }
 
   let jewelries = await Jewelry.find(query).lean();
 
   const metals = await Metal.find().lean();
   metalMatchReplacer = "metals.kind";
-  let metalsByCount = await getCompositionsCounts(metals, categoryId, metalMatchReplacer);
+  let metalsByCount = await getCompositionsCounts(
+    metals,
+    categoryId,
+    metalMatchReplacer
+  );
   metalsByCount = metalsByCount.filter((item) => item.count !== 0);
 
   const stoneTypes = await StoneType.find().lean();
   stoneTypeMatchReplacer = "stones.kind";
-  let stoneTypesByCount = await getCompositionsCounts(stoneTypes, categoryId, stoneTypeMatchReplacer);
+  let stoneTypesByCount = await getCompositionsCounts(
+    stoneTypes,
+    categoryId,
+    stoneTypeMatchReplacer
+  );
   stoneTypesByCount = stoneTypesByCount.filter((item) => item.count !== 0);
 
   const stoneColors = await StoneColor.find().lean();
   stoneColorMatchReplacer = "stones.color";
-  let stoneColorsByCount = await getCompositionsCounts(stoneColors, categoryId, stoneColorMatchReplacer);
+  let stoneColorsByCount = await getCompositionsCounts(
+    stoneColors,
+    categoryId,
+    stoneColorMatchReplacer
+  );
   stoneColorsByCount = stoneColorsByCount.filter((item) => item.count !== 0);
 
-  return {jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount} ;
+  console.log(query);
+
+  return { jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount };
 };
 
 async function getCompositionsCounts(collection, categoryId, matchReplacer) {
@@ -49,15 +63,34 @@ async function getCompositionsCounts(collection, categoryId, matchReplacer) {
   return collection;
 }
 
-async function getSelectionQuery(selection) {
-  query = {};
+function updateSelectionQuery(selection, query) {
+  const keys = Object.keys(selection);
 
-  query["metals.kind"] = { $in: selection };
-  aggregatedSelection = {};
+  keys.forEach((key) => {
+    let selectedField;
+
+    if (key === "Metal") {
+      selectedField = "metals.kind";
+    } else if (key === "StoneType") {
+      selectedField = "stones.kind";
+    } else if (key === "StoneColor") {
+      selectedField = "stones.color";
+    }
+    const array = selection[key];
+
+    if (!Array.isArray(array)) {
+      query[selectedField] = { $in: [Number(array)] };
+    } else {
+      const numbersArray = array.map((item) => Number(item));
+      query[selectedField] = { $in: numbersArray };
+    }
+  });
+  console.log(query);
+  return query;
 }
 
 function isSelectionEmpty(selection) {
-  return Object.keys(selection).length > 0;
+  return Object.keys(selection).length < 1;
 }
 
 function isArrayEmpty(array) {
@@ -103,5 +136,3 @@ exports.getOne = async (jewelryId) => {
 
   return jewelry;
 };
-exports.getStoneTypesByCount = async (categoryId) => {};
-exports.getStoneColorsByCount = async (categoryId) => {};
