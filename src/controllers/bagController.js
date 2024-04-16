@@ -8,10 +8,11 @@ const {
 } = require("../constants/shoppingBag");
 const { extractErrorMessages } = require("../utils/errorHelpers");
 const Jewelry = require("../models/Jewelry");
+const jewelryManager = require("../managers/jewelryManager");
 
-router.get("/:userId", isAuth, async (req, res) => {
+router.get("/", isAuth, async (req, res) => {
   try {
-    const userId = req.params.userId;
+    const userId = req.user._id;
 
     let bagCount = 0;
     let bagCountGreaterThanOne = false;
@@ -46,12 +47,17 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
 
   const jewelryId = Number(req.params.jewelryId);
 
-  const { size } = req.body;
-
-  const sizeId = Number(size);
-
   try {
-    const bagItem = await bagManager.getOne({ userId, jewelryId, sizeId });
+    const { size } = req.body;
+    let bagItem;
+    let sizeId;
+
+    if (!size) {
+      throw new Error("Ensure you have selected the desired size.");
+    } else {
+      sizeId = Number(size);
+      bagItem = await bagManager.getOne({ userId, jewelryId, sizeId });
+    };
 
     if (!bagItem) {
       await bagManager.create({
@@ -65,28 +71,34 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
       await bagItem.update({ quantity: newQuantity });
     }
 
-    res.redirect(`/bag/${userId}`);
+    res.redirect(`/bag/`);
   } catch (err) {
-    console.log(err.message);
-    res.render("500");
+    const errorMessages = extractErrorMessages(err);
+    const jewelry = await jewelryManager.getOne(jewelryId);
+    res.render("jewelries/jewelry-details", { errorMessages, jewelry });
   }
-//   payload.shoppingBag.push(bagItem);
+  //   payload.shoppingBag.push(bagItem);
 });
 
 router.post("/:jewelryId/update", isAuth, async (req, res) => {
   const userId = req.user._id;
 
   const { updatedQuantity, bagItemId, sizeId } = req.body;
-  const sizeIdAsNumber = Number(sizeId) ;
+  const sizeIdAsNumber = Number(sizeId);
 
   try {
-    await bagManager.update({ bagItemId, updatedQuantity, userId, sizeIdAsNumber });
+    await bagManager.update({
+      bagItemId,
+      updatedQuantity,
+      userId,
+      sizeIdAsNumber,
+    });
 
-    res.redirect(`/bag/${userId}`);
+    res.redirect(`/bag/`);
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
 
-    res.redirect(`/bag/${userId}`);
+    res.render("/bag/", errorMessages);
 
     // res.status(404).render("bag/display", jewelries, DEFAULT_MIN_QUANTITY, { errorMessages });
   }
