@@ -1,0 +1,9 @@
+{{#if isLikedByUser}}
+<form action="/likes/{{_id}}/delete" method="POST">
+{{>like-button}}
+</form>
+{{else}}
+<form action="/likes/{{_id}}/create" method="POST">
+{{>like-button}}
+</form>
+{{/if}}
