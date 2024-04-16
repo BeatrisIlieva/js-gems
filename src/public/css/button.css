@@ -83,4 +83,9 @@ input[type="radio"] {
     cursor: pointer;
 }
 
+.like-button {
+    border:none;
+    background: transparent;
+    cursor: pointer;
+}
 

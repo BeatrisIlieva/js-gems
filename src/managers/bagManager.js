@@ -30,13 +30,6 @@ exports.create = async ({
 
   await Jewelry.findOneAndUpdate({_id: jewelryId}, { $inc: { quantity: -1 } }, { new: true } );
 
-  // const jewelry = await Jewelry.findById(jewelryId).updateOne(quantity, {});
-  // oldQuantity = jewelry.quantity;
-  // newQuantity = oldQuantity - 1;
-
-  // jewelry.quantity = newQuantity;
-  // await jewelry.save();
-
   await updateBagTotalPrice({userId, jewelryId, sizeId});
 };
 

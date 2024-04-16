@@ -11,10 +11,13 @@ router.get("/:categoryId", async (req, res) => {
   try {
     const category = req.params.categoryId;
     const categoryId = Number(category);
+
     const selection = req.query;
-    console.log(selection);
+
+    const userId = req.user._id;
+
     const { jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount } =
-      await jewelryManager.getAll(categoryId, selection);
+      await jewelryManager.getAll(categoryId, selection, userId);
 
 
     res.render("jewelries/all", {
@@ -23,6 +26,7 @@ router.get("/:categoryId", async (req, res) => {
       stoneTypesByCount,
       stoneColorsByCount,
     });
+    
   } catch (err) {
     console.log(err.message);
     res.render("500");
@@ -44,5 +48,7 @@ router.get("/:jewelryId/details", async (req, res) => {
     res.render("500");
   }
 });
+
+
 
 module.exports = router;

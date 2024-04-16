@@ -3,8 +3,10 @@ const Category = require("../models/Category");
 const Metal = require("../models/Metal");
 const StoneType = require("../models/StoneType");
 const StoneColor = require("../models/StoneColor");
+const wishlistManager = require("../managers/wishlistManager");
 
-exports.getAll = async (categoryId, selection) => {
+exports.getAll = async (categoryId, selection, userId) => {
+  
   let query = {
     category: categoryId,
     quantity: { $gt: 0 },
@@ -15,6 +17,23 @@ exports.getAll = async (categoryId, selection) => {
   }
 
   let jewelries = await Jewelry.find(query).lean();
+
+  for (let i = 0; i < jewelries.length; i++) {
+    const jewelry = jewelries[i];
+    jewelryId = jewelry._id;
+    let isLikedByUser = await wishlistManager.isLikedByUser({userId, jewelryId});
+    isLikedByUser = !!isLikedByUser;
+    jewelry["isLikedByUser"] = isLikedByUser;
+  };
+
+  console.log(jewelries);
+
+
+  // for (const jewelry of jewelries) {
+  //   jewelryId = jewelry._id;
+  //   let isLikedByUser = await wishlistManager.isLikedByUser({userId, jewelryId});
+  //   jewelry["isLikedByUser"] = !!isLikedByUser;
+  // }
 
   const metals = await Metal.find().lean();
   metalMatchReplacer = "metals.kind";
@@ -43,7 +62,6 @@ exports.getAll = async (categoryId, selection) => {
   );
   stoneColorsByCount = stoneColorsByCount.filter((item) => item.count !== 0);
 
-  console.log(query);
 
   return { jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount };
 };

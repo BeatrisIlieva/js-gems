@@ -47,7 +47,7 @@
           </div>
         </label>
       </div>
-            <div class="dropdown-checkboxes" role="list" tabindex="0">
+      <div class="dropdown-checkboxes" role="list" tabindex="0">
         <label for="byStoneColor">
           <strong class="label-title">By Stone Color</strong>
           <i class="space fa-solid fa-sort-down"></i>
@@ -84,8 +84,7 @@
             alt="{{title}} image"
           />
         </a>
-        {{! {% include 'wishlist/like-button.html' %} }}
-        {{!-- <div class="jewelry-card-content" onclick="window.location='{% url 'view_jewelry' jewelry.pk %}?page={{ page_obj.number }}'"> --}}
+        {{>like-button}}
         <div class="jewelry-card-content">
           <p class="jewelry-card-description">
             <ul class="jewelry-card-meta" role="list">
@@ -106,10 +105,3 @@
     </article>
   {{/each}}
 </section>
-
-{{!-- {{#each jewelries}}
-  <div>
-    <img src="{{firstImageUrl}}" />
-    <a class="btn" href="/jewelries/{{_id}}/details">Details</a>
-  </div>
-{{/each}} --}}

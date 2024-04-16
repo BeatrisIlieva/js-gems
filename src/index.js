@@ -2,9 +2,10 @@ const express = require("express");
 
 const expressConfig = require("./config/expressConfig");
 const handlebarsConfig = require("./config/handlebarsConfig");
-const {errorHandler} = require("./middlewares/errorHandlerMiddleware");
+const { errorHandler } = require("./middlewares/errorHandlerMiddleware");
 const dbConnect = require("./config/dbConfig");
 const routes = require("./routes");
+const path = require('path');
 
 const app = express();
 

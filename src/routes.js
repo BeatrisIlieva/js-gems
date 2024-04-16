@@ -9,6 +9,7 @@ const completeTransactionController = require("./controllers/completeTransaction
 const bagController = require("./controllers/bagController");
 const orderConfirmationController = require("./controllers/orderConfirmationController");
 const orderHistoryController = require("./controllers/orderHistoryController");
+const wishlistController = require("./controllers/wishlistController");
 
 
 router.use(homeController);
@@ -20,6 +21,7 @@ router.use("/complete-order", completeOrderController);
 router.use("/complete-transaction", completeTransactionController);
 router.use("/order-confirmation", orderConfirmationController);
 router.use("/orders-history", orderHistoryController);
+router.use("/likes", wishlistController);
 
 router.get("*", (req, res) => {
     res.render("500");
