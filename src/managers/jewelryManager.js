@@ -3,7 +3,8 @@ const Category = require("../models/Category");
 const Metal = require("../models/Metal");
 const StoneType = require("../models/StoneType");
 const StoneColor = require("../models/StoneColor");
-const wishlistManager = require("../managers/wishlistManager");
+const {setJewelriesLiked} = require("../utils/setJewelriesLiked");
+const {isSelectionEmpty, isArrayEmpty} = require("../utils/checkIfCollectionIsEmpty");
 
 exports.getAll = async (categoryId, selection, userId) => {
   let query = {
@@ -16,19 +17,9 @@ exports.getAll = async (categoryId, selection, userId) => {
   }
 
   let jewelries = await Jewelry.find(query).lean();
-
-  for (let i = 0; i < jewelries.length; i++) {
-    const jewelry = jewelries[i];
-    jewelryId = jewelry._id;
-    let isLikedByUser = await wishlistManager.isLikedByUser({
-      userId,
-      jewelryId,
-    });
-    isLikedByUser = !!isLikedByUser;
-    jewelry["isLikedByUser"] = isLikedByUser;
-  }
-
   console.log(jewelries);
+
+  jewelries = await setJewelriesLiked(jewelries, userId);
 
   const metals = await Metal.find().lean();
   metalMatchReplacer = "metals.kind";
@@ -101,13 +92,7 @@ function updateSelectionQuery(selection, query) {
   return query;
 }
 
-function isSelectionEmpty(selection) {
-  return Object.keys(selection).length < 1;
-}
 
-function isArrayEmpty(array) {
-  return array.length < 1;
-}
 
 async function getCompositionsByCount(categoryId, itemId, matchReplacer) {
   const result = await Jewelry.aggregate([

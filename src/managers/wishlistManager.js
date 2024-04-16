@@ -1,4 +1,10 @@
 const Wishlist = require("../models/Wishlist");
+const Jewelry = require("../models/Jewelry");
+const { setJewelriesLiked } = require("../utils/setJewelriesLiked");
+const {
+  isSelectionEmpty,
+  isArrayEmpty,
+} = require("../utils/checkIfCollectionIsEmpty");
 
 exports.create = async ({ userId, jewelryId }) => {
   wishlist = await Wishlist.create({
@@ -14,17 +20,15 @@ exports.delete = async ({ userId, jewelryId }) => {
   });
 };
 
-exports.isLikedByUser = async ({ userId, jewelryId }) => {
-  const isLikedByUser = await Wishlist.findOne({
-    user: userId,
-    jewelry: jewelryId,
-  }).lean();
-  return isLikedByUser;
-};
-
 exports.getAll = async (userId) => {
-  const jewelries = await Wishlist.find({ user: userId })
-    .populate("jewelry")
-    .lean();
-  return jewelries;
+  let jewelryIds = await Wishlist.find({ user: userId }).select('jewelry');
+  jewelryIds = jewelryIds.map(item => item.jewelry);
+  console.log(jewelryIds);
+
+  let jewelries = await Jewelry.find({ _id: { $in: jewelryIds } }).lean();
+  console.log(jewelries);
+
+  jewelries = await setJewelriesLiked(jewelries, userId);
+
+    return jewelries;
 };

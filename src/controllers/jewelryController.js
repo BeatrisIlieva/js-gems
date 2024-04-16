@@ -19,14 +19,12 @@ router.get("/:categoryId", async (req, res) => {
     const { jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount } =
       await jewelryManager.getAll(categoryId, selection, userId);
 
-
     res.render("jewelries/all", {
       jewelries,
       metalsByCount,
       stoneTypesByCount,
       stoneColorsByCount,
     });
-    
   } catch (err) {
     console.log(err.message);
     res.render("500");
@@ -48,7 +46,5 @@ router.get("/:jewelryId/details", async (req, res) => {
     res.render("500");
   }
 });
-
-
 
 module.exports = router;
