@@ -13,9 +13,9 @@
         <ul role="list">
             <li>
                 {{#each jewelry.metals}}
-                  <span class="composition-item">
+                    <span class="composition-item">
                     {{#if this.caratWeight}}{{caratWeight}}ct.{{/if}}
-                    {{kind.title}}{{#unless @last}},{{/unless}}
+                        {{kind.title}}{{#unless @last}},{{/unless}}
                   </span>
                 {{/each}}
             </li>
@@ -23,22 +23,27 @@
                 {{#each jewelry.stones}}
                     <span class="composition-item">
                     {{#if this.caratWeight}}{{caratWeight}}ct.{{/if}}
-                    {{color.title}}
-                    {{kind.title}}{{#unless @last}},{{/unless}}
+                        {{color.title}}
+                        {{kind.title}}{{#unless @last}},{{/unless}}
                     </span>
                 {{/each}}
             </li>
             <li class="composition-item-size">
                 <form action="/bag/{{jewelry._id}}/create" method="POST">
-                <label class="materials" for="size">Size:</label>
-                <ul class="materials-details" role="list">
-                    <select id="size" name="size">
-                    {{#each jewelry.sizes}}
-                    <option value="{{this._id}}">{{this.measurement}}</option>
-                    {{/each}}
-                    </select>
-                </ul>
-                <button type="submit"  class="button hover filled_green" type="submit"><i class="fa-solid fa-plus"></i> Add To Bag</button>
+                    <div>
+                        <label class="materials">Size:</label>
+                    </div>
+                    <div class="materials-details">
+                        {{#each jewelry.sizes}}
+                            <div class="radio-option">
+                                <input type="radio" id="{{this._id}}" name="size" value="{{this._id}}">
+                                <label for="{{this._id}}">{{this.measurement}}</label>
+                            </div>
+                        {{/each}}
+                    </div>
+                    <button class="button hover filled_green"><i
+                            class="fa-solid fa-plus"></i> Add To Bag
+                    </button>
                 </form>
             </li>
         </ul>
