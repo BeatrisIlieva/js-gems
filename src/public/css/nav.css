@@ -26,7 +26,7 @@
 .header .icon-container {
     display: flex;
     justify-content: space-between;
-    gap: 1vw;
+    gap: 1vw; 
 }
 
 .header .icon-container a {
@@ -35,9 +35,9 @@
 }
 
 .likes-count-nav {
-    font-size: 16px;
+    /* font-size: 16px; */
     font-family: Arial;
-    font-weight: 200;
+    /* font-weight: 200; */
 }
 
 .cart-count-nav {

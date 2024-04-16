@@ -1,19 +1,4 @@
 <div class="icon-container">
-  {{!-- {% if likes_count > 0 %}
-        <button class="btn">
-            <a class="zoom-text" href="{% url 'display_liked_jewelries' %}">
-                <i class="icon-button fa-regular fa-heart"
-                ><span class="likes-count-nav">({{ likes_count }})</span></i
-                >
-            </a>
-        </button>
-    {% else %} --}}
-  {{! <button class="btn">
-            <a class="zoom-text" href="{% url 'display_liked_jewelries' %}">
-                <i class="icon-button fa-regular fa-heart"></i>
-            </a>
-        </button>
-    {% endif %}  }}
   <form method="GET">
     <input
       type="checkbox"
@@ -36,22 +21,20 @@
       ></i>
     </label>
   </form>
-    {{#if bagCount}}
-    <a href="/bag/{{user._id}}">
+  {{#if likesCount}}
+    <a href="/likes/">
       <i class="fa-regular fa-heart"></i>
-          class="cart-count-nav"
-        >({{bagCount}})</span></i>
+      <span class="likes-count-nav">({{likesCount}})</span>
     </a>
   {{else}}
-    <a href="/bag/{{user._id}}">
+    <a href="/likes/">
       <i class="fa-regular fa-heart"></i>
     </a>
   {{/if}}
   {{#if bagCount}}
     <a href="/bag/{{user._id}}">
-      <i class="icon-button fa-solid fa-bag-shopping"><span
-          class="cart-count-nav"
-        >({{bagCount}})</span></i>
+      <i class="icon-button fa-solid fa-bag-shopping"></i>
+      <span class="cart-count-nav">({{bagCount}})</span>
     </a>
   {{else}}
     <a href="/bag/{{user._id}}">

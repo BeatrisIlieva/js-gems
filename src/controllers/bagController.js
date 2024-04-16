@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { isAuth } = require("../middlewares/authMiddleware");
 const bagManager = require("../managers/bagManager");
-const { getBagCount } = require("../managers/bagManager");
+const { getBagCount } = require("../utils/counterHelper");
 const {
   DEFAULT_ADD_QUANTITY,
   DEFAULT_MIN_QUANTITY,

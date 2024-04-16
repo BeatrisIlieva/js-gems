@@ -109,12 +109,6 @@ exports.getAll = async (userId) => {
   return { bagItems, subTotal };
 };
 
-const getBagCount = async (userId) => {
-  const items = await ShoppingBag.find({ user: userId }).lean();
-  bagCount = items.length;
-
-  return bagCount;
-};
 
 const updateBagTotalPrice = async ({userId, jewelryId, sizeId}) => {
   const bagItem = await getOne({ userId, jewelryId, sizeId });
@@ -129,5 +123,4 @@ const updateBagTotalPrice = async ({userId, jewelryId, sizeId}) => {
 }
 
 exports.getOne = getOne;
-exports.getBagCount = getBagCount;
 exports.updateBagTotalPrice = updateBagTotalPrice;

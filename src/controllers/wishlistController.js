@@ -3,7 +3,7 @@ const { isAuth } = require("../middlewares/authMiddleware");
 const wishlistManager = require("../managers/wishlistManager");
 
 
-router.get("/:jewelryId", isAuth, async (req, res) => {
+router.get("/", isAuth, async (req, res) => {
     try {
         const userId = req.user._id;
     
@@ -12,7 +12,7 @@ router.get("/:jewelryId", isAuth, async (req, res) => {
     
         const jewelries = await wishlistManager.getAll(userId);
 
-        
+        res.render("wishlist/wishlist", {jewelries})
 
       } catch (err) {
         console.log(err.message);
