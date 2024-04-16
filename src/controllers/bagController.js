@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { isAuth } = require("../middlewares/authMiddleware");
+const {getBagCount} = require("../middlewares/bagCounterMiddleware");
 const bagManager = require("../managers/bagManager");
-const { getBagCount } = require("../utils/counterHelper");
 const {
   DEFAULT_ADD_QUANTITY,
   DEFAULT_MIN_QUANTITY,
@@ -10,26 +10,20 @@ const { extractErrorMessages } = require("../utils/errorHelpers");
 const Jewelry = require("../models/Jewelry");
 const jewelryManager = require("../managers/jewelryManager");
 
-router.get("/", isAuth, async (req, res) => {
+router.get("/", isAuth, getBagCount, async (req, res) => {
   try {
     const userId = req.user._id;
 
-    let bagCount = 0;
-    let bagCountGreaterThanOne = false;
+    const bagCount = res.locals.bagCount;
+    const bagCountGreaterThanOne = bagCount > 1;
+    const isEmpty = bagCount === 0;
 
     const { bagItems, subTotal } = await bagManager.getAll(userId);
 
-    const isEmpty = Object.keys(bagItems).length === 0;
-
     if (!isEmpty) {
-      bagCount = await getBagCount(userId);
-      if (bagCount > 1) {
-        bagCountGreaterThanOne = true;
-      }
       res.render("bag/display", {
         bagItems,
         DEFAULT_MIN_QUANTITY,
-        bagCount,
         bagCountGreaterThanOne,
         subTotal,
       });
@@ -71,7 +65,7 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
       await bagItem.update({ quantity: newQuantity });
     }
 
-    res.redirect(`/bag/`);
+    res.redirect("/bag");
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
     const jewelry = await jewelryManager.getOne(jewelryId);
@@ -94,13 +88,11 @@ router.post("/:jewelryId/update", isAuth, async (req, res) => {
       sizeIdAsNumber,
     });
 
-    res.redirect(`/bag/`);
+    res.redirect("/bag");
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
 
-    res.render("/bag/", errorMessages);
-
-    // res.status(404).render("bag/display", jewelries, DEFAULT_MIN_QUANTITY, { errorMessages });
+    res.render("/bag/display", errorMessages);
   }
 });
 
