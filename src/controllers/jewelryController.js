@@ -42,7 +42,7 @@ router.get("/:jewelryId/details", async (req, res) => {
       return res.redirect("/404");
     }
 
-    res.render("jewelries/details", { jewelry });
+    res.render("jewelries/jewelry-details", { jewelry });
   } catch (err) {
     console.log(err.message);
     res.render("500");

@@ -1,0 +1,38 @@
+.jewelry-details-wrapper {
+    display: flex;
+    color: var(--dark-blue);
+    padding: 24px 96px 24px 96px;
+    justify-content: space-evenly;
+}
+
+.jewelry-details-image-first, .jewelry-details-image-second {
+    width: calc(30vw - 48px);
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.jewelry-details-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: var(--white-pink);
+    border-radius: 16px;
+}
+
+.jewelry-details-composition {
+    width: calc(30vw - 96px);
+    position: relative;
+}
+
+.zoom-image {
+    transition: transform 0.3s ease;
+}
+
+.jewelry-details-image-first:hover .zoom-image {
+    transform: scale(2.2);
+}
+
+.jewelry-details-image-second:hover .zoom-image {
+    transform: scale(2.2);
+}

@@ -1,0 +1,47 @@
+<section class="jewelry-details-wrapper">
+    <div class="jewelry-details-image-first">
+        <img class="jewelry-details-img zoom-image" src="{{jewelry.firstImageUrl}}" alt="image1">
+        {{>like-button-forms}}
+    </div>
+    <div class="jewelry-details-image-second">
+        <img class="jewelry-details-img zoom-image" src="{{jewelry.secondImageUrl}}" alt="image1">
+        {{>like-button-forms}}
+    </div>
+    <div class="jewelry-details-composition">
+        <h6 class="composition-category">{{jewelry.category.title}}</h6>
+        <h5 class="composition-title">{{ jewelry.title }}</h5>
+        <ul role="list">
+            <li>
+                {{#each jewelry.metals}}
+                  <span class="composition-item">
+                    {{#if this.caratWeight}}{{caratWeight}}ct.{{/if}}
+                    {{kind.title}}{{#unless @last}},{{/unless}}
+                  </span>
+                {{/each}}
+            </li>
+            <li>
+                {{#each jewelry.stones}}
+                    <span class="composition-item">
+                    {{#if this.caratWeight}}{{caratWeight}}ct.{{/if}}
+                    {{color.title}}
+                    {{kind.title}}{{#unless @last}},{{/unless}}
+                    </span>
+                {{/each}}
+            </li>
+            <li class="composition-item-size">
+                <form action="/bag/{{jewelry._id}}/create" method="POST">
+                <label class="materials" for="size">Size:</label>
+                <ul class="materials-details" role="list">
+                    <select id="size" name="size">
+                    {{#each jewelry.sizes}}
+                    <option value="{{this._id}}">{{this.measurement}}</option>
+                    {{/each}}
+                    </select>
+                </ul>
+                <button type="submit"  class="button hover filled_green" type="submit"><i class="fa-solid fa-plus"></i> Add To Bag</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</section>
+
