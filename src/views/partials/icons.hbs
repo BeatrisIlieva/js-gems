@@ -1,65 +1,5 @@
 <div class="icon-container">
-  <form method="GET">
-    <input
-      type="checkbox"
-      id="search-toggle"
-      class="search-toggle"
-      value="{{search}}"
-      name="search"
-      placeholder="Find Jewelry"
-    />
-    <input
-      class="search"
-      name="search"
-      value="{{search}}"
-      placeholder="Find a Jewelry"
-      style="text-align: center"
-    />
-    <label for="search-toggle" class="search-icon">
-      <i
-        class="button-no-margin-left icon-button fa-solid fa-magnifying-glass"
-      ></i>
-    </label>
-  </form>
-  {{#if likesCount}}
-    <a href="/likes/">
-      <i class="fa-regular fa-heart"></i>
-      <span class="likes-count-nav">({{likesCount}})</span>
-    </a>
-  {{else}}
-    <a href="/likes/">
-      <i class="fa-regular fa-heart"></i>
-    </a>
-  {{/if}}
-  {{#if bagCount}}
-    <a href="/bag/{{user._id}}">
-      <i class="icon-button fa-solid fa-bag-shopping"></i>
-      <span class="cart-count-nav">({{bagCount}})</span>
-    </a>
-  {{else}}
-    <a href="/bag/{{user._id}}">
-      <i class="icon-button fa-solid fa-bag-shopping"></i>
-    </a>
-  {{/if}}
-  <a href="/orders-history/{{user._id}}">
-    <i class="fa-solid fa-clock-rotate-left"></i>
-  </a>
-  {{#unless isAuthenticated}}
-    <a href="/users/login">
-      <i class="icon-button fa-regular fa-user"></i>
-    </a>
-  {{else}}
-    <a href="/profiles/edit">
-      <i class="icon-button fa-regular fa-user"></i>
-    </a>
-  {{/unless}}
-  <a href="/orders-history/{{user._id}}">
-    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-  </a>
-</div>
-
-{{!-- <div class="icon-container">
-<button class="btn">
+  <button class="btn">
     <form method="GET">
       <input
         type="checkbox"
@@ -82,18 +22,56 @@
         ></i>
       </label>
     </form>
-</button>
-  {{#if isAuthenticated}}
-<button class="btn">
-          <a href="/display-bag/{{user._id}}">
-          {{#if bagCount}}
-          <i class="icon-button fa-solid fa-bag-shopping"></i>
-      <span class="cart-count-nav">{{bagCount}}</span>
-            {{/if}}
-</button>
-      {{else}}
-<button class="btn">
-    <a href="/users/login"><i class="icon-button fa-solid fa-bag-shopping"></i></a>
-</button>
-    {{/if}}
-</div> --}}
+  </button>
+  {{#if likesCount}}
+    <button class="btn">
+      <a href="/likes/">
+        <i class="fa-regular fa-heart"></i>
+        <span class="likes-count-nav">({{likesCount}})</span>
+      </a>
+    </button>
+  {{else}}
+    <button class="btn">
+      <a href="/likes/">
+        <i class="fa-regular fa-heart"></i>
+      </a>
+    </button>
+  {{/if}}
+  {{#if bagCount}}
+    <button class="btn">
+      <a href="/bag/{{user._id}}">
+        <i class="icon-button fa-solid fa-bag-shopping"></i>
+        <span class="cart-count-nav">({{bagCount}})</span>
+      </a>
+    </button>
+  {{else}}
+    <button class="btn">
+      <a href="/bag/{{user._id}}">
+        <i class="icon-button fa-solid fa-bag-shopping"></i>
+      </a>
+    </button>
+  {{/if}}
+  <button class="btn">
+    <a href="/orders-history/{{user._id}}">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+    </a>
+  </button>
+  {{#unless isAuthenticated}}
+    <button class="btn">
+      <a href="/users/login">
+        <i class="icon-button fa-regular fa-user"></i>
+      </a>
+    </button>
+  {{else}}
+    <button class="btn">
+      <a href="/profiles/edit">
+        <i class="icon-button fa-regular fa-user"></i>
+      </a>
+    </button>
+  {{/unless}}
+  <button class="btn">
+    <a href="/orders-history/{{user._id}}">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+    </a>
+  </button>
+</div>

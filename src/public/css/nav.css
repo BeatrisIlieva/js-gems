@@ -5,7 +5,7 @@
 
 .header .nav-list {
     display: flex;
-    gap: 2vw;
+    gap: 32px;
 }
 
 .header .nav-list a {
@@ -23,27 +23,44 @@
     transform: scale(1.2);
 }
 
+
 .header .icon-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 1vw; 
+    /* display: flex; */
+    /* gap:30px; */
+    /* justify-content: space-between; */
+    
 }
 
-.header .icon-container a {
+.header .btn {
+    display: inline-block;
     color: var(--white);
+    text-decoration: none;  
+    border:none;
+    background: transparent;
+    cursor: pointer;
+    /* margin-left: 2px; */
+} 
+
+.header i {
+    color: var(--white); 
+}
+
+.header a {
     text-decoration: none;
 }
 
 .likes-count-nav {
-    /* font-size: 16px; */
+    font-size: 16px;
     font-family: Arial;
-    /* font-weight: 200; */
+    font-weight: 200;
+    color: var(--white);
 }
 
 .cart-count-nav {
     font-size: 16px;
     font-family: Arial;
     font-weight: 200;
+    color: var(--white);
 }
 
 .header i:hover, .header li:hover {
