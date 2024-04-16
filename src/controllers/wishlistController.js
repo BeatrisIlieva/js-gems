@@ -12,10 +12,8 @@ router.get("/:jewelryId", isAuth, async (req, res) => {
     
         const jewelries = await wishlistManager.getAll(userId);
 
-        const referer = req.get('referer');
-        res.redirect(referer); 
-    
-        // res.render("wishlist/wishlist", jewelries)
+        
+
       } catch (err) {
         console.log(err.message);
         res.render("500");
@@ -31,8 +29,27 @@ router.post("/:jewelryId/create", isAuth, async(req, res)=>{
         const jewelryId = req.params.jewelryId;
     
         await wishlistManager.create({userId, jewelryId});
+
+        const referer = req.get('referer');
+        res.redirect(referer); 
+
+      } catch (err) {
+        console.log(err.message);
+        res.render("500");
+      }
+});
+
+router.post("/:jewelryId/delete", isAuth, async(req, res)=>{
+    try {
+        const userId = req.user._id;
+        console.log("here");
     
-        res.redirect(`/likes/${jewelryId}`);
+        const jewelryId = req.params.jewelryId;
+    
+        await wishlistManager.delete({userId, jewelryId});
+    
+        const referer = req.get('referer');
+        res.redirect(referer); 
 
       } catch (err) {
         console.log(err.message);

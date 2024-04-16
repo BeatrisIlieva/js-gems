@@ -10,6 +10,7 @@ const wishlistSchema = new mongoose.Schema({
     type: Number,
     ref: "Jewelry",
     required: true,
+    unique: true,
   },
 });
 

@@ -84,7 +84,15 @@
             alt="{{title}} image"
           />
         </a>
+        {{#if isLikedByUser}}
+        <form action="/likes/{{_id}}/delete" method="POST">
         {{>like-button}}
+        </form>
+        {{else}}
+                <form action="/likes/{{_id}}/create" method="POST">
+        {{>like-button}}
+        </form>
+        {{/if}}
         <div class="jewelry-card-content">
           <p class="jewelry-card-description">
             <ul class="jewelry-card-meta" role="list">
