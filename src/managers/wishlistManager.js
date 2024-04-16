@@ -23,7 +23,8 @@ exports.isLikedByUser = async ({ userId, jewelryId }) => {
 };
 
 exports.getAll = async (userId) => {
-  const jewelries = await Wishlist.findById(userId).populate("jewelry").lean();
+  const jewelries = await Wishlist.find({user: userId}).populate("jewelry").lean();
+  console.log(jewelries);
   return jewelries;
 
   // for (let i = 0; i < result.length; i++) {

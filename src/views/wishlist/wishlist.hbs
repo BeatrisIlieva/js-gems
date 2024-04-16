@@ -1,3 +1,29 @@
-{{#each jewelries}}
-{{jewelry.firstImageUrl}}
-{{/each}}
+<article class="wish-list-card">
+    <img class="img-bg"
+            src="https://res.cloudinary.com/deztgvefu/image/upload/v1706346310/template_images/largeherod_l3_candy23_a_red_xczfkn.webp"
+            alt="image">
+    <div class="wish-list-content-top">
+        <h2 class="wish-list-tag">
+            {{!-- {% if count_liked_jewelries %}
+                Your Wish List ({{ count_liked_jewelries }})
+            {% else %}
+                Your Wish List (0)
+            {% endif %} --}}
+        </h2>
+        <p class="wish-list-title">
+            Your favorite item(s) are below.
+            <br>Wishes can come true, especially when you dream.
+        </p>
+    </div>
+    <div class="wish-list-content-bottom">
+        <div class="meta-info">
+            <div class="designer">
+                <img src="https://res.cloudinary.com/deztgvefu/image/upload/v1706426486/template_images/cute-little-pink-cat-watercolor-png_2_kxmwtq.webp">
+            </div>
+            <p class="name">Beatris Ilieve</p>
+            <p class="email">beatrisilieve@icloud.com</p>
+        </div>
+    </div>
+</article>
+{{>jewelry-card}}
+
