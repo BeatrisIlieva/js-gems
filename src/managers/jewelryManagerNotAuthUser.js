@@ -12,9 +12,7 @@ const {
   isArrayEmpty,
 } = require("../utils/checkIfCollectionIsEmpty");
 
-const wishlistController = require("../controllers/wishlistController");
-
-exports.getAll = async ({categoryId, selection, userId, wishlistJewelryIds}) => {
+exports.getAll = async (categoryId, selection) => {
   let query = {
     category: categoryId,
     quantity: { $gt: 0 },
@@ -28,7 +26,9 @@ exports.getAll = async ({categoryId, selection, userId, wishlistJewelryIds}) => 
 
   if (userId) {
     jewelries = await setJewelriesLikedAuthUser(jewelries, userId);
-  };
+  } else {
+    jewelries = await setJewelriesLikedNotAuthUser(jewelries);
+  }
 
   const metals = await Metal.find().lean();
   metalMatchReplacer = "metals.kind";

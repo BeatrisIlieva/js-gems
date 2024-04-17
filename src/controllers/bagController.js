@@ -92,7 +92,7 @@ router.post("/:jewelryId/update", isAuth, async (req, res) => {
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
 
-    res.render("/bag/display", errorMessages);
+    res.redirect("/bag", {errorMessages});
   }
 });
 

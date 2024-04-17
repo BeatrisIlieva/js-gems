@@ -6,19 +6,41 @@ const metalIds = ({
   whiteGoldId,
   platinumId,
 } = require("../constants/jewelryComposition"));
+const { getBagCount } = require("../middlewares/bagCounterMiddleware");
+const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
+const { isArrayEmpty } = require("../utils/checkIfCollectionIsEmpty");
 
-router.get("/:categoryId", async (req, res) => {
+router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
   try {
+    let userId;
+
     const category = req.params.categoryId;
     const categoryId = Number(category);
-
     const selection = req.query;
+    // let result;
+    result = await jewelryManager.getAll({ categoryId, selection, userId })
 
-    const userId = req.user._id;
+    if (req.user) {
+      userId = req.user._id;
+      result = await jewelryManager.getAll({ categoryId, selection, userId });
+    } else {
+      const jewelryIds = req.session.wishlistItems;
+      console.log(req.session.wishlistItems);
 
+      result = await jewelryManager.getAll({
+        categoryId,
+        selection,
+      });
+      for (let i = 0; i < result.length; i++) {
+        const item = result[i];
+        itemId = item._id;
+        let isLikedByUser = jewelryIds.includes(itemId);
+    
+        item["isLikedByUser"] = isLikedByUser;
+      }
+    }
     const { jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount } =
-      await jewelryManager.getAll(categoryId, selection, userId);
-
+      result;
     res.render("jewelries/all", {
       jewelries,
       metalsByCount,

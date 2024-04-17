@@ -2,7 +2,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("../lib/jwt");
 const User = require("../models/User");
 const profileManager = require("./profileManager");
-const {SECRET} = require("../config/config");
+// const {SECRET} = require("../config/config");
+const { SECRET, BAG_ITEMS, WISHLIST_ITEMS } = require("../config/config");
 
 exports.register = async (userData) => {
   const user = await User.findOne({email: userData.email});
@@ -42,8 +43,6 @@ async function generateToken(user) {
   const payload = {
     _id: user._id,
     email: user.email,
-    shoppingBag: [],
-    wishlist: [],
   }
 
   const token = await jwt.sign(payload, SECRET, {expiresIn: "7d"});

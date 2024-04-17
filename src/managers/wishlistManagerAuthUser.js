@@ -21,14 +21,12 @@ exports.delete = async ({ userId, jewelryId }) => {
 };
 
 exports.getAll = async (userId) => {
-  let jewelryIds = await Wishlist.find({ user: userId }).select('jewelry');
-  jewelryIds = jewelryIds.map(item => item.jewelry);
-  console.log(jewelryIds);
+  let jewelryIds = await Wishlist.find({ user: userId }).select("jewelry");
+  jewelryIds = jewelryIds.map((item) => item.jewelry);
 
   let jewelries = await Jewelry.find({ _id: { $in: jewelryIds } }).lean();
-  console.log(jewelries);
 
   jewelries = await setJewelriesLiked(jewelries, userId);
 
-    return jewelries;
+  return jewelries;
 };

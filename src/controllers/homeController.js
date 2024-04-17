@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const {getBagCount} = require("../middlewares/bagCounterMiddleware");
-// const {getLikesCount} = require("../utils/counterHelper");
+const {getLikeCount} = require("../middlewares/likeCounterMiddleware");
 
-router.get("/", getBagCount, async (req, res) => {
+router.get("/", getBagCount, getLikeCount, async (req, res) => {
   // const userId = req.user?._id;
   try {
     res.render("index");
