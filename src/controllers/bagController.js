@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { isAuth } = require("../middlewares/authMiddleware");
 const {getBagCount} = require("../middlewares/bagCounterMiddleware");
+const {getLikeCount} = require("../middlewares/likeCounterMiddleware");
 const bagManager = require("../managers/bagManager");
 const {
   DEFAULT_ADD_QUANTITY,
@@ -10,7 +11,7 @@ const { extractErrorMessages } = require("../utils/errorHelpers");
 const Jewelry = require("../models/Jewelry");
 const jewelryManager = require("../managers/jewelryManager");
 
-router.get("/", isAuth, getBagCount, async (req, res) => {
+router.get("/", isAuth, getBagCount, getLikeCount, async (req, res) => {
   try {
     const userId = req.user._id;
 

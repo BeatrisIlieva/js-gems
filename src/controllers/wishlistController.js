@@ -1,8 +1,11 @@
 const router = require("express").Router();
 const { isAuth } = require("../middlewares/authMiddleware");
-const wishlistManagerAuthUser = require("../managers/wishlistManagerAuthUser");
+const wishlistAuthUserManager = require("../managers/wishlistAuthUserManager");
+const { getBagCount } = require("../middlewares/bagCounterMiddleware");
+const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
+const Jewelry = require("../models/Jewelry");
 
-router.get("/", async (req, res) => {
+router.get("/", getBagCount, getLikeCount, async (req, res) => {
   try {
     let userId;
     let jewelries;
@@ -22,7 +25,7 @@ router.get("/", async (req, res) => {
     } else {
       userId = req.user._id;
 
-      jewelries = await wishlistManagerAuthUser.getAll(userId);
+      jewelries = await wishlistAuthUserManager.getAll(userId);
     }
     res.render("wishlist/wishlist", { jewelries });
   } catch (err) {
@@ -43,7 +46,7 @@ router.post("/:jewelryId/create", async (req, res) => {
     } else {
       const userId = req.user._id;
 
-      await wishlistManagerAuthUser.create({ userId, jewelryId });
+      await wishlistAuthUserManager.create({ userId, jewelryId });
     }
     const referer = req.get("referer");
     res.redirect(referer);
@@ -62,7 +65,7 @@ router.post("/:jewelryId/delete", async (req, res) => {
     } else {
       const userId = req.user._id;
 
-      await wishlistManagerAuthUser.delete({ userId, jewelryId });
+      await wishlistAuthUserManager.delete({ userId, jewelryId });
     }
 
     const referer = req.get("referer");

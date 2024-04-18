@@ -1,8 +1,10 @@
 const router = require("express").Router();
 const profileManager = require("../managers/profileManager");
 const { extractErrorMessages } = require("../utils/errorHelpers");
+const { getBagCount } = require("../middlewares/bagCounterMiddleware");
+const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
 
-router.get("/edit", async (req, res) => {
+router.get("/edit", getBagCount, getLikeCount, async (req, res) => {
   const userId = req.user._id;
 
   try {

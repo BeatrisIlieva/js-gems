@@ -9,7 +9,10 @@ const metalIds = ({
 const { getBagCount } = require("../middlewares/bagCounterMiddleware");
 const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
 const { isArrayEmpty } = require("../utils/checkIfCollectionIsEmpty");
-const { setJewelriesLiked, setJewelryLiked } = require("../utils/setJewelriesLiked");
+const {
+  setJewelriesLiked,
+  setJewelryLiked,
+} = require("../utils/setJewelriesLiked");
 
 router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
   try {
@@ -24,7 +27,7 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
       const userId = req.user._id;
       jewelries = await setJewelriesLiked(jewelries, userId);
     } else {
-      jewelries = setJewelriesLikedNotAuthUser(jewelries);
+      jewelries = await setJewelriesLikedNotAuthUser(req, jewelries);
     }
 
     res.render("jewelries/all", {
@@ -39,36 +42,52 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
   }
 });
 
-router.get("/:jewelryId/details", async (req, res) => {
-  const jewelryId = req.params.jewelryId;
-  try {
-    let jewelry = await jewelryManager.getOne(jewelryId);
+router.get(
+  "/:jewelryId/details",
+  getBagCount,
+  getLikeCount,
+  async (req, res) => {
+    const jewelryId = req.params.jewelryId;
+    try {
+      let jewelry = await jewelryManager.getOne(jewelryId);
 
-    if (req.user) {
-      const userId = req.user._id;
-      jewelry = await setJewelryLiked(jewelry, userId);
-    } else {
-      jewelry = await setJewelriesLikedNotAuthUser(jewelry);
-    }
-
-    res.render("jewelries/jewelry-details", { jewelry });
-  } catch (err) {
-    console.log(err.message);
-    res.render("500");
-  }
-});
-
-const setJewelriesLikedNotAuthUser = async (req, res, jewelries) => {
-  const jewelryIds = Object.keys(req.session.wishlistItems).map(Number);
-
-      for (let i = 0; i < jewelries.length; i++) {
-        const jewelry = jewelries[i];
-        jewelryId = jewelry._id;
-        let isLikedByUser = jewelryIds.includes(jewelryId);
-
-        jewelry["isLikedByUser"] = isLikedByUser;
+      if (req.user) {
+        const userId = req.user._id;
+        jewelry = await setJewelryLiked(jewelry, userId);
+      } else {
+        jewelry = await setJewelryLikedNotAuthUser(req, jewelry);
       }
-      return jewelries;
-}
+
+      res.render("jewelries/jewelry-details", { jewelry });
+    } catch (err) {
+      console.log(err.message);
+      res.render("500");
+    }
+  }
+);
+
+const setJewelriesLikedNotAuthUser = async (req, jewelries) => {
+  const jewelryIds = Object.keys(req.session.wishlistItems || {}).map(Number);
+
+  for (let i = 0; i < jewelries.length; i++) {
+    const jewelry = jewelries[i];
+    jewelryId = jewelry._id;
+    let isLikedByUser = jewelryIds.includes(jewelryId);
+
+    jewelry["isLikedByUser"] = isLikedByUser;
+  }
+  return jewelries;
+};
+
+const setJewelryLikedNotAuthUser = async (req, jewelry) => {
+  const jewelryIds = Object.keys(req.session.wishlistItems || {}).map(Number);
+
+  jewelryId = jewelry._id;
+  let isLikedByUser = jewelryIds.includes(jewelryId);
+
+  jewelry["isLikedByUser"] = isLikedByUser;
+
+  return jewelry;
+};
 
 module.exports = router;

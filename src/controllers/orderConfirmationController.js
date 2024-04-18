@@ -3,9 +3,10 @@ const { isAuth } = require("../middlewares/authMiddleware");
 const orderConfirmationManager = require("../managers/orderConfirmationManager");
 const profileManager = require("../managers/profileManager");
 const ShoppingBag = require("../models/ShoppingBag");
+const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
 
 
-router.get("/", isAuth, async (req, res) => {
+router.get("/", isAuth, getLikeCount, async (req, res) => {
     const userId = req.user._id;
 
     try {

@@ -2,8 +2,10 @@ const router = require("express").Router();
 const { isAuth } = require("../middlewares/authMiddleware");
 const { extractErrorMessages } = require("../utils/errorHelpers");
 const profileManager = require("../managers/profileManager");
+const {getBagCount} = require("../middlewares/bagCounterMiddleware");
+const {getLikeCount} = require("../middlewares/likeCounterMiddleware");
 
-router.get("/", isAuth, async (req, res) => {
+router.get("/", isAuth, getBagCount, getLikeCount, async (req, res) => {
     const userId = req.user._id;
 
     try {
