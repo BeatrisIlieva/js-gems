@@ -1,13 +1,8 @@
 const Jewelry = require("../models/Jewelry");
-const Category = require("../models/Category");
 const Metal = require("../models/Metal");
 const StoneType = require("../models/StoneType");
 const StoneColor = require("../models/StoneColor");
-const { setJewelriesLiked } = require("../utils/setIsLikedAuthUser");
 const { isSelectionEmpty } = require("../utils/checkIfCollectionIsEmpty");
-
-const wishlistController = require("../controllers/wishlistController");
-
 const { updateSelectionQuery } = require("../utils/updateSelectionQuery");
 const { getCompositionsCounts } = require("../utils/getCompositionsCounts");
 
