@@ -60,13 +60,13 @@ exports.update = async ({bagItemId, updatedQuantity, userId, sizeId}) => {
     } else {
       difference = alreadyAddedQuantity - updatedQuantity;
       newQuantity = jewelry.quantity + difference;
-
-      if (Number(updatedQuantity) === 0) {
-        await bagItem.deleteOne();
-      }
     }
     await jewelry.updateOne({ quantity: newQuantity });
     await updateBagTotalPrice({userId, jewelryId, sizeId});
+
+    if (Number(updatedQuantity) === 0) {
+      await bagItem.deleteOne();
+    }
   }
 };
 

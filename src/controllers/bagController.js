@@ -77,15 +77,15 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
 router.post("/:jewelryId/update", isAuth, async (req, res) => {
   const userId = req.user._id;
 
-  const { updatedQuantity, bagItemId, sizeId } = req.body;
-  const sizeIdAsNumber = Number(sizeId);
+  let { updatedQuantity, bagItemId, sizeId } = req.body;
+  sizeId = Number(sizeId);
 
   try {
     await bagManager.update({
       bagItemId,
       updatedQuantity,
       userId,
-      sizeIdAsNumber,
+      sizeId,
     });
 
     res.redirect("/bag");
