@@ -14,11 +14,15 @@ exports.register = async (userData) => {
   
   const createdUser = await User.create(userData);
 
+  const userId = createdUser._id;
+
   const token = await generateToken(createdUser);
+
+  // user.sessionKey = token.session;
 
   await profileManager.createProfile(createdUser._id);
 
-  return token;
+  return {token, userId};
 };
 
 exports.login = async (email, password) => {

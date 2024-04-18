@@ -4,6 +4,7 @@ const { extractErrorMessages } = require("../utils/errorHelpers");
 const {TOKEN_KEY} = require("../config/config");
 const { getBagCount } = require("../middlewares/bagCounterMiddleware");
 const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
+const {transferSessionWishlistToModelWishlist} = require("../utils/transferSessionWishlistToModelWishlist")
 
 router.get("/register", getBagCount, getLikeCount, (req, res) => {
   res.render("users/register");
@@ -13,9 +14,11 @@ router.post("/register", async (req, res) => {
   const { email, password, repeatPassword} = req.body;
 
   try {
-    const token = await userManager.register({ email, password, repeatPassword });
+    const {token, userId} = await userManager.register({ email, password, repeatPassword });
 
     res.cookie(TOKEN_KEY, token);
+
+    await transferSessionWishlistToModelWishlist(req, userId);
     
     res.redirect("/");
 
