@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const { isAuth } = require("../middlewares/authMiddleware");
 const wishlistManagerAuthUser = require("../managers/wishlistManagerAuthUser");
-const wishlistManagerNotAuthUser = require("../managers/wishlistManagerNotAuthUser");
 
 router.get("/", async (req, res) => {
   try {
