@@ -6,7 +6,8 @@ exports.getBagCount = async (req, res, next) => {
     let userId;
 
     if(!req.user){
-      // bagCount = res.locals.bagItems.length;
+      bagCount = Object.keys(req.session.bagItems || {}).length;
+      res.locals.bagCount = bagCount;
       next();
     } else {
       userId = req.user._id;

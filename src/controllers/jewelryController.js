@@ -10,9 +10,15 @@ const { getBagCount } = require("../middlewares/bagCounterMiddleware");
 const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
 const { isArrayEmpty } = require("../utils/checkIfCollectionIsEmpty");
 const {
-  setJewelriesLiked,
-  setJewelryLiked,
-} = require("../utils/setJewelriesLiked");
+  setJewelriesLikedAuthUser,
+  setJewelryLikedAuthUser,
+} = require("../utils/setIsLikedAuthUser");
+
+const {
+  setJewelriesLikedNotAuthUser,
+  setJewelryLikedNotAuthUser,
+} = require("../utils/setIsLikedNotAuthUser");
+
 
 router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
   try {
@@ -25,7 +31,7 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
 
     if (req.user) {
       const userId = req.user._id;
-      jewelries = await setJewelriesLiked(jewelries, userId);
+      jewelries = await setJewelriesLikedAuthUser(jewelries, userId);
     } else {
       jewelries = await setJewelriesLikedNotAuthUser(req, jewelries);
     }
@@ -53,7 +59,7 @@ router.get(
 
       if (req.user) {
         const userId = req.user._id;
-        jewelry = await setJewelryLiked(jewelry, userId);
+        jewelry = await setJewelryLikedAuthUser(jewelry, userId);
       } else {
         jewelry = await setJewelryLikedNotAuthUser(req, jewelry);
       }
@@ -66,28 +72,5 @@ router.get(
   }
 );
 
-const setJewelriesLikedNotAuthUser = async (req, jewelries) => {
-  const jewelryIds = Object.keys(req.session.wishlistItems || {}).map(Number);
-
-  for (let i = 0; i < jewelries.length; i++) {
-    const jewelry = jewelries[i];
-    jewelryId = jewelry._id;
-    let isLikedByUser = jewelryIds.includes(jewelryId);
-
-    jewelry["isLikedByUser"] = isLikedByUser;
-  }
-  return jewelries;
-};
-
-const setJewelryLikedNotAuthUser = async (req, jewelry) => {
-  const jewelryIds = Object.keys(req.session.wishlistItems || {}).map(Number);
-
-  jewelryId = jewelry._id;
-  let isLikedByUser = jewelryIds.includes(jewelryId);
-
-  jewelry["isLikedByUser"] = isLikedByUser;
-
-  return jewelry;
-};
-
 module.exports = router;
+

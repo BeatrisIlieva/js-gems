@@ -6,7 +6,8 @@ exports.getLikeCount = async (req, res, next) => {
     let userId;
 
     if(!req.user){
-      // likeCount = res.locals.wishlistItems.length;
+      likeCount = Object.keys(req.session.wishlistItems || {}).length;
+      res.locals.likeCount = likeCount;
       next();
     } else {
       userId = req.user._id;

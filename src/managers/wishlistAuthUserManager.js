@@ -1,6 +1,6 @@
 const Wishlist = require("../models/Wishlist");
 const Jewelry = require("../models/Jewelry");
-const { setJewelriesLiked } = require("../utils/setJewelriesLiked");
+const { setJewelriesLikedAuthUser } = require("../utils/setIsLikedAuthUser");
 const {
   isSelectionEmpty,
   isArrayEmpty,
@@ -26,7 +26,7 @@ exports.getAll = async (userId) => {
 
   let jewelries = await Jewelry.find({ _id: { $in: jewelryIds } }).lean();
 
-  jewelries = await setJewelriesLiked(jewelries, userId);
+  jewelries = await setJewelriesLikedAuthUser(jewelries, userId);
 
   return jewelries;
 };

@@ -1,6 +1,6 @@
 const Wishlist = require("../models/Wishlist");
 
-exports.setJewelriesLiked = async (jewelries, userId) => {
+exports.setJewelriesLikedAuthUser = async (jewelries, userId) => {
   for (let i = 0; i < jewelries.length; i++) {
     const jewelry = jewelries[i];
     jewelryId = jewelry._id;
@@ -14,7 +14,7 @@ exports.setJewelriesLiked = async (jewelries, userId) => {
   return jewelries;
 };
 
-exports.setJewelryLiked = async (jewelry, userId) => {
+exports.setJewelryLikedAuthUser = async (jewelry, userId) => {
 
     jewelryId = jewelry._id;
     let isLikedByUser = await isLiked(
