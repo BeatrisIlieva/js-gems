@@ -12,35 +12,32 @@ const { isArrayEmpty } = require("../utils/checkIfCollectionIsEmpty");
 
 router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
   try {
-    let userId;
+
 
     const category = req.params.categoryId;
     const categoryId = Number(category);
     const selection = req.query;
-    // let result;
-    result = await jewelryManager.getAll({ categoryId, selection, userId })
+
+    const { jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount } =
+    await jewelryManager.getAll({ categoryId, selection});
 
     if (req.user) {
-      userId = req.user._id;
-      result = await jewelryManager.getAll({ categoryId, selection, userId });
+      const userId = req.user._id;
+      result = await jewelryManager.getAll({ categoryId, selection});
     } else {
-      const jewelryIds = req.session.wishlistItems;
-      console.log(req.session.wishlistItems);
+      const jewelryIds = Object.keys(req.session.wishlistItems).map(Number);
+      console.log(jewelryIds);
 
-      result = await jewelryManager.getAll({
-        categoryId,
-        selection,
-      });
-      for (let i = 0; i < result.length; i++) {
-        const item = result[i];
-        itemId = item._id;
-        let isLikedByUser = jewelryIds.includes(itemId);
+      
+      for (let i = 0; i < jewelries.length; i++) {
+        const jewelry = jewelries[i];
+        jewelryId = jewelry._id;
+        let isLikedByUser = jewelryIds.includes(jewelryId);
     
-        item["isLikedByUser"] = isLikedByUser;
+        jewelry["isLikedByUser"] = isLikedByUser;
       }
     }
-    const { jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount } =
-      result;
+
     res.render("jewelries/all", {
       jewelries,
       metalsByCount,

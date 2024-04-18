@@ -17,10 +17,9 @@ router.get("/", async (req, res) => {
         const jewelry = jewelries[i];
         jewelryId = jewelry._id;
         let isLikedByUser = JewelryIds.includes(jewelryId);
-    
+
         jewelry["isLikedByUser"] = isLikedByUser;
       }
-      
     } else {
       userId = req.user._id;
 
@@ -33,21 +32,15 @@ router.get("/", async (req, res) => {
   }
 });
 
-
 router.post("/:jewelryId/create", async (req, res) => {
   try {
     const jewelryId = req.params.jewelryId;
 
     if (!req.user) {
-      let wishListCollection = req.session.wishlistItems || {};
-      
-      if (wishListCollection.hasOwnProperty(jewelryId)) {
-        delete wishListCollection[jewelryId];
-      } else {
-        wishListCollection[jewelryId] = jewelryId;
-      }
-;
+      req.session.wishlistItems = req.session.wishlistItems || {};
 
+        req.session.wishlistItems[jewelryId] = jewelryId;
+        console.log(req.session.wishlistItems);
     } else {
       const userId = req.user._id;
 
@@ -66,11 +59,11 @@ router.post("/:jewelryId/delete", async (req, res) => {
     const jewelryId = req.params.jewelryId;
 
     if (!req.user) {
-      await wishlistManagerNotAuthUser.delete(jewelryId);
+      delete req.session.wishlistItems[jewelryId];
     } else {
       const userId = req.user._id;
-    
-    await wishlistManagerAuthUser.delete({ userId, jewelryId });
+
+      await wishlistManagerAuthUser.delete({ userId, jewelryId });
     }
 
     const referer = req.get("referer");

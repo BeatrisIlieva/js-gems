@@ -14,7 +14,7 @@ const {
 
 const wishlistController = require("../controllers/wishlistController");
 
-exports.getAll = async ({categoryId, selection, userId, wishlistJewelryIds}) => {
+exports.getAll = async ({categoryId, selection}) => {
   let query = {
     category: categoryId,
     quantity: { $gt: 0 },
@@ -25,10 +25,6 @@ exports.getAll = async ({categoryId, selection, userId, wishlistJewelryIds}) => 
   }
 
   let jewelries = await Jewelry.find(query).lean();
-
-  if (userId) {
-    jewelries = await setJewelriesLikedAuthUser(jewelries, userId);
-  };
 
   const metals = await Metal.find().lean();
   metalMatchReplacer = "metals.kind";
