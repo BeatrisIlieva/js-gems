@@ -1,0 +1,9 @@
+{{#if jewelry.isLikedByUser}}
+<form action="/likes/{{jewelry._id}}/delete" method="POST">
+{{>like-button-jewelry-details}}
+</form>
+{{else}}
+<form action="/likes/{{jewelry._id}}/create" method="POST">
+{{>like-button-jewelry-details}}
+</form>
+{{/if}}

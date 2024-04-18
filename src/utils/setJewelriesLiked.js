@@ -14,6 +14,19 @@ exports.setJewelriesLiked = async (jewelries, userId) => {
   return jewelries;
 };
 
+exports.setJewelryLiked = async (jewelry, userId) => {
+
+    jewelryId = jewelry._id;
+    let isLikedByUser = await isLiked(
+      userId,
+      jewelryId,
+    );
+    isLikedByUser = !!isLikedByUser;
+    jewelry["isLikedByUser"] = isLikedByUser;
+  
+  return jewelry;
+};
+
 
 const isLiked = async ( userId, jewelryId ) => {
   const isLikedByUser = await Wishlist.findOne({
