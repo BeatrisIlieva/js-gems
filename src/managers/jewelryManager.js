@@ -3,10 +3,7 @@ const Category = require("../models/Category");
 const Metal = require("../models/Metal");
 const StoneType = require("../models/StoneType");
 const StoneColor = require("../models/StoneColor");
-const {
-  setJewelriesLikedAuthUser,
-  setJewelriesLikedNotAuthUser,
-} = require("../utils/setJewelriesLiked");
+const { setJewelriesLiked } = require("../utils/setJewelriesLiked");
 const {
   isSelectionEmpty,
   isArrayEmpty,
@@ -14,7 +11,7 @@ const {
 
 const wishlistController = require("../controllers/wishlistController");
 
-exports.getAll = async ({categoryId, selection}) => {
+exports.getAll = async ({ categoryId, selection }) => {
   let query = {
     category: categoryId,
     quantity: { $gt: 0 },

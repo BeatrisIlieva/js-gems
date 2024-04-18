@@ -1,13 +1,13 @@
 const Wishlist = require("../models/Wishlist");
 
-exports.setJewelriesLikedAuthUser = async (jewelries, userId) => {
+exports.setJewelriesLiked = async (jewelries, userId) => {
   for (let i = 0; i < jewelries.length; i++) {
     const jewelry = jewelries[i];
     jewelryId = jewelry._id;
-    let isLikedByUser = await isLiked({
+    let isLikedByUser = await isLiked(
       userId,
       jewelryId,
-    });
+    );
     isLikedByUser = !!isLikedByUser;
     jewelry["isLikedByUser"] = isLikedByUser;
   }
@@ -15,7 +15,7 @@ exports.setJewelriesLikedAuthUser = async (jewelries, userId) => {
 };
 
 
-const isLiked = async ({ userId, jewelryId }) => {
+const isLiked = async ( userId, jewelryId ) => {
   const isLikedByUser = await Wishlist.findOne({
     user: userId,
     jewelry: jewelryId,

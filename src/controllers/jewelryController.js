@@ -9,7 +9,7 @@ const metalIds = ({
 const { getBagCount } = require("../middlewares/bagCounterMiddleware");
 const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
 const { isArrayEmpty } = require("../utils/checkIfCollectionIsEmpty");
-const { setJewelriesLikedAuthUser } = require("../utils/setJewelriesLiked");
+const { setJewelriesLiked } = require("../utils/setJewelriesLiked");
 
 router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
   try {
@@ -22,7 +22,7 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
 
     if (req.user) {
       const userId = req.user._id;
-      jewelries = await setJewelriesLikedAuthUser(jewelries, userId);
+      jewelries = await setJewelriesLiked(jewelries, userId);
     } else {
       const jewelryIds = Object.keys(req.session.wishlistItems).map(Number);
 

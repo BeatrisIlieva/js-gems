@@ -8,17 +8,17 @@ router.get("/", async (req, res) => {
     let jewelries;
 
     if (!req.user) {
-      const jewelryIds = res.locals.wishlistItems;
-
+      const jewelryIds = Object.keys(req.session.wishlistItems).map(Number);
       let jewelries = await Jewelry.find({ _id: { $in: jewelryIds } }).lean();
 
       for (let i = 0; i < jewelries.length; i++) {
         const jewelry = jewelries[i];
         jewelryId = jewelry._id;
-        let isLikedByUser = JewelryIds.includes(jewelryId);
+        let isLikedByUser = jewelryIds.includes(jewelryId);
 
         jewelry["isLikedByUser"] = isLikedByUser;
       }
+
     } else {
       userId = req.user._id;
 
