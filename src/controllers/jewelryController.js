@@ -1,24 +1,15 @@
 const router = require("express").Router();
 const jewelryManager = require("../managers/jewelryManager");
-const metalIds = ({
-  yellowGoldId,
-  roseGoldId,
-  whiteGoldId,
-  platinumId,
-} = require("../constants/jewelryComposition"));
 const { getBagCount } = require("../middlewares/bagCounterMiddleware");
 const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
-const { isArrayEmpty } = require("../utils/checkIfCollectionIsEmpty");
 const {
   setJewelriesLikedAuthUser,
   setJewelryLikedAuthUser,
 } = require("../utils/setIsLikedAuthUser");
-
 const {
   setJewelriesLikedNotAuthUser,
   setJewelryLikedNotAuthUser,
 } = require("../utils/setIsLikedNotAuthUser");
-
 
 router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
   try {
@@ -27,10 +18,11 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
     const selection = req.query;
 
     let { jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount } =
-      await jewelryManager.getAll(categoryId, selection );
+      await jewelryManager.getAll(categoryId, selection);
 
     if (req.user) {
       const userId = req.user._id;
+
       jewelries = await setJewelriesLikedAuthUser(jewelries, userId);
     } else {
       jewelries = await setJewelriesLikedNotAuthUser(req, jewelries);
@@ -59,6 +51,7 @@ router.get(
 
       if (req.user) {
         const userId = req.user._id;
+
         jewelry = await setJewelryLikedAuthUser(jewelry, userId);
       } else {
         jewelry = await setJewelryLikedNotAuthUser(req, jewelry);
@@ -73,4 +66,3 @@ router.get(
 );
 
 module.exports = router;
-
