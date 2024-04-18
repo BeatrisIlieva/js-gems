@@ -1,14 +1,13 @@
 const Jewelry = require("../models/Jewelry");
 
 exports.create = (req, jewelryId) => {
-    req.session.wishlistItems = req.session.wishlistItems || {};
-    req.session.wishlistItems[jewelryId] = jewelryId;
-  };
-  
-  exports.delete = (req, jewelryId) => {
-    delete req.session.wishlistItems[jewelryId];
-  };
+  req.session.wishlistItems = req.session.wishlistItems || {};
+  req.session.wishlistItems[jewelryId] = jewelryId;
+};
 
+exports.delete = (req, jewelryId) => {
+  delete req.session.wishlistItems[jewelryId];
+};
 
 exports.getAll = async (req) => {
   const jewelryIds = Object.keys(req.session.wishlistItems).map(Number);

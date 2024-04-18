@@ -6,14 +6,14 @@ const {
   isArrayEmpty,
 } = require("../utils/checkIfCollectionIsEmpty");
 
-exports.create = async ({ userId, jewelryId }) => {
+exports.create = async (userId, jewelryId) => {
   wishlist = await Wishlist.create({
     user: userId,
     jewelry: jewelryId,
   });
 };
 
-exports.delete = async ({ userId, jewelryId }) => {
+exports.delete = async (userId, jewelryId) => {
   wishlistItem = await Wishlist.findOneAndDelete({
     user: userId,
     jewelry: jewelryId,

@@ -33,8 +33,8 @@ router.post("/:jewelryId/create", async (req, res) => {
       await wishlistNotAuthUserManager.create(req, jewelryId);
     } else {
       const userId = req.user._id;
-      
-      await wishlistAuthUserManager.create({ userId, jewelryId });
+
+      await wishlistAuthUserManager.create(userId, jewelryId);
     }
     const referer = req.get("referer");
     res.redirect(referer);
@@ -52,7 +52,7 @@ router.post("/:jewelryId/delete", async (req, res) => {
       await wishlistNotAuthUserManager.delete(req, jewelryId);
     } else {
       const userId = req.user._id;
-      await wishlistAuthUserManager.delete({ userId, jewelryId });
+      await wishlistAuthUserManager.delete(userId, jewelryId);
     }
 
     const referer = req.get("referer");
