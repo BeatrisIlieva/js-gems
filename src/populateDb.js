@@ -364,6 +364,46 @@ async function populateDb() {
       secondImageUrl:
         "https://res.cloudinary.com/deztgvefu/image/upload/v1703434445/rings/2/sparkling_cluster_sap_aqua_and_diamond_ring_frsaqpclrfspc_e-2h_kmqowy.webp",
       category: allCategories[3],
+    },
+    {
+      title: "Pink Flower",
+      firstImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703434808/rings/3/forget_me_not_ring_diamond_and_pink_sapphire_frpsprfflrfmn_e_1_cy6fmu.webp",
+      secondImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703434809/rings/3/forget_me_not_ring_diamond_and_pink_sapphire_frpsprfflrfmn_e_2_r9cunk.webp",
+      category: allCategories[3],
+    },
+    {
+      title: "Ruby",
+      firstImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703435551/rings/4/ruby_and_diamond_ring_ruby_and_diamond_frrmrpddhwf_e-1_w6ovk2.webp",
+      secondImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703435552/rings/4/ruby_and_diamond_ring_ruby_and_diamond_frrmrpddhwf_e-2_sas5gh.webp",
+      category: allCategories[3],
+    },
+    {
+      title: "Clssic",
+      firstImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703435818/rings/5/classic_engagement_ring_emerald_rgemec020tb_e-1_remfd3.webp",
+      secondImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703435820/rings/5/classic_engagement_ring_emerald_rgemec020tb_e-2_qqna1u.webp",
+      category: allCategories[3],
+    },
+    {
+      title: "Lily",
+      firstImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703437558/rings/6/lily_cluster_ring_diamond_rose_gold_frdrmqrflc_e-1_sap3ct.webp",
+      secondImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703437556/rings/6/lily_cluster_ring_diamond_rose_gold_frdrmqrflc_e-2_i3qn33.webp",
+      category: allCategories[3],
+    },
+    {
+      title: "Sunflower",
+      firstImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703436504/rings/7/sunflower_ring_diamond_frdptw007sf_e-1_poiqqc.webp",
+      secondImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703436502/rings/7/sunflower_ring_diamond_frdptw007sf_e-2_grj12r.webp",
+      category: allCategories[3],
     }
   ]);
 
@@ -498,6 +538,38 @@ async function populateDb() {
     {
       jewelry: allJewelries[28],
       metal: allMetals[3],
+    },
+    {
+      jewelry: allJewelries[29],
+      metal: allMetals[3],
+    },
+    {
+      jewelry: allJewelries[30],
+      metal: allMetals[3],
+    },
+    {
+      jewelry: allJewelries[30],
+      metal: allMetals[0],
+      caratWeight: 18
+    },
+    {
+      jewelry: allJewelries[31],
+      metal: allMetals[3],
+    },
+    {
+      jewelry: allJewelries[31],
+      metal: allMetals[0],
+      caratWeight: 18
+    },
+    {
+      jewelry: allJewelries[32],
+      metal: allMetals[1],
+      caratWeight: 18
+    },
+    {
+      jewelry: allJewelries[33],
+      metal: allMetals[2],
+      caratWeight: 18
     },
   ]);
 
@@ -822,6 +894,48 @@ async function populateDb() {
       stoneType: allStoneTypes[4],
       stoneColor: allStoneColors[0],
       caratWeight: 1.08,
+    },
+    {
+      jewelry: allJewelries[29],
+      stoneType: allStoneTypes[4],
+      stoneColor: allStoneColors[4],
+      caratWeight: 2.22,
+    },
+    {
+      jewelry: allJewelries[29],
+      stoneType: allStoneTypes[1],
+      stoneColor: allStoneColors[6],
+      caratWeight: 0.05,
+    },
+    {
+      jewelry: allJewelries[30],
+      stoneType: allStoneTypes[3],
+      stoneColor: allStoneColors[5],
+      caratWeight: 1.32,
+    },
+    {
+      jewelry: allJewelries[30],
+      stoneType: allStoneTypes[1],
+      stoneColor: allStoneColors[6],
+      caratWeight: 3.29,
+    },
+    {
+      jewelry: allJewelries[31],
+      stoneType: allStoneTypes[2],
+      stoneColor: allStoneColors[3],
+      caratWeight: 2.32,
+    },
+    {
+      jewelry: allJewelries[32],
+      stoneType: allStoneTypes[1],
+      stoneColor: allStoneColors[6],
+      caratWeight: 0.41,
+    },
+    {
+      jewelry: allJewelries[33],
+      stoneType: allStoneTypes[1],
+      stoneColor: allStoneColors[6],
+      caratWeight: 0.31,
     },
   ]);
 
@@ -1240,6 +1354,96 @@ async function populateDb() {
       quantity: 3,
       price: 48000,
     },
+    {
+      jewelry: allJewelries[29],
+      size: allSizes[9],
+      quantity: 3,
+      price: 33000,
+    },
+    {
+      jewelry: allJewelries[29],
+      size: allSizes[10],
+      quantity: 3,
+      price: 33000,
+    },
+    {
+      jewelry: allJewelries[29],
+      size: allSizes[11],
+      quantity: 3,
+      price: 33000,
+    },
+    {
+      jewelry: allJewelries[30],
+      size: allSizes[9],
+      quantity: 3,
+      price: 36000,
+    },
+    {
+      jewelry: allJewelries[30],
+      size: allSizes[10],
+      quantity: 3,
+      price: 36000,
+    },
+    {
+      jewelry: allJewelries[30],
+      size: allSizes[11],
+      quantity: 3,
+      price: 36000,
+    },
+    {
+      jewelry: allJewelries[31],
+      size: allSizes[9],
+      quantity: 3,
+      price: 51000,
+    },
+    {
+      jewelry: allJewelries[31],
+      size: allSizes[10],
+      quantity: 3,
+      price: 51000,
+    },
+    {
+      jewelry: allJewelries[31],
+      size: allSizes[11],
+      quantity: 3,
+      price: 51000,
+    },
+    {
+      jewelry: allJewelries[32],
+      size: allSizes[9],
+      quantity: 3,
+      price: 23000,
+    },
+    {
+      jewelry: allJewelries[32],
+      size: allSizes[10],
+      quantity: 3,
+      price: 23000,
+    },
+    {
+      jewelry: allJewelries[32],
+      size: allSizes[11],
+      quantity: 3,
+      price: 23000,
+    },
+    {
+      jewelry: allJewelries[33],
+      size: allSizes[9],
+      quantity: 3,
+      price: 57000,
+    },
+    {
+      jewelry: allJewelries[33],
+      size: allSizes[10],
+      quantity: 3,
+      price: 57000,
+    },
+    {
+      jewelry: allJewelries[33],
+      size: allSizes[11],
+      quantity: 3,
+      price: 57000,
+    },
   ]);
 
 
@@ -1250,109 +1454,17 @@ async function populateDb() {
 
   await Jewelry.create();
 
-  await Jewelry.create({
-    title: "Pink Flower",
-    firstImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703434808/rings/3/forget_me_not_ring_diamond_and_pink_sapphire_frpsprfflrfmn_e_1_cy6fmu.webp",
-    secondImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703434809/rings/3/forget_me_not_ring_diamond_and_pink_sapphire_frpsprfflrfmn_e_2_r9cunk.webp",
-    price: 33000.0,
-    quantity: 20,
-    category: allCategories[3],
-    metals: [{ kind: allMetals[3], caratWeight: null }],
-    stones: [
-      { kind: allStoneTypes[4], color: allStoneColors[4], caratWeight: 2.22 },
-      { kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 0.05 },
-    ],
-    sizes: [allSizes[9], allSizes[10], allSizes[11]],
-  });
+  await Jewelry.create();
 
-  await Jewelry.create({
-    title: "Ruby",
-    firstImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703435551/rings/4/ruby_and_diamond_ring_ruby_and_diamond_frrmrpddhwf_e-1_w6ovk2.webp",
-    secondImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703435552/rings/4/ruby_and_diamond_ring_ruby_and_diamond_frrmrpddhwf_e-2_sas5gh.webp",
-    price: 36000.0,
-    quantity: 20,
-    category: allCategories[3],
-    metals: [
-      { kind: allMetals[3], caratWeight: null },
-      { kind: allMetals[0], caratWeight: 18 },
-    ],
-    stones: [
-      { kind: allStoneTypes[3], color: allStoneColors[5], caratWeight: 1.32 },
-      { kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 3.29 },
-    ],
-    sizes: [allSizes[9], allSizes[10], allSizes[11]],
-  });
+  await Jewelry.create();
 
-  await Jewelry.create({
-    title: "Clssic",
-    firstImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703435818/rings/5/classic_engagement_ring_emerald_rgemec020tb_e-1_remfd3.webp",
-    secondImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703435820/rings/5/classic_engagement_ring_emerald_rgemec020tb_e-2_qqna1u.webp",
-    price: 52000.0,
-    quantity: 20,
-    category: allCategories[3],
-    metals: [
-      { kind: allMetals[3], caratWeight: null },
-      { kind: allMetals[0], caratWeight: 18 },
-    ],
-    stones: [
-      { kind: allStoneTypes[2], color: allStoneColors[3], caratWeight: 2.32 },
-    ],
-    sizes: [allSizes[9], allSizes[10], allSizes[11]],
-  });
+  await Jewelry.create();
 
-  await Jewelry.create({
-    title: "Lily",
-    firstImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703437558/rings/6/lily_cluster_ring_diamond_rose_gold_frdrmqrflc_e-1_sap3ct.webp",
-    secondImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703437556/rings/6/lily_cluster_ring_diamond_rose_gold_frdrmqrflc_e-2_i3qn33.webp",
-    price: 23000.0,
-    quantity: 20,
-    category: allCategories[3],
-    metals: [{ kind: allMetals[1], caratWeight: 18 }],
-    stones: [
-      { kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 0.41 },
-    ],
-    sizes: [allSizes[9], allSizes[10], allSizes[11]],
-  });
+  await Jewelry.create();
 
-  await Jewelry.create({
-    title: "Sunflower",
-    firstImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703436504/rings/7/sunflower_ring_diamond_frdptw007sf_e-1_poiqqc.webp",
-    secondImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703436502/rings/7/sunflower_ring_diamond_frdptw007sf_e-2_grj12r.webp",
-    price: 57000.0,
-    quantity: 20,
-    category: allCategories[3],
-    metals: [{ kind: allMetals[2], caratWeight: 18 }],
-    stones: [
-      { kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 0.31 },
-    ],
-    sizes: [allSizes[9], allSizes[10], allSizes[11]],
-  });
+  await Jewelry.create();
 
-  await Jewelry.create({
-    title: "Heart",
-    firstImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703436707/rings/8/classic_winston_engagement_ring_diamond_rgdphs010tb_e-1_ew1irj.webp",
-    secondImageUrl:
-      "https://res.cloudinary.com/deztgvefu/image/upload/v1703436707/rings/8/classic_winston_engagement_ring_diamond_rgdphs010tb_e-1_ew1irj.webp",
-    price: 29000.0,
-    quantity: 20,
-    category: allCategories[3],
-    metals: [{ kind: allMetals[2], caratWeight: 18 }],
-    stones: [
-      { kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 0.34 },
-    ],
-    sizes: [allSizes[9], allSizes[10], allSizes[11]],
-  });
+  await Jewelry.create();
 
   await Jewelry.create({
     title: "Bridal Couture",
