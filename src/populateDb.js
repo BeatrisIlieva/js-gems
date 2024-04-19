@@ -412,6 +412,21 @@ async function populateDb() {
       secondImageUrl:
         "https://res.cloudinary.com/deztgvefu/image/upload/v1703436707/rings/8/classic_winston_engagement_ring_diamond_rgdphs010tb_e-1_ew1irj.webp",
       category: allCategories[3],
+    },
+    {
+      title: "Bridal Couture",
+      firstImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703436882/rings/9/bridal_couture_by_harry_winston_engagement_ring_emerald_cut_diamond_platinum_rgdpec050ub7_550070_e_1_zgzgx4.webp",
+      secondImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703436854/rings/9/bridal_couture_by_harry_winston_engagement_ring_emerald_cut_diamond_platinum_rgdpec050ub7_550070_e_2_ovqn8e.webp",
+      price: 46000.0,
+      quantity: 20,
+      category: allCategories[3],
+      metals: [{ kind: allMetals[2], caratWeight: 18 }],
+      stones: [
+        { kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 0.36 },
+      ],
+      sizes: [allSizes[9], allSizes[10], allSizes[11]],
     }
   ]);
 
