@@ -20,15 +20,38 @@ exports.getAll = async (categoryId, selection) => {
 
   const metals = await Metal.find().lean();
 
-  metalMatchReplacer = "metals.kind";
+  let metalsByCount = await Jewelry.aggregate([
+    {
+      $match: {
+        category: categoryId,
+      },
+    },
+    {
+      $project: {
+        "metals.kind": 1,
+      },
+    },
+    {
+      $group: {
+        _id: "$metals.kind",
+        count: {
+          $count: {},
+        },
+      },
+    },
+  ]);
 
-  let metalsByCount = await getCompositionsCounts(
-    metals,
-    categoryId,
-    metalMatchReplacer
-  );
+  console.log(metalsByCount);
 
-  metalsByCount = metalsByCount.filter((item) => item.count !== 0);
+  // metalMatchReplacer = "metals.kind";
+
+  // let metalsByCount = await getCompositionsCounts(
+  //   metals,
+  //   categoryId,
+  //   metalMatchReplacer
+  // );
+
+  // metalsByCount = metalsByCount.filter((item) => item.count !== 0);
 
   const stoneTypes = await StoneType.find().lean();
 
