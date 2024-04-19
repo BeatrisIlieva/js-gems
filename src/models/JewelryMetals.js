@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const jewelryMetalsSchema = new mongoose.Schema({
   jewelry: {
-    type: Number,
+    type: mongoose.Types.ObjectId,
     ref: "Jewelry",
     required: true,
   },
