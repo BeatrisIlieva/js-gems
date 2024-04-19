@@ -1,47 +1,46 @@
+
 const Jewelry = require("../models/Jewelry");
-const Metal = require("../models/Metal");
 const StoneType = require("../models/StoneType");
 const StoneColor = require("../models/StoneColor");
 const { isSelectionEmpty } = require("../utils/checkIfCollectionIsEmpty");
 const { updateSelectionQuery } = require("../utils/updateSelectionQuery");
 const { getCompositionsCounts } = require("../utils/getCompositionsCounts");
+const {getSelectionData} = require("../utils/getSelectionData");
 
 exports.getAll = async (categoryId, selection) => {
-  let query = {
-    category: categoryId,
-    quantity: { $gt: 0 },
-  };
-
-  if (!isSelectionEmpty(selection)) {
-    query = updateSelectionQuery(selection, query);
-  }
-
-  let jewelries = await Jewelry.find(query).lean();
-
-  const metals = await Metal.find().lean();
-
-  let metalsByCount = await Jewelry.aggregate([
+  let query = [
     {
       $match: {
         category: categoryId,
       },
     },
     {
-      $project: {
-        "metals.kind": 1,
+      $lookup: {
+        as: "inventories",
+        from: "inventories",
+        foreignField: "jewelry",
+        localField: "_id",
       },
     },
     {
-      $group: {
-        _id: "$metals.kind",
-        count: {
-          $count: {},
+      $match: {
+        "inventories.quantity": {
+          $gt: 0,
         },
       },
     },
-  ]);
+  ];
 
-  console.log(metalsByCount);
+  if (!isSelectionEmpty(selection)) {
+    query = updateSelectionQuery(selection, query);
+  }
+
+  let jewelries = await Jewelry.aggregate(query);
+
+  let metalsData = await getSelectionData(categoryId, jewelries);
+  // stoneTypesData, stoneColorsData
+
+  
 
   // metalMatchReplacer = "metals.kind";
 
@@ -77,7 +76,12 @@ exports.getAll = async (categoryId, selection) => {
 
   stoneColorsByCount = stoneColorsByCount.filter((item) => item.count !== 0);
 
-  return { jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount };
+  return {
+    jewelries,
+    metalsData,
+    stoneTypesByCount,
+    stoneColorsByCount,
+  };
 };
 
 exports.getOne = async (jewelryId) => {

@@ -17,7 +17,7 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
     const categoryId = Number(category);
     const selection = req.query;
 
-    let { jewelries, metalsByCount, stoneTypesByCount, stoneColorsByCount } =
+    let { jewelries, metalsData, stoneTypesByCount, stoneColorsByCount } =
       await jewelryManager.getAll(categoryId, selection);
 
     if (req.user) {
@@ -30,7 +30,7 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
 
     res.render("jewelries/all", {
       jewelries,
-      metalsByCount,
+      metalsData,
       stoneTypesByCount,
       stoneColorsByCount,
     });

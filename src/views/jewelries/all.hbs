@@ -6,6 +6,84 @@
           <strong class="label-title">By Metal</strong>
           <i class="space fa-solid fa-sort-down"></i>
           <div class="dropdown-checkboxes-content">
+            {{#each metalsData}}
+              <div class="dropdown-subfield">
+                <input
+                  type="checkbox"
+                  id="{{title}}"
+                  name="Metal"
+                  value="{{id}}"
+                />
+                <label for="{{title}}">
+                  {{title}}
+                  ({{count}})</label><br />
+              </div>
+            {{/each}}
+            <br />
+            <button class="drop-down-button button filled_pink">Apply</button>
+          </div>
+        </label>
+      </div>
+      <div class="dropdown-checkboxes" role="list" tabindex="0">
+        <label for="byStoneType">
+          <strong class="label-title">By Stone Type</strong>
+          <i class="space fa-solid fa-sort-down"></i>
+          <div class="dropdown-checkboxes-content">
+            {{#each stoneTypesByCount}}
+              <div class="dropdown-subfield">
+                <input
+                  type="checkbox"
+                  id="{{title}}"
+                  name="StoneType"
+                  value="{{_id}}"
+                />
+                <label for="{{title}}">
+                  {{title}}
+                  ({{count}})</label><br />
+              </div>
+            {{/each}}
+            <br />
+            <button class="drop-down-button button filled_pink">Apply</button>
+          </div>
+        </label>
+      </div>
+      <div class="dropdown-checkboxes" role="list" tabindex="0">
+        <label for="byStoneColor">
+          <strong class="label-title">By Stone Color</strong>
+          <i class="space fa-solid fa-sort-down"></i>
+          <div class="dropdown-checkboxes-content">
+            {{#each stoneColorsByCount}}
+              <div class="dropdown-subfield">
+                <input
+                  type="checkbox"
+                  id="{{title}}"
+                  name="StoneColor"
+                  value="{{_id}}"
+                />
+                <label for="{{title}}">
+                  {{title}}
+                  ({{count}})</label><br />
+              </div>
+            {{/each}}
+            <br />
+            <button class="drop-down-button button filled_pink">Apply</button>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+</form>
+{{>jewelry-card}}
+
+
+{{!-- <form method="GET">
+  <div class="center-container">
+    <div class="checkbox-list">
+      <div class="dropdown-checkboxes" role="list" tabindex="0">
+        <label for="byMetal">
+          <strong class="label-title">By Metal</strong>
+          <i class="space fa-solid fa-sort-down"></i>
+          <div class="dropdown-checkboxes-content">
             {{#each metalsByCount}}
               <div class="dropdown-subfield">
                 <input
@@ -73,4 +151,4 @@
     </div>
   </div>
 </form>
-{{>jewelry-card}}
+{{>jewelry-card}} --}}
