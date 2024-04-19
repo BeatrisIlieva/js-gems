@@ -363,16 +363,7 @@ async function populateDb() {
         "https://res.cloudinary.com/deztgvefu/image/upload/v1703434446/rings/2/sparkling_cluster_sap_aqua_and_diamond_ring_frsaqpclrfspc_e-1h_znic2h.webp",
       secondImageUrl:
         "https://res.cloudinary.com/deztgvefu/image/upload/v1703434445/rings/2/sparkling_cluster_sap_aqua_and_diamond_ring_frsaqpclrfspc_e-2h_kmqowy.webp",
-      price: 48000.0,
-      quantity: 20,
       category: allCategories[3],
-      metals: [{ kind: allMetals[3], caratWeight: null }],
-      stones: [
-        { kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 1.19 },
-        { kind: allStoneTypes[3], color: allStoneColors[2], caratWeight: 0.38 },
-        { kind: allStoneTypes[4], color: allStoneColors[0], caratWeight: 1.08 },
-      ],
-      sizes: [allSizes[9], allSizes[10], allSizes[11]],
     }
   ]);
 
@@ -502,6 +493,10 @@ async function populateDb() {
     },
     {
       jewelry: allJewelries[27],
+      metal: allMetals[3],
+    },
+    {
+      jewelry: allJewelries[28],
       metal: allMetals[3],
     },
   ]);
@@ -809,6 +804,24 @@ async function populateDb() {
       stoneType: allStoneTypes[1],
       stoneColor: allStoneColors[7],
       caratWeight:0.98,
+    },
+    {
+      jewelry: allJewelries[28],
+      stoneType: allStoneTypes[1],
+      stoneColor: allStoneColors[6],
+      caratWeight: 1.19,
+    },
+    {
+      jewelry: allJewelries[28],
+      stoneType: allStoneTypes[3],
+      stoneColor: allStoneColors[2],
+      caratWeight: 0.38,
+    },
+    {
+      jewelry: allJewelries[28],
+      stoneType: allStoneTypes[4],
+      stoneColor: allStoneColors[0],
+      caratWeight: 1.08,
     },
   ]);
 
@@ -1208,6 +1221,24 @@ async function populateDb() {
       size: allSizes[11],
       quantity: 3,
       price: 53000,
+    },
+    {
+      jewelry: allJewelries[28],
+      size: allSizes[9],
+      quantity: 3,
+      price: 48000,
+    },
+    {
+      jewelry: allJewelries[28],
+      size: allSizes[10],
+      quantity: 3,
+      price: 48000,
+    },
+    {
+      jewelry: allJewelries[28],
+      size: allSizes[11],
+      quantity: 3,
+      price: 48000,
     },
   ]);
 
