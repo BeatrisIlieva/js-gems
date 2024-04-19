@@ -9,14 +9,13 @@ exports.updateSelectionQuery = (selection, query) => {
     if (key === "Metal") {
       matchString = "jewelrymetals.metal";
       lookupString = "jewelrymetals";
-    };
-    // } else if (key === "StoneType") {
-    //   const matchString = "jewelrystones.stoneType";
-    //   const lookupString = "jewelrystones";
-    // } else if (key === "StoneColor") {
-    //   const matchString = "jewelrystones.stoneColor";
-    //   const lookupString = "jewelrystones";
-    // }
+    } else if (key === "StoneType") {
+      matchString = "jewelrystones.stoneType";
+      lookupString = "jewelrystones";
+    } else if (key === "StoneColor") {
+      matchString = "jewelrystones.stoneColor";
+      lookupString = "jewelrystones";
+    }
 
     query.push({
       $lookup: {
