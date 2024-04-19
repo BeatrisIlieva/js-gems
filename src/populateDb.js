@@ -404,6 +404,21 @@ async function populateDb() {
       secondImageUrl:
         "https://res.cloudinary.com/deztgvefu/image/upload/v1703436502/rings/7/sunflower_ring_diamond_frdptw007sf_e-2_grj12r.webp",
       category: allCategories[3],
+    },
+    {
+      title: "Heart",
+      firstImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703436707/rings/8/classic_winston_engagement_ring_diamond_rgdphs010tb_e-1_ew1irj.webp",
+      secondImageUrl:
+        "https://res.cloudinary.com/deztgvefu/image/upload/v1703436707/rings/8/classic_winston_engagement_ring_diamond_rgdphs010tb_e-1_ew1irj.webp",
+      price: 29000.0,
+      quantity: 20,
+      category: allCategories[3],
+      metals: [{ kind: allMetals[2], caratWeight: 18 }],
+      stones: [
+        { kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 0.34 },
+      ],
+      sizes: [allSizes[9], allSizes[10], allSizes[11]],
     }
   ]);
 
