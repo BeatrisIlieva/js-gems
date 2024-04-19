@@ -586,6 +586,11 @@ async function populateDb() {
       metal: allMetals[2],
       caratWeight: 18
     },
+    {
+      jewelry: allJewelries[34],
+      metal: allMetals[2],
+      caratWeight: 18
+    },
   ]);
 
   await JewelryStones.insertMany([
@@ -951,6 +956,12 @@ async function populateDb() {
       stoneType: allStoneTypes[1],
       stoneColor: allStoneColors[6],
       caratWeight: 0.31,
+    },
+    {
+      jewelry: allJewelries[34],
+      stoneType: allStoneTypes[1],
+      stoneColor: allStoneColors[6],
+      caratWeight: 0.34,
     },
   ]);
 
@@ -1458,6 +1469,24 @@ async function populateDb() {
       size: allSizes[11],
       quantity: 3,
       price: 57000,
+    },
+    {
+      jewelry: allJewelries[34],
+      size: allSizes[9],
+      quantity: 3,
+      price: 29000,
+    },
+    {
+      jewelry: allJewelries[34],
+      size: allSizes[10],
+      quantity: 3,
+      price: 29000,
+    },
+    {
+      jewelry: allJewelries[34],
+      size: allSizes[11],
+      quantity: 3,
+      price: 29000,
     },
   ]);
 
