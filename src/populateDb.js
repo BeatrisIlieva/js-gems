@@ -12,119 +12,138 @@ const Inventory = require("./models/Inventory");
 async function populateDb() {
   await mongoose.connect("mongodb://127.0.0.1:27017/JSGems");
 
-  await Category.insertMany([
-    {
-      title: "Bracelet",
-    },
-    {
-      title: "Earring",
-    },
-    {
-      title: "Necklace",
-    },
-    {
-      title: "Ring",
-    },
-  ]);
+  await Category.create({
+    title: "Bracelet",
+  });
 
-  await Metal.insertMany([
-    {
-      title: "Yellow Gold",
-    },
-    {
-      title: "Rose Gold",
-    },
-    {
-      title: "White Gold",
-    },
-    {
-      title: "Platinum",
-    },
-  ]);
+  await Category.create({
+    title: "Earring",
+  });
 
-  await StoneType.insertMany([
-    {
-      title: "Spinel",
-    },
-    {
-      title: "Diamond",
-    },
-    {
-      title: "Emerald",
-    },
-    {
-      title: "Ruby",
-    },
-    {
-      title: "Sapphire",
-    },
-  ]);
+  await Category.create({
+    title: "Necklace",
+  });
 
-  await StoneColor.insertMany([
-    {
-      title: "Aquamarine",
-    },
-    {
-      title: "Black",
-    },
-    {
-      title: "Blue",
-    },
-    {
-      title: "Green",
-    },
-    {
-      title: "Pink",
-    },
-    {
-      title: "Red",
-    },
-    {
-      title: "White",
-    },
-    {
-      title: "Yellow",
-    },
-  ]);
+  await Category.create({
+    title: "Ring",
+  });
 
-  await Size.insertMany([
-    {
-      measurement: 2.05,
-    },
-    {
-      measurement: 3.95,
-    },
-    {
-      measurement: 5.86,
-    },
-    {
-      measurement: 40.64,
-    },
-    {
-      measurement: 43.18,
-    },
-    {
-      measurement: 45.72,
-    },
-    {
-      measurement: 15.2,
-    },
-    {
-      measurement: 17.8,
-    },
-    {
-      measurement: 19.3,
-    },
-    {
-      measurement: 4.7,
-    },
-    {
-      measurement: 4.9,
-    },
-    {
-      measurement: 5.05,
-    },
-  ]);
+  await Metal.create({
+    title: "Yellow Gold",
+  });
+
+  await Metal.create({
+    title: "Rose Gold",
+  });
+
+  await Metal.create({
+    title: "White Gold",
+  });
+
+  await Metal.create({
+    title: "Platinum",
+  });
+
+  await StoneType.create({
+    title: "Spinel",
+  });
+
+  await StoneType.create({
+    title: "Diamond",
+  });
+
+  await StoneType.create({
+    title: "Emerald",
+  });
+
+  await StoneType.create({
+    title: "Ruby",
+  });
+
+  await StoneType.create({
+    title: "Sapphire",
+  });
+
+  await StoneColor.create({
+    title: "Aquamarine",
+  });
+
+  await StoneColor.create({
+    title: "Black", 
+  });
+
+  await StoneColor.create({
+    title: "Blue",
+  });
+
+  await StoneColor.create({
+    title: "Green",
+  });
+
+  await StoneColor.create({
+    title: "Pink",
+  });
+
+  await StoneColor.create({
+    title: "Red",
+  });
+
+  await StoneColor.create({
+    title: "White",
+  });
+
+  await StoneColor.create({
+    title: "Yellow",
+  });
+
+  await Size.create({
+    measurement: 2.05,
+  });
+
+  await Size.create({
+    measurement: 3.95,
+  });
+
+  await Size.create({
+    measurement: 5.86,
+  });
+
+  await Size.create({
+    measurement: 40.64,
+  });
+
+  await Size.create({
+    measurement: 43.18,
+  });
+
+  await Size.create({
+    measurement: 45.72,
+  });
+
+  await Size.create({
+    measurement: 15.2,
+  });
+
+  await Size.create({
+    measurement: 17.8,
+  });
+
+  await Size.create({
+    measurement: 19.3,
+  });
+
+  await Size.create({
+    measurement: 4.7,
+  });
+
+  await Size.create({
+    measurement: 4.9,
+  });
+
+  await Size.create({
+    measurement: 5.05,
+  });
+
 
   const allCategories = await Category.find();
   const allMetals = await Metal.find();

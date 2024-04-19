@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const Category = require("../models/Category");
 
 const jewelrySchema = new mongoose.Schema({
-  _id: {
-    type: Number,
-    default: 0,
-  },
+  // _id: {
+  //   type: Number,
+  //   default: 0,
+  // },
   title: {
     type: String,
     required: true,
@@ -25,29 +25,29 @@ const jewelrySchema = new mongoose.Schema({
   },
 });
 
-jewelrySchema.pre("save", async function() {
-  const currentId = await setID();
+// jewelrySchema.pre("save", async function() {
+//   const currentId = await setID();
 
-  this._id = currentId;
-});
+//   this._id = currentId;
+// });
 
 const jewelry = mongoose.model("Jewelry", jewelrySchema);
 
 module.exports = jewelry;
 
-const setID = async () => {
-  try {
-    let lastObj = await jewelry.findOne().sort({ _id: -1 });
+// const setID = async () => {
+//   try {
+//     let lastObj = await jewelry.findOne().sort({ _id: -1 });
 
-    lastId = lastObj._id;
+//     lastId = lastObj._id;
 
-    nextId = lastId + 1;
+//     nextId = lastId + 1;
 
-    return nextId;
-  } catch (err) {
-    return 1;
-  }
-};
+//     return nextId;
+//   } catch (err) {
+//     return 1;
+//   }
+// };
 
 
 
