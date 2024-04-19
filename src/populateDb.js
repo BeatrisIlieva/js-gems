@@ -419,15 +419,8 @@ async function populateDb() {
         "https://res.cloudinary.com/deztgvefu/image/upload/v1703436882/rings/9/bridal_couture_by_harry_winston_engagement_ring_emerald_cut_diamond_platinum_rgdpec050ub7_550070_e_1_zgzgx4.webp",
       secondImageUrl:
         "https://res.cloudinary.com/deztgvefu/image/upload/v1703436854/rings/9/bridal_couture_by_harry_winston_engagement_ring_emerald_cut_diamond_platinum_rgdpec050ub7_550070_e_2_ovqn8e.webp",
-      price: 46000.0,
-      quantity: 20,
       category: allCategories[3],
-      metals: [{ kind: allMetals[2], caratWeight: 18 }],
-      stones: [
-        { kind: allStoneTypes[1], color: allStoneColors[6], caratWeight: 0.36 },
-      ],
-      sizes: [allSizes[9], allSizes[10], allSizes[11]],
-    }
+    },
   ]);
 
   const allJewelries = await Jewelry.find();
@@ -499,7 +492,7 @@ async function populateDb() {
     {
       jewelry: allJewelries[14],
       metal: allMetals[0],
-      caratWeight: 18
+      caratWeight: 18,
     },
     {
       jewelry: allJewelries[15],
@@ -508,12 +501,12 @@ async function populateDb() {
     {
       jewelry: allJewelries[16],
       metal: allMetals[2],
-      caratWeight: 18 
+      caratWeight: 18,
     },
     {
       jewelry: allJewelries[17],
       metal: allMetals[2],
-      caratWeight: 18 
+      caratWeight: 18,
     },
     {
       jewelry: allJewelries[18],
@@ -526,7 +519,7 @@ async function populateDb() {
     {
       jewelry: allJewelries[20],
       metal: allMetals[0],
-      caratWeight: 18
+      caratWeight: 18,
     },
     {
       jewelry: allJewelries[21],
@@ -539,7 +532,7 @@ async function populateDb() {
     {
       jewelry: allJewelries[23],
       metal: allMetals[2],
-      caratWeight: 18
+      caratWeight: 18,
     },
     {
       jewelry: allJewelries[24],
@@ -548,7 +541,7 @@ async function populateDb() {
     {
       jewelry: allJewelries[25],
       metal: allMetals[2],
-      caratWeight: 18 
+      caratWeight: 18,
     },
     {
       jewelry: allJewelries[26],
@@ -573,7 +566,7 @@ async function populateDb() {
     {
       jewelry: allJewelries[30],
       metal: allMetals[0],
-      caratWeight: 18
+      caratWeight: 18,
     },
     {
       jewelry: allJewelries[31],
@@ -582,27 +575,27 @@ async function populateDb() {
     {
       jewelry: allJewelries[31],
       metal: allMetals[0],
-      caratWeight: 18
+      caratWeight: 18,
     },
     {
       jewelry: allJewelries[32],
       metal: allMetals[1],
-      caratWeight: 18
+      caratWeight: 18,
     },
     {
       jewelry: allJewelries[33],
       metal: allMetals[2],
-      caratWeight: 18
+      caratWeight: 18,
     },
     {
       jewelry: allJewelries[34],
       metal: allMetals[2],
-      caratWeight: 18
+      caratWeight: 18,
     },
     {
       jewelry: allJewelries[35],
       metal: allMetals[2],
-      caratWeight: 18
+      caratWeight: 18,
     },
   ]);
 
@@ -890,25 +883,25 @@ async function populateDb() {
       jewelry: allJewelries[26],
       stoneType: allStoneTypes[1],
       stoneColor: allStoneColors[6],
-      caratWeight:4.24,
+      caratWeight: 4.24,
     },
     {
       jewelry: allJewelries[26],
       stoneType: allStoneTypes[4],
       stoneColor: allStoneColors[4],
-      caratWeight:4.36,
+      caratWeight: 4.36,
     },
     {
       jewelry: allJewelries[27],
       stoneType: allStoneTypes[1],
       stoneColor: allStoneColors[6],
-      caratWeight:0.36,
+      caratWeight: 0.36,
     },
     {
       jewelry: allJewelries[27],
       stoneType: allStoneTypes[1],
       stoneColor: allStoneColors[7],
-      caratWeight:0.98,
+      caratWeight: 0.98,
     },
     {
       jewelry: allJewelries[28],
