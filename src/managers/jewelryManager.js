@@ -3,8 +3,6 @@ const StoneType = require("../models/StoneType");
 const StoneColor = require("../models/StoneColor");
 const { isSelectionEmpty } = require("../utils/checkIfCollectionIsEmpty");
 const { updateSelectionQuery } = require("../utils/updateSelectionQuery");
-const { getCompositionsCounts } = require("../utils/getCompositionsCounts");
-const { getSelectionData } = require("../utils/getSelectionData");
 
 exports.getAll = async (categoryId, selection) => {
   let query = [
@@ -28,41 +26,27 @@ exports.getAll = async (categoryId, selection) => {
         },
       },
     },
-    {
-      $project: {
-        jewelry: "$$ROOT",
-        _id: 1,
-      },
-    },
   ];
 
   if (!isSelectionEmpty(selection)) {
     query = updateSelectionQuery(selection, query);
   }
 
-  let jewelryData = await Jewelry.aggregate(query);
-  let jewelries = jewelryData.map(({ jewelry }) => jewelry);
-  let jewelryIds = jewelryData.map(({ _id }) => _id);
+  let jewelries = await Jewelry.aggregate(query);
 
-  const {metalsData, stoneTypesData} = await getSelectionData(categoryId, jewelryIds);
-
-  return {
-    jewelries,
-    metalsData,
-    stoneTypesData,
-  };
+  return jewelries;
 };
 
 exports.getOne = async (jewelryId) => {
   const jewelry = await Jewelry.findById(jewelryId)
     .populate("category")
-    .populate("metals.kind")
-    .populate("metals.caratWeight")
-    .populate("stones.kind")
-    .populate("stones.color")
-    .populate("stones.caratWeight")
-    .populate("sizes")
-    .populate("price")
+    .populate("jewelrymetals")
+    // .populate("metals.caratWeight")
+    .populate("jewelrystones")
+    // .populate("stones.color")
+    // .populate("stones.caratWeight")
+    // .populate("sizes")
+    // .populate("price")
     .lean();
 
   return jewelry;

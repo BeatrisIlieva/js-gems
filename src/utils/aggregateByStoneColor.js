@@ -1,14 +1,14 @@
 const Inventory = require("../models/Inventory");
 
-exports.aggregateByMetal = async (
-  metals,
+exports.aggregateByStoneColor = async (
+  stoneColors,
   categoryId,
-  metalsData,
   jewelriesMatchCondition
 ) => {
+  let stoneColorsData = [];
 
-  metals.reduce(async (acc, curr) => {
-    let metalId = curr._id;
+  stoneColors.reduce(async (acc, curr) => {
+    let stoneColorId = curr._id;
 
     count = await Inventory.aggregate([
       {
@@ -34,15 +34,15 @@ exports.aggregateByMetal = async (
       },
       {
         $lookup: {
-          as: "jewelrymetals",
-          from: "jewelrymetals",
+          as: "jewelrystones",
+          from: "jewelrystones",
           foreignField: "jewelry",
           localField: "jewelries._id",
         },
       },
       {
         $match: {
-          "jewelrymetals.metal": metalId,
+          "jewelrystones.stoneColor": stoneColorId,
         },
       },
       {
@@ -60,14 +60,11 @@ exports.aggregateByMetal = async (
     }
     acc["title"] = curr.title;
     acc["count"] = count.length;
-    acc["id"] = metalId;
-    metalsData.push(acc);
-    // console.log(acc);
-    console.log("--------");
+    acc["id"] = stoneColorId;
+    stoneColorsData.push(acc);
+    console.log(stoneColorsData)
     return acc;
   }, {});
-
-  console.log(metalsData);
-
-  return metalsData;
+  
+  return stoneColorsData;
 };

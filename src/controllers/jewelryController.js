@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const jewelryManager = require("../managers/jewelryManager");
+const {getMetalsData} = require("../utils/getMetalsData");
+ const jewelryManager = require("../managers/jewelryManager");
 const { getBagCount } = require("../middlewares/bagCounterMiddleware");
 const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
 const {
@@ -17,8 +18,10 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
     const categoryId = Number(category);
     const selection = req.query;
 
-    let { jewelries, metalsData, stoneTypesData,} =
-      await jewelryManager.getAll(categoryId, selection);
+    let jewelries = await jewelryManager.getAll(categoryId, selection);
+    let jewelryIds = jewelries.map((jewelry) => jewelry._id);
+
+    let metalsData = await getMetalsData(jewelryIds);
 
     if (req.user) {
       const userId = req.user._id;
@@ -31,7 +34,8 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
     res.render("jewelries/all", {
       jewelries,
       metalsData,
-      stoneTypesData,
+      // stoneTypesData,
+      // stoneColorsData,
     });
   } catch (err) {
     console.log(err.message);

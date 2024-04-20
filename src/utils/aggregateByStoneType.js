@@ -5,10 +5,10 @@ exports.aggregateByStoneType = async (
   categoryId,
   jewelriesMatchCondition
 ) => {
-  const stoneTypesData = [];
+  let stoneTypesData = [];
 
   stoneTypes.reduce(async (acc, curr) => {
-    const stoneTypeId = curr._id;
+    let stoneTypeId = curr._id;
 
     count = await Inventory.aggregate([
       {

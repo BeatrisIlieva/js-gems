@@ -27,14 +27,14 @@ exports.updateSelectionQuery = (selection, query) => {
     });
     if (!Array.isArray(array)) {
       const matchCondition = {};
-      
+
       matchCondition[matchString] = Number(array);
       query.push({
         $match: matchCondition,
       });
     } else {
-      const matchConditions = array.map((num) => {
-        const condition = {};
+      let matchConditions = array.map((num) => {
+        let condition = {};
         condition[matchString] = Number(num);
         return condition;
       });

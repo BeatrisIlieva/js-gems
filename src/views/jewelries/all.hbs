@@ -12,7 +12,7 @@
                   type="checkbox"
                   id="{{title}}"
                   name="Metal"
-                  value="{{id}}"
+                  value="{{_id}}"
                 />
                 <label for="{{title}}">
                   {{title}}
@@ -29,13 +29,13 @@
           <strong class="label-title">By Stone Type</strong>
           <i class="space fa-solid fa-sort-down"></i>
           <div class="dropdown-checkboxes-content">
-            {{#each stoneTypesByCount}}
+            {{#each stoneTypesData}}
               <div class="dropdown-subfield">
                 <input
                   type="checkbox"
                   id="{{title}}"
                   name="StoneType"
-                  value="{{_id}}"
+                  value="{{id}}"
                 />
                 <label for="{{title}}">
                   {{title}}
@@ -52,13 +52,13 @@
           <strong class="label-title">By Stone Color</strong>
           <i class="space fa-solid fa-sort-down"></i>
           <div class="dropdown-checkboxes-content">
-            {{#each stoneColorsByCount}}
+            {{#each stoneColorsData}}
               <div class="dropdown-subfield">
                 <input
                   type="checkbox"
                   id="{{title}}"
                   name="StoneColor"
-                  value="{{_id}}"
+                  value="{{id}}"
                 />
                 <label for="{{title}}">
                   {{title}}
