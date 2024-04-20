@@ -29,7 +29,9 @@ exports.getAll = async (categoryId, selection) => {
   ];
 
   if (!isSelectionEmpty(selection)) {
-    query = updateSelectionQuery(selection, query);
+    console.log(selection);
+  
+    await updateSelectionQuery(selection, query);
   }
 
   let jewelries = await Jewelry.aggregate(query);

@@ -1,50 +1,97 @@
+exports.updateJewelryQuery = (selection, query) => {};
+
 exports.updateSelectionQuery = (selection, query) => {
   const keys = Object.keys(selection);
 
   keys.forEach((key) => {
     const array = selection[key];
-    let matchString;
-    let lookupString;
 
     if (key === "Metal") {
-      matchString = "jewelrymetals.metal";
-      lookupString = "jewelrymetals";
-    } else if (key === "StoneType") {
-      matchString = "jewelrystones.stoneType";
-      lookupString = "jewelrystones";
-    } else if (key === "StoneColor") {
-      matchString = "jewelrystones.stoneColor";
-      lookupString = "jewelrystones";
-    }
-
-    query.push({
-      $lookup: {
-        as: lookupString,
-        from: lookupString,
-        foreignField: "jewelry",
-        localField: "_id",
-      },
-    });
-    if (!Array.isArray(array)) {
-      const matchCondition = {};
-
-      matchCondition[matchString] = Number(array);
       query.push({
-        $match: matchCondition,
-      });
-    } else {
-      let matchConditions = array.map((num) => {
-        let condition = {};
-        condition[matchString] = Number(num);
-        return condition;
-      });
-      query.push({
-        $match: {
-          $or: matchConditions,
+        $lookup: {
+          as: "jewelrymetals",
+          from: "jewelrymetals",
+          foreignField: "jewelry",
+          localField: "_id",
         },
       });
+
+      if (!Array.isArray(array)) {
+        query.push({
+          $match: {
+            "jewelrymetals.metal": Number(array),
+          },
+        });
+      } else {
+        let metalMatchCondition = array.reduce((acc, curr) => {
+          let metalId = Number(curr);
+          acc.push({ "jewelrymetals.metal": metalId });
+          return acc;
+        }, []);
+        
+        query.push({
+          $match: {
+            $or: metalMatchCondition,
+          },
+        });
+      }
+    } else if (key === "StoneType") {
+      query.push({
+        $lookup: {
+          as: "jewelrystones",
+          from: "jewelrystones",
+          foreignField: "jewelry",
+          localField: "_id",
+        },
+      });
+
+      if (!Array.isArray(array)) {
+        query.push({
+          $match: {
+            "jewelrystones.stoneType": Number(array),
+          },
+        });
+      } else {
+        let stoneTypeMatchCondition = array.reduce((acc, curr) => {
+          let stoneTypeId = Number(curr);
+          acc.push({ "jewelrystones.stoneType": stoneTypeId });
+          return acc;
+        }, []);
+        query.push({
+          $match: {
+            $or: stoneTypeMatchCondition,
+          },
+        });
+      }
+    } else if (key === "StoneColor") {
+      query.push({
+        $lookup: {
+          as: "jewelrystones",
+          from: "jewelrystones",
+          foreignField: "jewelry",
+          localField: "_id",
+        },
+      });
+
+      if (!Array.isArray(array)) {
+        query.push({
+          $match: {
+            "jewelrystones.stoneColor": Number(array),
+          },
+        });
+      } else {
+        let stoneColorMatchCondition = array.reduce((acc, curr) => {
+          let stoneColorId = Number(curr);
+          acc.push({ "jewelrystones.stoneColor": stoneColorId });
+          return acc;
+        }, []);
+        query.push({
+          $match: {
+            $or: stoneColorMatchCondition,
+          },
+        });
+      }
     }
   });
-
-  return query;
+  console.log(query);
 };
