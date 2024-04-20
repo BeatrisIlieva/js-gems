@@ -1,11 +1,10 @@
-
 const Jewelry = require("../models/Jewelry");
 const StoneType = require("../models/StoneType");
 const StoneColor = require("../models/StoneColor");
 const { isSelectionEmpty } = require("../utils/checkIfCollectionIsEmpty");
 const { updateSelectionQuery } = require("../utils/updateSelectionQuery");
 const { getCompositionsCounts } = require("../utils/getCompositionsCounts");
-const {getSelectionData} = require("../utils/getSelectionData");
+const { getSelectionData } = require("../utils/getSelectionData");
 
 exports.getAll = async (categoryId, selection) => {
   let query = [
@@ -29,58 +28,28 @@ exports.getAll = async (categoryId, selection) => {
         },
       },
     },
+    {
+      $project: {
+        jewelry: "$$ROOT",
+        _id: 1,
+      },
+    },
   ];
 
   if (!isSelectionEmpty(selection)) {
     query = updateSelectionQuery(selection, query);
   }
 
-  let jewelries = await Jewelry.aggregate(query);
+  let jewelryData = await Jewelry.aggregate(query);
+  let jewelries = jewelryData.map(({ jewelry }) => jewelry);
+  let jewelryIds = jewelryData.map(({ _id }) => _id);
 
-  let metalsData = await getSelectionData(categoryId, jewelries);
-  // stoneTypesData, stoneColorsData
-
-  
-
-  // metalMatchReplacer = "metals.kind";
-
-  // let metalsByCount = await getCompositionsCounts(
-  //   metals,
-  //   categoryId,
-  //   metalMatchReplacer
-  // );
-
-  // metalsByCount = metalsByCount.filter((item) => item.count !== 0);
-
-  const stoneTypes = await StoneType.find().lean();
-
-  stoneTypeMatchReplacer = "stones.kind";
-
-  let stoneTypesByCount = await getCompositionsCounts(
-    stoneTypes,
-    categoryId,
-    stoneTypeMatchReplacer
-  );
-
-  stoneTypesByCount = stoneTypesByCount.filter((item) => item.count !== 0);
-
-  const stoneColors = await StoneColor.find().lean();
-
-  stoneColorMatchReplacer = "stones.color";
-
-  let stoneColorsByCount = await getCompositionsCounts(
-    stoneColors,
-    categoryId,
-    stoneColorMatchReplacer
-  );
-
-  stoneColorsByCount = stoneColorsByCount.filter((item) => item.count !== 0);
+  const {metalsData, stoneTypesData} = await getSelectionData(categoryId, jewelryIds);
 
   return {
     jewelries,
     metalsData,
-    stoneTypesByCount,
-    stoneColorsByCount,
+    stoneTypesData,
   };
 };
 

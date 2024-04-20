@@ -27,6 +27,7 @@ exports.updateSelectionQuery = (selection, query) => {
     });
     if (!Array.isArray(array)) {
       const matchCondition = {};
+      
       matchCondition[matchString] = Number(array);
       query.push({
         $match: matchCondition,
