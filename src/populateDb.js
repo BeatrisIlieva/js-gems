@@ -869,7 +869,7 @@ async function populateDb() {
     {
       jewelry: allJewelries[22],
       stoneType: allStoneTypes[1],
-      stoneColor: allStoneColors[7],
+      stoneColor: allStoneColors[6],
       caratWeight: 2.66,
     },
     {

@@ -8,46 +8,44 @@ exports.getStoneColorsData = async (jewelryIds) => {
   }, []);
 
   let stoneColorsData = await JewelryStones.aggregate([
-    [
-        {
-          $lookup: {
-            as: "jewelries",
-            from: "jewelries",
-            foreignField: "_id",
-            localField: "jewelry",
-          },
+    {
+      $lookup: {
+        as: "jewelries",
+        from: "jewelries",
+        foreignField: "_id",
+        localField: "jewelry",
+      },
+    },
+    {
+      $match: {
+        $or: jewelryMatchCondition,
+      },
+    },
+    {
+      $group: {
+        _id: "$stoneColor",
+        jewelries: {
+          $addToSet: "$jewelry",
         },
-        {
-          $lookup: {
-            as: "stonecolors",
-            from: "stonecolors",
-            foreignField: "_id",
-            localField: "stoneColor",
-          },
+      },
+    },
+    {
+      $lookup: {
+        as: "stonecolors",
+        from: "stonecolors",
+        foreignField: "_id",
+        localField: "_id",
+      },
+    },
+    {
+      $project: {
+        stoneColorId: "$_id",
+        title: { $first: "$stonecolors.title" },
+        count: {
+          $size: "$jewelries",
         },
-        {
-          $match: {
-            $or: jewelryMatchCondition
-          },
-        },
-        {
-          $project: {
-            "stonecolors._id": 1,
-            "stonecolors.title": 1,
-          },
-        },
-        {
-          $group: {
-            _id: "$stonecolors._id",
-            title: {
-                $first: "$stonecolors.title",
-              },
-            count: {
-              $count: {},
-            },
-          },
-        },
-      ]
+      },
+    },
   ]);
 
   return stoneColorsData;

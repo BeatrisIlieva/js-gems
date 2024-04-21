@@ -1,13 +1,13 @@
-exports.updateJewelryQuery = (selection, query) => {};
-
-exports.updateSelectionQuery = (selection, query) => {
+exports.updateSelectionQuery = (selection) => {
   const keys = Object.keys(selection);
+
+  let selectionQuery = [];
 
   keys.forEach((key) => {
     const array = selection[key];
 
     if (key === "Metal") {
-      query.push({
+      selectionQuery.push({
         $lookup: {
           as: "jewelrymetals",
           from: "jewelrymetals",
@@ -17,7 +17,7 @@ exports.updateSelectionQuery = (selection, query) => {
       });
 
       if (!Array.isArray(array)) {
-        query.push({
+        selectionQuery.push({
           $match: {
             "jewelrymetals.metal": Number(array),
           },
@@ -29,14 +29,14 @@ exports.updateSelectionQuery = (selection, query) => {
           return acc;
         }, []);
         
-        query.push({
+        selectionQuery.push({
           $match: {
             $or: metalMatchCondition,
           },
         });
       }
     } else if (key === "StoneType") {
-      query.push({
+      selectionQuery.push({
         $lookup: {
           as: "jewelrystones",
           from: "jewelrystones",
@@ -46,7 +46,7 @@ exports.updateSelectionQuery = (selection, query) => {
       });
 
       if (!Array.isArray(array)) {
-        query.push({
+        selectionQuery.push({
           $match: {
             "jewelrystones.stoneType": Number(array),
           },
@@ -57,14 +57,14 @@ exports.updateSelectionQuery = (selection, query) => {
           acc.push({ "jewelrystones.stoneType": stoneTypeId });
           return acc;
         }, []);
-        query.push({
+        selectionQuery.push({
           $match: {
             $or: stoneTypeMatchCondition,
           },
         });
       }
     } else if (key === "StoneColor") {
-      query.push({
+      selectionQuery.push({
         $lookup: {
           as: "jewelrystones",
           from: "jewelrystones",
@@ -74,7 +74,7 @@ exports.updateSelectionQuery = (selection, query) => {
       });
 
       if (!Array.isArray(array)) {
-        query.push({
+        selectionQuery.push({
           $match: {
             "jewelrystones.stoneColor": Number(array),
           },
@@ -85,7 +85,7 @@ exports.updateSelectionQuery = (selection, query) => {
           acc.push({ "jewelrystones.stoneColor": stoneColorId });
           return acc;
         }, []);
-        query.push({
+        selectionQuery.push({
           $match: {
             $or: stoneColorMatchCondition,
           },
@@ -93,5 +93,5 @@ exports.updateSelectionQuery = (selection, query) => {
       }
     }
   });
-  console.log(query);
+  return selectionQuery;
 };

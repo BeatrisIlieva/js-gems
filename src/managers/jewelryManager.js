@@ -1,10 +1,14 @@
 const Jewelry = require("../models/Jewelry");
 const StoneType = require("../models/StoneType");
 const StoneColor = require("../models/StoneColor");
-const { isSelectionEmpty } = require("../utils/checkIfCollectionIsEmpty");
+const {
+  isSelectionEmpty,
+  isArrayEmpty,
+} = require("../utils/checkIfCollectionIsEmpty");
 const { updateSelectionQuery } = require("../utils/updateSelectionQuery");
+const {updateQueryByJewelryIds} = require("../utils/updateQueryByJewelryIds");
 
-exports.getAll = async (categoryId, selection) => {
+exports.getAll = async (categoryId) => {
   let query = [
     {
       $match: {
@@ -28,11 +32,14 @@ exports.getAll = async (categoryId, selection) => {
     },
   ];
 
-  if (!isSelectionEmpty(selection)) {
-    console.log(selection);
-  
-    await updateSelectionQuery(selection, query);
-  }
+  const jewelries = await Jewelry.aggregate(query);
+  return jewelries;
+};
+
+exports.getFiltered = async (jewelryIds, selection) => {
+  const selectionQuery = await updateSelectionQuery(selection);
+  const queryByJewelryIds = await updateQueryByJewelryIds(jewelryIds);
+  const query = [...selectionQuery, ...queryByJewelryIds];
 
   let jewelries = await Jewelry.aggregate(query);
 
