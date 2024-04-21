@@ -1,5 +1,6 @@
 const ShoppingBag = require("../models/ShoppingBag");
 const Jewelry = require("../models/Jewelry");
+const Inventory = require("../models/Inventory");
 const Size = require("../models/Size");
 const { DEFAULT_MIN_QUANTITY } = require("../constants/shoppingBag");
 const { Decimal128 } = require('mongodb');
@@ -28,7 +29,7 @@ exports.create = async ({
     quantity: DEFAULT_ADD_QUANTITY,
   });
 
-  await Jewelry.findOneAndUpdate({_id: jewelryId}, { $inc: { quantity: -1 } }, { new: true } );
+  await Inventory.findOneAndUpdate({jewelry: jewelryId, size: sizeId}, { $inc: { quantity: -1 } }, { new: true } );
 
   await updateBagTotalPrice({userId, jewelryId, sizeId});
 };
@@ -113,8 +114,9 @@ exports.getAll = async (userId) => {
 const updateBagTotalPrice = async ({userId, jewelryId, sizeId}) => {
   const bagItem = await getOne({ userId, jewelryId, sizeId });
   const bagItemQuantity = bagItem.quantity;
-  const jewelry = await Jewelry.findById(jewelryId);
-  const jewelryPrice = jewelry.price;
+  const inventory = await Inventory.findOne({jewelry: jewelryId, size: sizeId});
+  const jewelryPrice = inventory.price;
+
 
   const totalPrice = bagItemQuantity * jewelryPrice;
 

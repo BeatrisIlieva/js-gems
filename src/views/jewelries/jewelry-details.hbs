@@ -9,7 +9,9 @@
         {{>like-button-forms-jewelry-details}}
     </div>
     <div class="jewelry-details-composition">
-        <h6 class="composition-category">{{categories.title}}</h6>
+        {{#each categories}}
+        <h6 class="composition-category">{{this.title}}</h6>
+        {{/each}}
         <h5 class="composition-title">{{ title }}</h5>
         <ul role="list">
             <li>
@@ -35,7 +37,7 @@
                         <label class="materials">Size:</label>
                     </div>
                     <div class="materials-details">
-                        {{#each jewelry.sizes}}
+                        {{#each sizes}}
                             <div class="radio-option">
                                 <input type="radio" id="{{this._id}}" name="size" value="{{this._id}}">
                                 <label for="{{this._id}}">{{this.measurement}}</label>
