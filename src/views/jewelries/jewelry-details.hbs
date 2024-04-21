@@ -1,21 +1,22 @@
+{{#each jewelry}}
 <section class="jewelry-details-wrapper">
     <div class="jewelry-details-image-first">
-        <img class="jewelry-details-img zoom-image" src="{{jewelry.firstImageUrl}}" alt="image1">
+        <img class="jewelry-details-img zoom-image" src="{{firstImageUrl}}" alt="image1">
         {{>like-button-forms-jewelry-details}}
     </div>
     <div class="jewelry-details-image-second">
-        <img class="jewelry-details-img zoom-image" src="{{jewelry.secondImageUrl}}" alt="image1">
+        <img class="jewelry-details-img zoom-image" src="{{secondImageUrl}}" alt="image1">
         {{>like-button-forms-jewelry-details}}
     </div>
     <div class="jewelry-details-composition">
-        <h6 class="composition-category">{{jewelry.category.title}}</h6>
-        <h5 class="composition-title">{{ jewelry.title }}</h5>
+        <h6 class="composition-category">{{categories.title}}</h6>
+        <h5 class="composition-title">{{ title }}</h5>
         <ul role="list">
             <li>
-                {{#each jewelry.metals}}
+                {{#each metalInfo}}
                     <span class="composition-item">
-                    {{#if this.caratWeight}}{{caratWeight}}ct.{{/if}}
-                        {{kind.title}}{{#unless @last}},{{/unless}}
+                    {{#if caratWeight}}{{caratWeight}}ct.{{/if}}
+                        {{title}}{{#unless @last}},{{/unless}}
                   </span>
                 {{/each}}
             </li>
@@ -29,7 +30,7 @@
                 {{/each}}
             </li>
             <li class="composition-item-size">
-                <form action="/bag/{{jewelry._id}}/create" method="POST">
+                <form action="/bag/{{_id}}/create" method="POST">
                     <div>
                         <label class="materials">Size:</label>
                     </div>
@@ -49,4 +50,4 @@
         </ul>
     </div>
 </section>
-
+{{/each}}

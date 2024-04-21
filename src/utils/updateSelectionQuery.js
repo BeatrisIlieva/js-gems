@@ -28,7 +28,7 @@ exports.updateSelectionQuery = (selection) => {
           acc.push({ "jewelrymetals.metal": metalId });
           return acc;
         }, []);
-        
+
         selectionQuery.push({
           $match: {
             $or: metalMatchCondition,

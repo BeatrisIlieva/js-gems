@@ -86,15 +86,15 @@ router.get(
   async (req, res) => {
     const jewelryId = req.params.jewelryId;
     try {
-      let jewelry = await jewelryManager.getOne(jewelryId);
+      let jewelry = await jewelryManager.getOne(Number(jewelryId));
 
-      if (req.user) {
-        const userId = req.user._id;
+      // if (req.user) {
+      //   const userId = req.user._id;
 
-        jewelry = await setJewelryLikedAuthUser(jewelry, userId);
-      } else {
-        jewelry = await setJewelryLikedNotAuthUser(req, jewelry);
-      }
+      //   jewelry = await setJewelryLikedAuthUser(jewelry, userId);
+      // } else {
+      //   jewelry = await setJewelryLikedNotAuthUser(req, jewelry);
+      // }
 
       res.render("jewelries/jewelry-details", { jewelry });
     } catch (err) {
