@@ -15,17 +15,17 @@
             <li>
                 {{#each metalInfo}}
                     <span class="composition-item">
-                    {{#if caratWeight}}{{caratWeight}}ct.{{/if}}
-                        {{title}}{{#unless @last}},{{/unless}}
+                    {{#if this.caratWeight}}{{this.caratWeight}}ct.{{/if}}
+                        {{this.metal.title}}{{#unless @last}},{{/unless}}
                   </span>
                 {{/each}}
             </li>
             <li>
-                {{#each jewelry.stones}}
+                {{#each stoneInfo}}
                     <span class="composition-item">
-                    {{#if this.caratWeight}}{{caratWeight}}ct.{{/if}}
-                        {{color.title}}
-                        {{kind.title}}{{#unless @last}},{{/unless}}
+                    {{#if this.caratWeight}}{{this.caratWeight}}ct.{{/if}}
+                        {{this.stoneColor}}
+                        {{this.stoneType}}{{#unless @last}},{{/unless}}
                     </span>
                 {{/each}}
             </li>

@@ -79,17 +79,13 @@ exports.getOne = async (jewelryId) => {
             input: "$jewelrymetals",
             as: "jm",
             in: {
-              $mergeObjects: [
-                {
-                  $arrayElemAt: [
-                    "$metals",
-                    {
-                      $indexOfArray: ["$metals._id", "$$jm.metal"],
-                    },
-                  ],
-                },
-                { caratWeight: "$$jm.caratWeight" },
-              ],
+              metal: {
+                $arrayElemAt: [
+                  "$metals",
+                  { $indexOfArray: ["$metals._id", "$$jm.metal"] },
+                ],
+              },
+              caratWeight: "$$jm.caratWeight",
             },
           },
         },
@@ -120,6 +116,31 @@ exports.getOne = async (jewelryId) => {
       },
     },
     {
+      $addFields: {
+        stoneInfo: {
+          $map: {
+            input: "$jewelrystones",
+            as: "js",
+            in: {
+              stoneType: {
+                $arrayElemAt: [
+                  "$stonetypes.title",
+                  { $indexOfArray: ["$stonetypes._id", "$$js.stoneType"] },
+                ],
+              },
+              stoneColor: {
+                $arrayElemAt: [
+                  "$stonecolors.title",
+                  { $indexOfArray: ["$stonecolors._id", "$$js.stoneColor"] },
+                ],
+              },
+              caratWeight: "$$js.caratWeight",
+            },
+          },
+        },
+      },
+    },
+    {
       $lookup: {
         as: "inventories",
         from: "inventories",
@@ -141,11 +162,11 @@ exports.getOne = async (jewelryId) => {
         firstImageUrl: 1,
         secondImageUrl: 1,
         "categories.title": 1,
-        "metalInfo.title": 1,
+        "metalInfo.metal.title": 1,
         "metalInfo.caratWeight": 1,
-        "stonetypes.title": 1,
-        "stonecolors.title": 1,
-        "jewelrystones.caratWeight": 1,
+        "stoneInfo.stoneType": 1,
+        "stoneInfo.stoneColor": 1,
+        "stoneInfo.caratWeight": 1,
         "inventories.size": 1,
         "inventories.quantity": 1,
         "inventories.price": 1,
@@ -153,12 +174,11 @@ exports.getOne = async (jewelryId) => {
     },
     {
       $match: {
-        _id: jewelryId,
+        _id: jewelryId, // Assuming _id is a number, not a string with "NumberInt"
       },
     },
   ]);
   return jewelry;
-  a;
 };
 
 // exports.getOne = async (jewelryId) => {
