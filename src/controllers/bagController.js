@@ -10,6 +10,7 @@ const {
 const { extractErrorMessages } = require("../utils/errorHelpers");
 const Jewelry = require("../models/Jewelry");
 const jewelryManager = require("../managers/jewelryManager");
+const shoppingBag = require("../models/ShoppingBag");
 
 router.get("/", isAuth, getBagCount, getLikeCount, async (req, res) => {
   try {
@@ -19,14 +20,16 @@ router.get("/", isAuth, getBagCount, getLikeCount, async (req, res) => {
     const bagCountGreaterThanOne = bagCount > 1;
     const isEmpty = bagCount === 0;
 
-    const { bagItems, subTotal } = await bagManager.getAll(userId);
+    let jewelries = await bagManager.getAll(userId);
+
+    // const { bagItems, subTotal } = await bagManager.getAll(userId);
 
     if (!isEmpty) {
       res.render("bag/display", {
-        bagItems,
+        jewelries,
         DEFAULT_MIN_QUANTITY,
         bagCountGreaterThanOne,
-        subTotal,
+        // subTotal,
       });
     } else {
       res.render("bag/display");
@@ -63,7 +66,8 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
       });
     } else {
       newQuantity = Number(bagItem.quantity) + DEFAULT_ADD_QUANTITY;
-      await bagItem.update({ quantity: newQuantity });
+      await shoppingBag.findOneAndUpdate({user: userId, jewelry: jewelryId, size: sizeId}, { quantity: newQuantity });
+      // await bagItem.update({ quantity: newQuantity });
     }
 
     res.redirect("/bag");
@@ -72,7 +76,6 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
     const jewelry = await jewelryManager.getOne(jewelryId);
     res.render("jewelries/jewelry-details", { errorMessages, jewelry });
   }
-  //   payload.shoppingBag.push(bagItem);
 });
 
 router.post("/:jewelryId/update", isAuth, async (req, res) => {
