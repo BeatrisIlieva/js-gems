@@ -24,19 +24,6 @@ exports.getAll = async (categoryId) => {
         },
       },
     },
-    // {
-    //   $group: {
-    //     _id: null,
-    //     price: {
-    //       $first: {"$inventories.price"},
-    //     },
-    //   },
-    // },
-    // {
-    //   $addFields: {
-    //     price: "$inventories.price"
-    //   }
-    // },
     {
       $project: {
         price: "$inventories.price",
