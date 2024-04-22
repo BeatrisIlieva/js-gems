@@ -1,9 +1,5 @@
 const Jewelry = require("../models/Jewelry");
 
-const {
-  isSelectionEmpty,
-  isArrayEmpty,
-} = require("../utils/checkIfCollectionIsEmpty");
 const { updateSelectionQuery } = require("../utils/updateSelectionQuery");
 const { updateQueryByJewelryIds } = require("../utils/updateQueryByJewelryIds");
 
