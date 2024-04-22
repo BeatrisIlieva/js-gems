@@ -21,14 +21,11 @@ router.get("/", isAuth, getBagCount, getLikeCount, async (req, res) => {
 
     let jewelries = await bagManager.getAll(userId);
 
-    // const { bagItems, subTotal } = await bagManager.getAll(userId);
-
     if (!isEmpty) {
       res.render("bag/display", {
         jewelries,
         DEFAULT_MIN_QUANTITY,
         bagCountGreaterThanOne,
-        // subTotal,
       });
     } else {
       res.render("bag/display");
