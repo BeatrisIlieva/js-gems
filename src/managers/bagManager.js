@@ -61,7 +61,6 @@ exports.update = async ({bagItemId, updatedQuantity}) => {
       newQuantity = jewelry.quantity + difference;
     }
     await jewelry.updateOne({ quantity: newQuantity });
-    // await updateBagTotalPrice({userId, jewelryId, sizeId});
 
     if (Number(updatedQuantity) === 0) {
       await bagItem.deleteOne();
