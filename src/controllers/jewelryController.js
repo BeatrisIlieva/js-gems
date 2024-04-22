@@ -33,25 +33,7 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
     jewelryIds = jewelries.map((jewelry) => jewelry._id);
     req.session.jewelryIds = req.session.jewelryIds || [];
     req.session.jewelryIds = jewelryIds;
-    // jewelryIds = req.session.jewelryIds;
-
-    // if (!isSelectionEmpty(selection)){
-    //   jewelryIds = req.session.jewelryIds;
-    //   jewelries = await jewelryManager.getFiltered(jewelryIds, selection);
-    //   jewelryIds = jewelries.map((jewelry) => jewelry._id);
-    //   req.session.jewelryIds = jewelryIds;
-
-    // } else {
-    //   jewelries = await jewelryManager.getAll(categoryId);
-
-    //   jewelryIds = jewelries.map((jewelry) => jewelry._id);
-
-    //   req.session.jewelryIds = req.session.jewelryIds || [];
-
-    //   req.session.jewelryIds = jewelryIds;
-    // }
-
-    // jewelryIds = req.session.jewelryIds;
+  
 
     let metalsData = await getMetalsData(jewelryIds);
     let stoneTypesData = await getStoneTypesData(jewelryIds);
