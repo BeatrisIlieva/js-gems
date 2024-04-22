@@ -17,14 +17,10 @@ exports.setJewelryLikedNotAuthUser = async (req, jewelry) => {
   jewelryId = jewelry[0]._id;
   let isLikedByUser = jewelryIds.includes(jewelryId);
 
-  // jewelry["isLikedByUser"] = isLikedByUser;
-
-
   firstObj = jewelry;
-  secondObj = {"isLikedByUser": isLikedByUser};
+  secondObj = { isLikedByUser: isLikedByUser };
 
-  jewelry = firstObj.map(obj => ({...obj, ...secondObj}));
+  jewelry = firstObj.map((obj) => ({ ...obj, ...secondObj }));
 
   return jewelry;
 };
-
