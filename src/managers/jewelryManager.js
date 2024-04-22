@@ -24,7 +24,53 @@ exports.getAll = async (categoryId) => {
         },
       },
     },
-  ];
+    // {
+    //   $group: {
+    //     _id: null,
+    //     price: {
+    //       $first: {"$inventories.price"},
+    //     },
+    //   },
+    // },
+    // {
+    //   $addFields: {
+    //     price: "$inventories.price"
+    //   }
+    // },
+    {
+      $project: {
+        price: "$inventories.price",
+        firstImageUrl: 1,
+      },
+    },
+  ]
+  // let query = [
+  //   {
+  //     $match: {
+  //       category: categoryId,
+  //     },
+  //   },
+  //   {
+  //     $lookup: {
+  //       as: "inventories",
+  //       from: "inventories",
+  //       foreignField: "jewelry",
+  //       localField: "_id",
+  //     },
+  //   },
+  //   {
+  //     $match: {
+  //       "inventories.quantity": {
+  //         $gt: 0,
+  //       },
+  //     },
+  //   },
+  //   {
+  //     $project: {
+  //       "inventories.price": 1,
+  //     },
+  //   },
+  // ];
 
   const jewelries = await Jewelry.aggregate(query);
   return jewelries;

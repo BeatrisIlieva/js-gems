@@ -13,7 +13,6 @@ const {
   setJewelryLikedNotAuthUser,
   setJewelriesLikedNotAuthUser,
 } = require("../utils/setIsLikedNotAuthUser");
-
 const { isSelectionEmpty } = require("../utils/checkIfCollectionIsEmpty");
 
 router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
@@ -35,7 +34,6 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
     jewelryIds = jewelries.map((jewelry) => jewelry._id);
     req.session.jewelryIds = req.session.jewelryIds || [];
     req.session.jewelryIds = jewelryIds;
-  
 
     let metalsData = await getMetalsData(jewelryIds);
     let stoneTypesData = await getStoneTypesData(jewelryIds);
