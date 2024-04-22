@@ -18,6 +18,14 @@ exports.getAll = async (categoryId) => {
       },
     },
     {
+      $lookup: {
+        as: "categories",
+        from: "categories",
+        foreignField: "_id",
+        localField: "category",
+      },
+    },
+    {
       $match: {
         "inventories.quantity": {
           $gt: 0,
@@ -25,9 +33,28 @@ exports.getAll = async (categoryId) => {
       },
     },
     {
+      $group: {
+        _id: "$_id",
+        price: {
+          $addToSet: "$inventories.price",
+        },
+        firstImageUrl: {
+          $addToSet: "$firstImageUrl",
+        },
+        jewelryIds: {
+          $push: "$_id",
+        },
+        categoryTitle: {
+          $push: "$categories.title",
+        },
+      },
+    },
+    {
       $project: {
-        price: "$inventories.price",
+        price: 1,
         firstImageUrl: 1,
+        jewelryIds: 1,
+        categoryTitle: 1,
       },
     },
   ];
