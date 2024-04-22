@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { isAuth } = require("../middlewares/authMiddleware");
-const {getBagCount} = require("../middlewares/bagCounterMiddleware");
-const {getLikeCount} = require("../middlewares/likeCounterMiddleware");
+const { getBagCount } = require("../middlewares/bagCounterMiddleware");
+const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
 const bagManager = require("../managers/bagManager");
 const {
   DEFAULT_ADD_QUANTITY,
@@ -51,7 +51,7 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
     } else {
       sizeId = Number(size);
       bagItem = await bagManager.getOne({ userId, jewelryId, sizeId });
-    };
+    }
 
     if (!bagItem) {
       await bagManager.create({
@@ -62,7 +62,10 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
       });
     } else {
       newQuantity = Number(bagItem.quantity) + DEFAULT_ADD_QUANTITY;
-      await shoppingBag.findOneAndUpdate({user: userId, jewelry: jewelryId, size: sizeId}, { quantity: newQuantity });
+      await shoppingBag.findOneAndUpdate(
+        { user: userId, jewelry: jewelryId, size: sizeId },
+        { quantity: newQuantity }
+      );
     }
 
     res.redirect("/bag");
@@ -91,7 +94,7 @@ router.post("/:jewelryId/update", isAuth, async (req, res) => {
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
 
-    res.redirect("/bag", {errorMessages});
+    res.redirect("/bag", { errorMessages });
   }
 });
 

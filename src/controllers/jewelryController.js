@@ -7,7 +7,6 @@ const { getBagCount } = require("../middlewares/bagCounterMiddleware");
 const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
 const {
   setJewelriesLikedAuthUser,
-  setJewelryLikedAuthUser,
 } = require("../utils/setIsLikedAuthUser");
 const {
   setJewelriesLikedNotAuthUser,
