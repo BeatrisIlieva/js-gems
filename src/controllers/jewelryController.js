@@ -10,7 +10,6 @@ const {
 } = require("../utils/setIsLikedAuthUser");
 const {
   setJewelriesLikedNotAuthUser,
-  setJewelryLikedNotAuthUser,
 } = require("../utils/setIsLikedNotAuthUser");
 
 const { isSelectionEmpty } = require("../utils/checkIfCollectionIsEmpty");
