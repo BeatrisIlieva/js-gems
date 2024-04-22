@@ -4,10 +4,7 @@ exports.setJewelriesLikedAuthUser = async (jewelries, userId) => {
   for (let i = 0; i < jewelries.length; i++) {
     const jewelry = jewelries[i];
     jewelryId = jewelry._id;
-    let isLikedByUser = await isLiked(
-      userId,
-      jewelryId,
-    );
+    let isLikedByUser = await isLiked(userId, jewelryId);
     isLikedByUser = !!isLikedByUser;
     jewelry["isLikedByUser"] = isLikedByUser;
   }
@@ -16,34 +13,25 @@ exports.setJewelriesLikedAuthUser = async (jewelries, userId) => {
 };
 
 exports.setJewelryLikedAuthUser = async (jewelry, userId) => {
+  jewelryId = jewelry[0]._id;
+  console.log(userId);
+  console.log(jewelryId);
+  let isLikedByUser = await isLiked(userId, jewelryId);
+  isLikedByUser = !!isLikedByUser;
 
-    jewelryId = jewelry[0]._id;
-    console.log(userId);
-    console.log(jewelryId);
-    let isLikedByUser = await isLiked(
-      userId,
-      jewelryId,
-    );
-    isLikedByUser = !!isLikedByUser;
-    // jewelry["isLikedByUser"] = isLikedByUser;
-    // console.log(isLikedByUser);
+  firstObj = jewelry;
+  secondObj = { isLikedByUser: isLikedByUser };
 
+  jewelry = firstObj.map((obj) => ({ ...obj, ...secondObj }));
 
-    firstObj = jewelry;
-    secondObj = {"isLikedByUser": isLikedByUser};
-
-    jewelry = firstObj.map(obj => ({...obj, ...secondObj}));
-    // console.log(jewelry);
-  
   return jewelry;
 };
 
-
-const isLiked = async ( userId, jewelryId ) => {
+const isLiked = async (userId, jewelryId) => {
   const isLikedByUser = await Wishlist.findOne({
     user: userId,
     jewelry: jewelryId,
   }).lean();
-  // console.log(isLikedByUser);
+
   return isLikedByUser;
 };
