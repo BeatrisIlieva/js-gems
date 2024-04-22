@@ -120,7 +120,12 @@ exports.getOne = async (jewelryId) => {
               metal: {
                 $arrayElemAt: [
                   "$metals",
-                  { $indexOfArray: ["$metals._id", "$$jm.metal"] },
+                  {
+                    $indexOfArray: [
+                      "$metals._id",
+                      "$$jm.metal",
+                    ],
+                  },
                 ],
               },
               caratWeight: "$$jm.caratWeight",
@@ -163,13 +168,23 @@ exports.getOne = async (jewelryId) => {
               stoneType: {
                 $arrayElemAt: [
                   "$stonetypes.title",
-                  { $indexOfArray: ["$stonetypes._id", "$$js.stoneType"] },
+                  {
+                    $indexOfArray: [
+                      "$stonetypes._id",
+                      "$$js.stoneType",
+                    ],
+                  },
                 ],
               },
               stoneColor: {
                 $arrayElemAt: [
                   "$stonecolors.title",
-                  { $indexOfArray: ["$stonecolors._id", "$$js.stoneColor"] },
+                  {
+                    $indexOfArray: [
+                      "$stonecolors._id",
+                      "$$js.stoneColor",
+                    ],
+                  },
                 ],
               },
               caratWeight: "$$js.caratWeight",
@@ -195,8 +210,16 @@ exports.getOne = async (jewelryId) => {
       },
     },
     {
+      $addFields: {
+        price: {
+          $arrayElemAt: ["$inventories.price", 0],
+        },
+      },
+    },
+    {
       $project: {
         title: 1,
+        price: 1,
         firstImageUrl: 1,
         secondImageUrl: 1,
         "categories.title": 1,
@@ -205,7 +228,6 @@ exports.getOne = async (jewelryId) => {
         "stoneInfo.stoneType": 1,
         "stoneInfo.stoneColor": 1,
         "stoneInfo.caratWeight": 1,
-
         "sizes.measurement": 1,
         "sizes._id": 1,
       },

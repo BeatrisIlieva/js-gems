@@ -36,3 +36,15 @@
 .jewelry-details-image-second:hover .zoom-image {
     transform: scale(2.2);
 }
+
+/* .composition-details {
+    display:flex;
+} */
+
+.price {
+    margin-top: 2vh;
+}
+
+.add-to-bag {
+    margin-top: 2vh;
+}
