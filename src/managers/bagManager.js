@@ -4,16 +4,6 @@ const Inventory = require("../models/Inventory");
 const { DEFAULT_MIN_QUANTITY } = require("../constants/shoppingBag");
 const User = require("../models/User");
 
-const getOne = async ({ userId, jewelryId, sizeId }) => {
-  const bagItem = await ShoppingBag.findOne({
-    user: userId,
-    jewelry: jewelryId,
-    size: sizeId,
-  });
-
-  return bagItem;
-};
-
 exports.create = async ({
   userId,
   jewelryId,
