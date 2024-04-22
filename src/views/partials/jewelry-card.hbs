@@ -2,11 +2,11 @@
   {{#each jewelries}}
     <article class="jewelry-card">
       <div class="jewelry-card-thumbnail">
-        <a href="/jewelries/{{_id}}/details" title="{{title}}">
+        <a href="/jewelries/{{jewelryIds}}/details" title="{{jewelryTitle}}">
           <img
             class="jewelry-card-img"
             src="{{firstImageUrl}}"
-            alt="{{title}} image"
+            alt="{{jewelryTitle}} image"
           />
         </a>
         {{>like-button-forms}}
@@ -14,10 +14,10 @@
           <p class="jewelry-card-description">
             <ul class="jewelry-card-meta" role="list">
               <li class="jewelry-card-meta-item">
-                {{title}}
+                <i>{{jewelryTitle}}</i>
               </li>
               <li class="jewelry-card-meta-item">
-                {{category}}
+                {{categoryTitle}}
               </li>
               <li class="jewelry-card-meta-item">
                 <i class="price__icon fa-solid fa-sack-dollar"></i>

@@ -6,7 +6,7 @@ exports.getAll = async (categoryId) => {
   let query = [
     {
       $match: {
-        category: categoryId,
+        category: 2,
       },
     },
     {
@@ -45,7 +45,10 @@ exports.getAll = async (categoryId) => {
           $push: "$_id",
         },
         categoryTitle: {
-          $push: "$categories.title",
+          $addToSet: "$categories.title",
+        },
+        jewelryTitle: {
+          $addToSet: "$title",
         },
       },
     },
@@ -55,6 +58,7 @@ exports.getAll = async (categoryId) => {
         firstImageUrl: 1,
         jewelryIds: 1,
         categoryTitle: 1,
+        jewelryTitle: 1,
       },
     },
   ];
