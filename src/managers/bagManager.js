@@ -279,6 +279,12 @@ exports.getAll = async (userId) => {
         maxQuantity: { $first: "$maxQuantity" },
         minQuantity: { $first: "$minQuantity" },
         totalPrice: { $first: "$totalPrice" },
+        createdAt: { $first: "$createdAt" },
+      },
+    },
+      {
+      $sort: {
+        createdAt: -1, 
       },
     },
     {
@@ -299,8 +305,23 @@ exports.getAll = async (userId) => {
         totalPrice: 1,
       },
     },
+    {
+      $group: {
+        _id: null, 
+        documents: {
+          $push: "$$ROOT", 
+        },
+        totalTotalPrice: { $sum: "$totalPrice" }, 
+      },
+    },
+    {
+      $project: {
+        documents: 1,
+        totalTotalPrice: 1,
+      },
+    },
   ]);
-
+  console.log(jewelries);
   return jewelries;
 };
 

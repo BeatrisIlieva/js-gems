@@ -20,127 +20,139 @@
       />
     </div>
   </div>
-  <section class="shopping-cart-wrapper">
-    <div class="left-container">
-      {{#if bagCountGreaterThanOne}}
-        <h4 class="left-container-title">
-          <i class="fa-solid fa-truck" style="color: #ffb7ce;"></i>
-          Delivery ({{bagCount}}
-          items)
-        </h4>
-      {{else}}
-        <h4 class="left-container-title">
-          <i class="fa-solid fa-truck" style="color: #ffb7ce;"></i>
-          Delivery ({{bagCount}}
-          item)
-        </h4>
-      {{/if}}
+  {{#each jewelries}}
+    <section class="shopping-cart-wrapper">
+      <div class="left-container">
+        {{#if bagCountGreaterThanOne}}
+          <h4 class="left-container-title">
+            <i class="fa-solid fa-truck" style="color: #ffb7ce;"></i>
+            Delivery ({{bagCount}}
+            items)
+          </h4>
+        {{else}}
+          <h4 class="left-container-title">
+            <i class="fa-solid fa-truck" style="color: #ffb7ce;"></i>
+            Delivery ({{bagCount}}
+            item)
+          </h4>
+        {{/if}}
 
-      <div class="left-subcontainer">
-        {{#each jewelries}}
-          <section class="jewelry-container">
-            <div class="shopping-cart-image-container">
-              {{!-- {{#each jewelries}} --}}
-              <img
-                class="shopping-cart-jewelry-img"
-                src="{{this.firstImageUrl}}"
-                alt="{{this.jewelryTitle}} image"
-              />
-              {{!-- {{/each}} --}}
-            </div>
-            <div class="jewelry-composition">
-              <h6 class="composition-category">{{this.categoryTitle}}</h6>
-              <h5 class="composition-title">{{this.jewelryTitle}}</h5>
-              <ul role="list">
-                <li>
-                  {{#each this.metalInfo}}
-                    {{#each this}}
-                      <span class="composition-item">
-                        {{#if this.caratWeight}}{{this.caratWeight}}ct.{{/if}}
-                        {{this.metal}}{{#unless @last}},{{/unless}}
-                      </span>{{/each}}{{#unless @last}},{{/unless}}
-                  {{/each}}
-                </li>
-                <li>
-                  {{#each this.stoneInfo}}
-                    {{#each this}}
-                      <span class="composition-item">
-                        {{#if this.caratWeight}}{{this.caratWeight}}ct.{{/if}}
-                        {{this.stoneColor}}
-                        {{this.stoneType}}{{#unless @last}},{{/unless}}
-                      </span>{{/each}}{{#unless @last}},{{/unless}}
-                  {{/each}}
-                </li>
-                <li class="composition-item-size">
-                  <span>Size: {{this.size}} cm.</span>
-                </li>
-              </ul>
-            </div>
-            <div class="price-and-quantity">
-              <p class="item-price">
-                {{totalPrice}}
-              </p>
-              <div class="item-quantity">
-                <form method="POST" action="/bag/{{jewelry._id}}/update">
-                  <label>
-                    <input
-                      type="number"
-                      class="quantity-field"
-                      name="updatedQuantity"
-                      value="{{quantity}}"
-                      min="{{minQuantity}}"
-                      max="{{maxQuantity}}"
-                    />
-                  </label>
-                  <input type="hidden" name="bagItemId" value="{{bagItemId}}" />
-                  <input type="hidden" name="sizeId" value="{{size._id}}" />
-                  <button
-                    type="submit"
-                    name="update_quantity"
-                    class="button hover filled_pink"
-                  >
-                    <i class="fa-solid fa-pencil"></i>
-                    Update
-                  </button>
-                </form>
+        <div class="left-subcontainer">
+
+          {{#each documents}}
+            <section class="jewelry-container">
+              <div class="shopping-cart-image-container">
+                {{!-- {{#each jewelries}} --}}
+                <img
+                  class="shopping-cart-jewelry-img"
+                  src="{{this.firstImageUrl}}"
+                  alt="{{this.jewelryTitle}} image"
+                />
+                {{!-- {{/each}} --}}
               </div>
-            </div>
-          </section>
-        {{/each}}
-      </div>
-    </div>
-    <div class="right-container">
-      <div class="right-sticky">
-        <h4 class="right-container-title">Order Summary</h4>
-        <div class="right-subcontainer">
-          <section class="order-summary-container">
-            <div class="order-summary-items">
-              <p class="subtotal">Subtotal</p>
-              <p class="subtotal"><i
-                  class="fa-solid fa-euro-sign"
-                ></i>{{subTotal}}</p>
-            </div>
-            <div class="order-summary-items">
-              <p>Shipping</p>
-              <p>Complimentary</p>
-            </div>
-            <hr class="seperation-line" />
-            <div class="order-summary-items">
-              <p class="subtotal">Total</p>
-              <p class="subtotal"><i
-                  class="fa-solid fa-euro-sign"
-                ></i>{{subTotal}}</p>
-            </div>
-            <div class="shopping-cart-checkout">
-              <button class="button hover filled_green">
-                <a href="/complete-order">
-                  <i class="fa-regular fa-credit-card"></i>
-                  Continue Checkout</a>
-              </button>
-            </div>
-          </section>
+              <div class="jewelry-composition">
+                <h6 class="composition-category">{{this.categoryTitle}}</h6>
+                <h5 class="composition-title">{{this.jewelryTitle}}</h5>
+                <ul role="list">
+                  <li>
+                    {{#each this.metalInfo}}
+                      {{#each this}}
+                        <span class="composition-item">
+                          {{#if this.caratWeight}}{{this.caratWeight}}ct.{{/if}}
+                          {{this.metal}}{{#unless @last}},{{/unless}}
+                        </span>{{/each}}{{#unless @last}},{{/unless}}
+                    {{/each}}
+                  </li>
+                  <li>
+                    {{#each this.stoneInfo}}
+                      {{#each this}}
+                        <span class="composition-item">
+                          {{#if this.caratWeight}}{{this.caratWeight}}ct.{{/if}}
+                          {{this.stoneColor}}
+                          {{this.stoneType}}{{#unless @last}},{{/unless}}
+                        </span>{{/each}}{{#unless @last}},{{/unless}}
+                    {{/each}}
+                  </li>
+                  <li class="composition-item-size">
+                    <span>Size: {{this.size}} cm.</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="price-and-quantity">
+                <p class="item-price">
+                  {{this.totalPrice}}
+                </p>
+                <div class="item-quantity">
+                  <form method="POST" action="/bag/{{this.jewelryId}}/update">
+                    <label>
+                      <input
+                        type="number"
+                        class="quantity-field"
+                        name="updatedQuantity"
+                        value="{{this.quantity}}"
+                        min="{{this.minQuantity}}"
+                        max="{{this.maxQuantity}}"
+                      />
+                    </label>
+                    <input
+                      type="hidden"
+                      name="bagItemId"
+                      value="{{this._id}}"
+                    />
+                    <input
+                      type="hidden"
+                      name="sizeId"
+                      value="{{this.sizeId}}"
+                    />
+                    <button
+                      type="submit"
+                      name="update_quantity"
+                      class="button hover filled_pink"
+                    >
+                      <i class="fa-solid fa-pencil"></i>
+                      Update
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </section>
+          {{/each}}
+
         </div>
       </div>
-    </div>
-  </section>
+      <div class="right-container">
+        <div class="right-sticky">
+          <h4 class="right-container-title">Order Summary</h4>
+          <div class="right-subcontainer">
+            <section class="order-summary-container">
+              <div class="order-summary-items">
+                <p class="subtotal">Subtotal</p>
+                <p class="subtotal"><i
+                    class="fa-solid fa-euro-sign"
+                  ></i>{{totalTotalPrice}}</p>
+              </div>
+              <div class="order-summary-items">
+                <p>Shipping</p>
+                <p>Complimentary</p>
+              </div>
+              <hr class="seperation-line" />
+              <div class="order-summary-items">
+                <p class="subtotal">Total</p>
+                <p class="subtotal"><i
+                    class="fa-solid fa-euro-sign"
+                  ></i>{{totalTotalPrice}}</p>
+              </div>
+              <div class="shopping-cart-checkout">
+                <button class="button hover filled_green">
+                  <a href="/complete-order">
+                    <i class="fa-regular fa-credit-card"></i>
+                    Continue Checkout</a>
+                </button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{/each}}
 {{/unless}}
