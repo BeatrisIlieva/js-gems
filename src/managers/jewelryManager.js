@@ -1,5 +1,4 @@
 const Jewelry = require("../models/Jewelry");
-
 const { updateSelectionQuery } = require("../utils/updateSelectionQuery");
 const { updateQueryByJewelryIds } = require("../utils/updateQueryByJewelryIds");
 
@@ -164,7 +163,7 @@ exports.getOne = async (jewelryId) => {
         "stoneInfo.caratWeight": 1,
 
         "sizes.measurement": 1,
-        "sizes._id":1,
+        "sizes._id": 1,
       },
     },
     {
@@ -175,18 +174,3 @@ exports.getOne = async (jewelryId) => {
   ]);
   return jewelry;
 };
-
-// exports.getOne = async (jewelryId) => {
-//   const jewelry = await Jewelry.findById(jewelryId)
-//     .populate("category")
-//     .populate("jewelrymetals")
-//     // .populate("metals.caratWeight")
-//     .populate("jewelrystones")
-//     // .populate("stones.color")
-//     // .populate("stones.caratWeight")
-//     // .populate("sizes")
-//     // .populate("price")
-//     .lean();
-
-//   return jewelry;
-// };
