@@ -1,10 +1,8 @@
 const router = require("express").Router();
-const { isAuth } = require("../middlewares/authMiddleware");
 const wishlistAuthUserManager = require("../managers/wishlistAuthUserManager");
 const wishlistNotAuthUserManager = require("../managers/wishlistNotAuthUserManager");
 const { getBagCount } = require("../middlewares/bagCounterMiddleware");
 const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
-const Jewelry = require("../models/Jewelry");
 
 router.get("/", getBagCount, getLikeCount, async (req, res) => {
   try {
