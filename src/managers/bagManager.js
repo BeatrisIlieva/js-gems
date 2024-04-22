@@ -4,7 +4,7 @@ const Inventory = require("../models/Inventory");
 const { DEFAULT_MIN_QUANTITY } = require("../constants/shoppingBag");
 const User = require("../models/User");
 
-const getOne = async ({userId, jewelryId, sizeId}) => {
+const getOne = async ({ userId, jewelryId, sizeId }) => {
   const bagItem = await ShoppingBag.findOne({
     user: userId,
     jewelry: jewelryId,
@@ -20,7 +20,6 @@ exports.create = async ({
   sizeId,
   quantity: DEFAULT_ADD_QUANTITY,
 }) => {
-
   bagItem = await ShoppingBag.create({
     user: userId,
     jewelry: jewelryId,
@@ -28,12 +27,14 @@ exports.create = async ({
     quantity: DEFAULT_ADD_QUANTITY,
   });
 
-  await Inventory.findOneAndUpdate({jewelry: jewelryId, size: sizeId}, { $inc: { quantity: -1 } }, { new: true } );
-
+  await Inventory.findOneAndUpdate(
+    { jewelry: jewelryId, size: sizeId },
+    { $inc: { quantity: -1 } },
+    { new: true }
+  );
 };
 
-
-exports.update = async ({bagItemId, updatedQuantity}) => {
+exports.update = async ({ bagItemId, updatedQuantity }) => {
   const bagItem = await ShoppingBag.findById(bagItemId);
 
   const jewelryId = bagItem.jewelry.toString();
@@ -51,7 +52,7 @@ exports.update = async ({bagItemId, updatedQuantity}) => {
       `Please choose quantity between ${DEFAULT_MIN_QUANTITY} and ${availableQuantity}`
     );
   } else {
-    await bagItem.updateOne({ quantity: updatedQuantity});
+    await bagItem.updateOne({ quantity: updatedQuantity });
 
     if (alreadyAddedQuantity < updatedQuantity) {
       difference = updatedQuantity - alreadyAddedQuantity;
@@ -68,11 +69,10 @@ exports.update = async ({bagItemId, updatedQuantity}) => {
   }
 };
 
-
 exports.getAll = async (userId) => {
   user = await User.findById(userId);
 
-  let jewelries =  await ShoppingBag.aggregate([
+  let jewelries = await ShoppingBag.aggregate([
     {
       $match: {
         user: user._id,
@@ -171,28 +171,22 @@ exports.getAll = async (userId) => {
     {
       $unwind: "$inventories",
     },
-  
+
     {
       $unwind: "$sizes",
     },
     {
       $unwind: "$categories",
     },
-  
+
     {
       $addFields: {
         totalPrice: {
-          $multiply: [
-            "$inventories.price",
-            "$quantity",
-          ],
+          $multiply: ["$inventories.price", "$quantity"],
         },
         minQuantity: 0,
         maxQuantity: {
-          $sum: [
-            "$inventories.quantity",
-            "$quantity",
-          ],
+          $sum: ["$inventories.quantity", "$quantity"],
         },
       },
     },
@@ -203,8 +197,7 @@ exports.getAll = async (userId) => {
             input: [
               {
                 metal: "$metals",
-                caratWeight:
-                  "$jewelrymetals.caratWeight",
+                caratWeight: "$jewelrymetals.caratWeight",
               },
             ],
             as: "jm",
@@ -224,8 +217,7 @@ exports.getAll = async (userId) => {
               {
                 stoneType: "$stonetypes",
                 stoneColor: "$stonecolors",
-                caratWeight:
-                  "$jewelrystones.caratWeight",
+                caratWeight: "$jewelrystones.caratWeight",
               },
             ],
             as: "js",
@@ -277,9 +269,9 @@ exports.getAll = async (userId) => {
         createdAt: { $first: "$createdAt" },
       },
     },
-      {
+    {
       $sort: {
-        createdAt: -1, 
+        createdAt: -1,
       },
     },
     {
@@ -302,11 +294,11 @@ exports.getAll = async (userId) => {
     },
     {
       $group: {
-        _id: null, 
+        _id: null,
         documents: {
-          $push: "$$ROOT", 
+          $push: "$$ROOT",
         },
-        totalTotalPrice: { $sum: "$totalPrice" }, 
+        totalTotalPrice: { $sum: "$totalPrice" },
       },
     },
     {
@@ -319,64 +311,3 @@ exports.getAll = async (userId) => {
 
   return jewelries;
 };
-
-
-
-
-
-
-// exports.getAll = async (userId) => {
-//   const result = await ShoppingBag.find({ user: userId });
-
-//   const bagItems = {};
-
-//   let subTotal = 0;
-
-//   for (let i = 0; i < result.length; i++) {
-//     const jewelryId = result[i].jewelry;
-//     const bagItemId = result[i]._id;
-
-//     const jewelry = await Jewelry.findById(jewelryId)
-//       .populate("category")
-//       .populate("metals.kind")
-//       .populate("metals.caratWeight")
-//       .populate("stones.kind")
-//       .populate("stones.color")
-//       .populate("stones.caratWeight")
-//       .lean();
-//     const sizeId = result[i].size;
-//     const size = await Size.findById(sizeId).populate("measurement").lean();
-//     const quantity = result[i].quantity;
-//     const totalPrice = result[i].totalPrice;
-//     const maxQuantity = jewelry.quantity + quantity;
-//     bagItems[bagItemId] = {
-//       bagItemId,
-//       jewelry: jewelry,
-//       size: size,
-//       quantity: quantity,
-//       totalPrice: totalPrice,
-//       maxQuantity: maxQuantity,
-//       minQuantity: DEFAULT_MIN_QUANTITY,
-//     };
-//     subTotal += totalPrice;
-//   }
-
-//   return { bagItems, subTotal };
-// };
-
-
-// const updateBagTotalPrice = async ({userId, jewelryId, sizeId}) => {
-//   const bagItem = await getOne({ userId, jewelryId, sizeId });
-//   const bagItemQuantity = bagItem.quantity;
-//   const inventory = await Inventory.findOne({jewelry: jewelryId, size: sizeId});
-//   const jewelryPrice = inventory.price;
-
-
-//   const totalPrice = bagItemQuantity * jewelryPrice;
-
-//   bagItem.totalPrice = totalPrice;
-//   await bagItem.save();
-// }
-
-exports.getOne = getOne;
-
