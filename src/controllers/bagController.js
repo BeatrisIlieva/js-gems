@@ -63,7 +63,6 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
     } else {
       newQuantity = Number(bagItem.quantity) + DEFAULT_ADD_QUANTITY;
       await shoppingBag.findOneAndUpdate({user: userId, jewelry: jewelryId, size: sizeId}, { quantity: newQuantity });
-      // await bagItem.update({ quantity: newQuantity });
     }
 
     res.redirect("/bag");
