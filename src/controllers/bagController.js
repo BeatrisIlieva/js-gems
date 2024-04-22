@@ -8,7 +8,6 @@ const {
   DEFAULT_MIN_QUANTITY,
 } = require("../constants/shoppingBag");
 const { extractErrorMessages } = require("../utils/errorHelpers");
-const Jewelry = require("../models/Jewelry");
 const jewelryManager = require("../managers/jewelryManager");
 const shoppingBag = require("../models/ShoppingBag");
 
