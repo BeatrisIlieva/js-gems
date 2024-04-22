@@ -167,6 +167,7 @@ exports.getOne = async (jewelryId) => {
         "stoneInfo.stoneType": 1,
         "stoneInfo.stoneColor": 1,
         "stoneInfo.caratWeight": 1,
+
         "sizes.measurement": 1,
         "sizes._id":1,
       },

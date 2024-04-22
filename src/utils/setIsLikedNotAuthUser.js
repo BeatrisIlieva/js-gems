@@ -14,10 +14,16 @@ exports.setJewelriesLikedNotAuthUser = async (req, jewelries) => {
 exports.setJewelryLikedNotAuthUser = async (req, jewelry) => {
   const jewelryIds = Object.keys(req.session.wishlistItems || {}).map(Number);
 
-  jewelryId = jewelry._id;
+  jewelryId = jewelry[0]._id;
   let isLikedByUser = jewelryIds.includes(jewelryId);
 
-  jewelry["isLikedByUser"] = isLikedByUser;
+  // jewelry["isLikedByUser"] = isLikedByUser;
+
+
+  firstObj = jewelry;
+  secondObj = {"isLikedByUser": isLikedByUser};
+
+  jewelry = firstObj.map(obj => ({...obj, ...secondObj}));
 
   return jewelry;
 };

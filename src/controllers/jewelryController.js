@@ -5,8 +5,12 @@ const { getStoneColorsData } = require("../utils/getStoneColorsData");
 const jewelryManager = require("../managers/jewelryManager");
 const { getBagCount } = require("../middlewares/bagCounterMiddleware");
 const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
-const { setJewelriesLikedAuthUser } = require("../utils/setIsLikedAuthUser");
 const {
+  setJewelriesLikedAuthUser,
+  setJewelryLikedAuthUser,
+} = require("../utils/setIsLikedAuthUser");
+const {
+  setJewelryLikedNotAuthUser,
   setJewelriesLikedNotAuthUser,
 } = require("../utils/setIsLikedNotAuthUser");
 
@@ -31,6 +35,7 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
     jewelryIds = jewelries.map((jewelry) => jewelry._id);
     req.session.jewelryIds = req.session.jewelryIds || [];
     req.session.jewelryIds = jewelryIds;
+  
 
     let metalsData = await getMetalsData(jewelryIds);
     let stoneTypesData = await getStoneTypesData(jewelryIds);
@@ -65,6 +70,14 @@ router.get(
     try {
       let jewelry = await jewelryManager.getOne(Number(jewelryId));
 
+      if (req.user) {
+        const userId = req.user._id;
+
+        jewelry = await setJewelryLikedAuthUser(jewelry, userId);
+      } else {
+        jewelry = await setJewelryLikedNotAuthUser(req, jewelry);
+      }
+      console.log(jewelry);
       res.render("jewelries/jewelry-details", { jewelry });
     } catch (err) {
       console.log(err.message);

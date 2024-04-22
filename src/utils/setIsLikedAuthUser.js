@@ -11,18 +11,29 @@ exports.setJewelriesLikedAuthUser = async (jewelries, userId) => {
     isLikedByUser = !!isLikedByUser;
     jewelry["isLikedByUser"] = isLikedByUser;
   }
+
   return jewelries;
 };
 
 exports.setJewelryLikedAuthUser = async (jewelry, userId) => {
 
-    jewelryId = jewelry._id;
+    jewelryId = jewelry[0]._id;
+    console.log(userId);
+    console.log(jewelryId);
     let isLikedByUser = await isLiked(
       userId,
       jewelryId,
     );
     isLikedByUser = !!isLikedByUser;
-    jewelry["isLikedByUser"] = isLikedByUser;
+    // jewelry["isLikedByUser"] = isLikedByUser;
+    // console.log(isLikedByUser);
+
+
+    firstObj = jewelry;
+    secondObj = {"isLikedByUser": isLikedByUser};
+
+    jewelry = firstObj.map(obj => ({...obj, ...secondObj}));
+    // console.log(jewelry);
   
   return jewelry;
 };
@@ -33,5 +44,6 @@ const isLiked = async ( userId, jewelryId ) => {
     user: userId,
     jewelry: jewelryId,
   }).lean();
+  // console.log(isLikedByUser);
   return isLikedByUser;
 };

@@ -55,6 +55,8 @@ router.post("/:jewelryId/delete", async (req, res) => {
       await wishlistAuthUserManager.delete(userId, jewelryId);
     }
 
+    // res.redirect(`/${jewelryId}/details`)
+
     const referer = req.get("referer");
     res.redirect(referer);
   } catch (err) {
