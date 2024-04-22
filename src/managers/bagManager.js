@@ -1,11 +1,7 @@
-
-
 const ShoppingBag = require("../models/ShoppingBag");
 const Jewelry = require("../models/Jewelry");
 const Inventory = require("../models/Inventory");
-
 const { DEFAULT_MIN_QUANTITY } = require("../constants/shoppingBag");
-const { Decimal128 } = require('mongodb');
 const User = require("../models/User");
 
 const getOne = async ({userId, jewelryId, sizeId}) => {
