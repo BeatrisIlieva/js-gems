@@ -30,34 +30,7 @@ exports.getAll = async (categoryId) => {
         firstImageUrl: 1,
       },
     },
-  ]
-  // let query = [
-  //   {
-  //     $match: {
-  //       category: categoryId,
-  //     },
-  //   },
-  //   {
-  //     $lookup: {
-  //       as: "inventories",
-  //       from: "inventories",
-  //       foreignField: "jewelry",
-  //       localField: "_id",
-  //     },
-  //   },
-  //   {
-  //     $match: {
-  //       "inventories.quantity": {
-  //         $gt: 0,
-  //       },
-  //     },
-  //   },
-  //   {
-  //     $project: {
-  //       "inventories.price": 1,
-  //     },
-  //   },
-  // ];
+  ];
 
   const jewelries = await Jewelry.aggregate(query);
   return jewelries;
@@ -201,7 +174,7 @@ exports.getOne = async (jewelryId) => {
     },
     {
       $match: {
-        _id: jewelryId, // Assuming _id is a number, not a string with "NumberInt"
+        _id: jewelryId,
       },
     },
   ]);
