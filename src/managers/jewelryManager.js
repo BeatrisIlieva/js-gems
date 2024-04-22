@@ -1,6 +1,5 @@
 const Jewelry = require("../models/Jewelry");
-const StoneType = require("../models/StoneType");
-const StoneColor = require("../models/StoneColor");
+
 const {
   isSelectionEmpty,
   isArrayEmpty,
