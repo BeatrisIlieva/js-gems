@@ -321,7 +321,7 @@ exports.getAll = async (userId) => {
       },
     },
   ]);
-  console.log(jewelries);
+
   return jewelries;
 };
 

@@ -36,19 +36,15 @@
             item)
           </h4>
         {{/if}}
-
         <div class="left-subcontainer">
-
           {{#each documents}}
             <section class="jewelry-container">
               <div class="shopping-cart-image-container">
-                {{!-- {{#each jewelries}} --}}
                 <img
                   class="shopping-cart-jewelry-img"
                   src="{{this.firstImageUrl}}"
                   alt="{{this.jewelryTitle}} image"
                 />
-                {{!-- {{/each}} --}}
               </div>
               <div class="jewelry-composition">
                 <h6 class="composition-category">{{this.categoryTitle}}</h6>
@@ -117,7 +113,6 @@
               </div>
             </section>
           {{/each}}
-
         </div>
       </div>
       <div class="right-container">
