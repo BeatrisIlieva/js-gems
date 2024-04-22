@@ -1,5 +1,5 @@
 
-const mongoose = require('mongoose');
+
 const ShoppingBag = require("../models/ShoppingBag");
 const Jewelry = require("../models/Jewelry");
 const Inventory = require("../models/Inventory");
