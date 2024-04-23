@@ -7,6 +7,9 @@ const handlebarsConfig = require("./config/handlebarsConfig");
 const dbConnect = require("./config/dbConfig");
 const routes = require("./routes");
 const { SECRET } = require("./config/config");
+const {
+  storeOriginalUrl,
+} = require("./middlewares/storeOriginalUrlMiddleware");
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/JSGems", {
@@ -40,6 +43,8 @@ dbConnect()
   .catch((err) => {
     console.log("DB error: ", err.message);
   });
+
+app.use(storeOriginalUrl);
 
 app.use(routes);
 

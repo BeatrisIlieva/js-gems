@@ -33,7 +33,9 @@ router.post("/register", async (req, res) => {
 
     await transferSessionBagsToModelShoppingBag(sessionId, userId);
 
-    res.redirect("/");
+    const redirectTo = req.session.originalUrl || "/";
+    delete req.session.originalUrl;
+    res.redirect(redirectTo);
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
 
@@ -63,7 +65,9 @@ router.post("/login", async (req, res, next) => {
 
     res.cookie(TOKEN_KEY, token, { httpOnly: true });
 
-    res.redirect("/");
+    const redirectTo = req.session.originalUrl || "/";
+    delete req.session.originalUrl;
+    res.redirect(redirectTo);
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
     res.status(404).render("users/login", { errorMessages });

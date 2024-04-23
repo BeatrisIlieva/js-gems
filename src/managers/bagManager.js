@@ -90,7 +90,7 @@ exports.getAll = async (userId, sessionId) => {
         $match: {
           user: user._id,
         },
-      }
+      },
     ];
   } else {
     matchCondition = [
@@ -98,7 +98,7 @@ exports.getAll = async (userId, sessionId) => {
         $match: {
           session: sessionId,
         },
-      }
+      },
     ];
   }
 
