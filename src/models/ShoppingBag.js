@@ -4,7 +4,15 @@ const shoppingBagSchema = new mongoose.Schema({
   user: {
     type: mongoose.Types.ObjectId,
     ref: "User",
-    required: true,
+    default: null,
+    required: false,
+    // sparse: true, // Allows null values to be indexed
+    // unique: true,
+  },
+  session: {
+    type: String,
+    default: null,
+    required: false,
   },
   jewelry: {
     type: Number,

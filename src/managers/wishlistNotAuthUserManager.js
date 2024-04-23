@@ -10,6 +10,7 @@ exports.delete = (req, jewelryId) => {
 };
 
 exports.getAll = async (req) => {
+  req.session.wishlistItems = req.session.wishlistItems || {};
   const jewelryIds = Object.keys(req.session.wishlistItems).map(Number);
   let jewelries = await Jewelry.find({ _id: { $in: jewelryIds } }).lean();
 

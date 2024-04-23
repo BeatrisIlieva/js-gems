@@ -4,9 +4,9 @@ const Inventory = require("../models/Inventory");
 const { DEFAULT_MIN_QUANTITY } = require("../constants/shoppingBag");
 const User = require("../models/User");
 
-exports.getOne = async ({ userId, jewelryId, sizeId }) => {
+exports.getOne = async ({ userId, sessionId, jewelryId, sizeId }) => {
   const bagItem = await ShoppingBag.findOne({
-    user: userId,
+    $or: [{ user: userId }, { session: sessionId }],
     jewelry: jewelryId,
     size: sizeId,
   });
@@ -16,16 +16,26 @@ exports.getOne = async ({ userId, jewelryId, sizeId }) => {
 
 exports.create = async ({
   userId,
+  sessionId,
   jewelryId,
   sizeId,
   quantity: DEFAULT_ADD_QUANTITY,
 }) => {
-  bagItem = await ShoppingBag.create({
-    user: userId,
-    jewelry: jewelryId,
-    size: sizeId,
-    quantity: DEFAULT_ADD_QUANTITY,
-  });
+  if (userId) {
+    bagItem = await ShoppingBag.create({
+      user: userId,
+      jewelry: jewelryId,
+      size: sizeId,
+      quantity: DEFAULT_ADD_QUANTITY,
+    });
+  } else {
+    bagItem = await ShoppingBag.create({
+      session: sessionId,
+      jewelry: jewelryId,
+      size: sizeId,
+      quantity: DEFAULT_ADD_QUANTITY,
+    });
+  }
 
   await Inventory.findOneAndUpdate(
     { jewelry: jewelryId, size: sizeId },
@@ -69,15 +79,31 @@ exports.update = async ({ bagItemId, updatedQuantity }) => {
   }
 };
 
-exports.getAll = async (userId) => {
-  user = await User.findById(userId);
+exports.getAll = async (userId, sessionId) => {
+  let user;
+  let matchCondition;
+
+  if (userId) {
+    user = await User.findById(userId);
+    matchCondition = [
+      {
+        $match: {
+          user: user._id,
+        },
+      }
+    ];
+  } else {
+    matchCondition = [
+      {
+        $match: {
+          session: sessionId,
+        },
+      }
+    ];
+  }
 
   let jewelries = await ShoppingBag.aggregate([
-    {
-      $match: {
-        user: user._id,
-      },
-    },
+    ...matchCondition,
     {
       $lookup: {
         as: "jewelries",

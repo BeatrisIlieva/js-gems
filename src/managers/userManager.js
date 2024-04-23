@@ -2,7 +2,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("../lib/jwt");
 const User = require("../models/User");
 const profileManager = require("./profileManager");
-// const {SECRET} = require("../config/config");
 const { SECRET, BAG_ITEMS, WISHLIST_ITEMS } = require("../config/config");
 
 exports.register = async (userData) => {
@@ -17,8 +16,6 @@ exports.register = async (userData) => {
   const userId = createdUser._id;
 
   const token = await generateToken(createdUser);
-
-  // user.sessionKey = token.session;
 
   await profileManager.createProfile(createdUser._id);
 
@@ -40,7 +37,7 @@ exports.login = async (email, password) => {
 
   const token = await generateToken(user);
 
-  return token;
+  return {token, user};
 };
 
 async function generateToken(user) {

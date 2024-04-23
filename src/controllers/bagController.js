@@ -11,17 +11,24 @@ const { extractErrorMessages } = require("../utils/errorHelpers");
 const jewelryManager = require("../managers/jewelryManager");
 const shoppingBag = require("../models/ShoppingBag");
 
-router.get("/", isAuth, getBagCount, getLikeCount, async (req, res) => {
+router.get("/", getBagCount, getLikeCount, async (req, res) => {
+  const bagCount = res.locals.bagCount;
+  const bagCountGreaterThanOne = bagCount > 1;
+  const isEmpty = bagCount === 0;
+  let jewelries;
+  let userId;
+  let sessionId;
+
   try {
-    const userId = req.user._id;
-
-    const bagCount = res.locals.bagCount;
-    const bagCountGreaterThanOne = bagCount > 1;
-    const isEmpty = bagCount === 0;
-
-    let jewelries = await bagManager.getAll(userId);
+    if (req.user) {
+      userId = req.user._id;
+    } else {
+      sessionId = req.session.id;
+    }
 
     if (!isEmpty) {
+      jewelries = await bagManager.getAll(userId, sessionId);
+      
       res.render("bag/display", {
         jewelries,
         DEFAULT_MIN_QUANTITY,
@@ -37,10 +44,17 @@ router.get("/", isAuth, getBagCount, getLikeCount, async (req, res) => {
   }
 });
 
-router.post("/:jewelryId/create", isAuth, async (req, res) => {
-  const userId = req.user._id;
+router.post("/:jewelryId/create", async (req, res) => {
+  let userId;
+  let sessionId;
 
   const jewelryId = Number(req.params.jewelryId);
+
+  if (req.user) {
+    userId = req.user._id;
+  } else {
+    sessionId = req.session.id;
+  }
 
   try {
     const { size } = req.body;
@@ -51,12 +65,18 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
       throw new Error("Ensure you have selected the desired size.");
     } else {
       sizeId = Number(size);
-      bagItem = await bagManager.getOne({ userId, jewelryId, sizeId });
+      bagItem = await bagManager.getOne({
+        userId,
+        sessionId,
+        jewelryId,
+        sizeId,
+      });
     }
 
     if (!bagItem) {
       await bagManager.create({
         userId,
+        sessionId,
         jewelryId,
         sizeId,
         quantity: DEFAULT_ADD_QUANTITY,
@@ -64,7 +84,11 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
     } else {
       newQuantity = Number(bagItem.quantity) + DEFAULT_ADD_QUANTITY;
       await shoppingBag.findOneAndUpdate(
-        { user: userId, jewelry: jewelryId, size: sizeId },
+        {
+          $or: [{ user: userId }, { session: sessionId }],
+          jewelry: jewelryId,
+          size: sizeId,
+        },
         { quantity: newQuantity }
       );
     }
@@ -77,7 +101,7 @@ router.post("/:jewelryId/create", isAuth, async (req, res) => {
   }
 });
 
-router.post("/:jewelryId/update", isAuth, async (req, res) => {
+router.post("/:jewelryId/update", async (req, res) => {
   const userId = req.user._id;
 
   let { updatedQuantity, bagItemId, sizeId } = req.body;
