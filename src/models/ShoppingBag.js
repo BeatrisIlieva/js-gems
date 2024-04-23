@@ -6,8 +6,6 @@ const shoppingBagSchema = new mongoose.Schema({
     ref: "User",
     default: null,
     required: false,
-    // sparse: true, // Allows null values to be indexed
-    // unique: true,
   },
   session: {
     type: String,
@@ -30,7 +28,7 @@ const shoppingBagSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
 });
 
