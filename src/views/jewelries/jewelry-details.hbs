@@ -1,5 +1,6 @@
 {{#each jewelry}}
 <section class="jewelry-details-wrapper">
+<div class="jewelry-details-left-container">
     <div class="jewelry-details-image-first">
         <img class="jewelry-details-img zoom-image" src="{{firstImageUrl}}" alt="image1">
         {{>like-button-forms-jewelry-details}}
@@ -8,13 +9,15 @@
         <img class="jewelry-details-img zoom-image" src="{{secondImageUrl}}" alt="image1">
         {{>like-button-forms-jewelry-details}}
     </div>
-    <div class="jewelry-details-composition">
+</div>
+<div class="jewelry-details-right-container">
+    <div class="jewelry-details-composition right-sticky">
         {{#each categories}}
-        <h6 class="composition-category">{{this.title}}</h6>
+        <h6 class="composition-category category">{{this.title}}</h6>
         {{/each}}
-        <h5 class="composition-title">{{ title }}</h5>
-        <ul role="list">
-            <li>
+        <h5 class="composition-title title">{{ title }}</h5>
+        <ul  role="list">
+            <li class="details-items">
                 {{#each metalInfo}}
                     <span class="composition-item">
                     {{#if this.caratWeight}}{{this.caratWeight}}ct.{{/if}}
@@ -22,7 +25,7 @@
                   </span>
                 {{/each}}
             </li>
-            <li>
+            <li class="details-items">
                 {{#each stoneInfo}}
                     <span class="composition-item">
                     {{#if this.caratWeight}}{{this.caratWeight}}ct.{{/if}}
@@ -56,6 +59,7 @@
             </li>
         </ul>
     </div>
+</div>
 </section>
 {{/each}}
 {{>lastViewedJewelries}}
