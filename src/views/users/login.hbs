@@ -1,77 +1,60 @@
 <section class="form-container-login-or-register">
-    <div class="left-login-or-register-container">
-      <h4 class="form-login-or-register-title">Registered Customers</h4>
-      <h3 class="form-login-or-register-subtitle">Please Sign In to access your
-        account</h3>
-      <form method="POST" action="/users/login">
-        <ul role="list">
-          <li class="form-item">
-            <input
-              placeholder="Enter your email"
-              type="text"
-              id="email"
-              name="email"
-            />
-          </li>
-          <li class="form-item">
-            <input
-              placeholder="Enter your password"
-              type="password"
-              id="password"
-              name="password"
-            />
-          </li>
-          <li class="form-item">
-            <button class="button hover filled_blue">
-              <i class="fa-solid fa-arrow-right-to-bracket"></i>
-              Login
-            </button>
-          </li>
-        </ul>
-      </form>
-    </div>
-    <div class="right-login-or-register-container">
-      <h4 class="form-login-or-register-title">New Customers</h4>
-      <h3 class="form-login-or-register-subtitle">Register with
-        <i>JS Gems</i>
-        for the following benefits:
-      </h3>
-      <ul>
+  <div class="left-login-or-register-container">
+    <h4 class="form-login-or-register-title">Registered Customers</h4>
+    <h3 class="form-login-or-register-subtitle">Please Sign In to access your
+      account</h3>
+    <form method="POST" action="/users/login">
+      <ul role="list">
         <li class="form-item">
-          Faster checkout
+          <input
+            placeholder="Enter your email"
+            type="text"
+            id="email"
+            name="email"
+          />
         </li>
         <li class="form-item">
-          Access your order status
+          <input
+            placeholder="Enter your password"
+            type="password"
+            id="password"
+            name="password"
+          />
         </li>
         <li class="form-item">
-          View order history
-        </li>
-        <li class="form-item">
-          Enjoy the convenience of saving your wishlist permanently
+          <button class="button hover filled_blue">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            Login
+          </button>
         </li>
       </ul>
-      <a href="/users/register">
-        <button class="button hover filled_green">
-          <i class="fa-solid fa-user-plus"></i>
-          Register
-        </button>
-      </a>
-    </div>
-  </section>
-
-
-{{! <main>
-  <h1>Login Form</h1>
-  <div class="form">
-    <form method="POST">
-      <label for="email">Email</label>
-      <input type="text" id="email" name="email" />
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" />
-      <input type="submit" value="Login" />
     </form>
   </div>
-  <div>
-    <p>Don't have an account yet? <a href="/users/register">Register</a></p>
+  <div class="right-login-or-register-container">
+    <h4 class="form-login-or-register-title">New Customers</h4>
+    <h3 class="form-login-or-register-subtitle">Register with
+      <i>JS Gems</i>
+      for the following benefits:
+    </h3>
+    <ul>
+      <li class="form-item">
+        Faster checkout
+      </li>
+      <li class="form-item">
+        Access your order status
+      </li>
+      <li class="form-item">
+        View order history
+      </li>
+      <li class="form-item">
+        Enjoy the convenience of saving your wishlist permanently
+      </li>
+    </ul>
+    <a href="/users/register">
+      <button class="button hover filled_green">
+        <i class="fa-solid fa-user-plus"></i>
+        Register
+      </button>
+    </a>
   </div>
-</main> }}
+</section>
