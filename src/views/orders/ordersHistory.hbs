@@ -32,13 +32,12 @@
                 <div class="order-wrapper">
                     {{#each jewelries}}
                         <div class="order-content">
-                            <p>Price: {{ jewelry.price }}</p>
                             <p>Quantity: {{ quantity }}</p>
                             <p>Total Price per Jewelry: {{ totalPrice }}</p>
                         </div>
                         <div class="order-content">
                             <p>
-                                <img class="order-image" src="{{ jewelry.firstImageUrl }}" alt="image">
+                                <img class="order-image" src="{{ firstImageUrl }}" alt="image">
                             </p>
                         </div>
                     {{/each}}
