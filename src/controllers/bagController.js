@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const { isAuth } = require("../middlewares/authMiddleware");
 const { getBagCount } = require("../middlewares/bagCounterMiddleware");
 const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
 const bagManager = require("../managers/bagManager");
@@ -28,7 +27,7 @@ router.get("/", getBagCount, getLikeCount, async (req, res) => {
 
     if (!isEmpty) {
       jewelries = await bagManager.getAll(userId, sessionId);
-      
+
       res.render("bag/display", {
         jewelries,
         DEFAULT_MIN_QUANTITY,

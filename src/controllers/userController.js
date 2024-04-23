@@ -10,6 +10,7 @@ const {
 const {
   transferSessionBagsToModelShoppingBag,
 } = require("../utils/transferSessionBagsToModelShoppingBag");
+
 router.get("/register", getBagCount, getLikeCount, (req, res) => {
   res.render("users/register");
 });
