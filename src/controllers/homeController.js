@@ -5,9 +5,7 @@ const homeManager = require("../managers/homeManager");
 const {
   setJewelriesLikedNotAuthUser,
 } = require("../utils/setIsLikedNotAuthUser");
-const {
-  setJewelriesLikedAuthUser,
-} = require("../utils/setIsLikedAuthUser");
+const { setJewelriesLikedAuthUser } = require("../utils/setIsLikedAuthUser");
 
 router.get("/", getBagCount, getLikeCount, async (req, res) => {
   try {
