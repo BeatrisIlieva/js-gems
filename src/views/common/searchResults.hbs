@@ -1,4 +1,4 @@
-{{#unless searchResult}}
+{{#unless jewelries}}
 <div class="no-results-found">
   <p><i>No jewelry items matching your search criteria were found.</i></p>
   <h4><i>Explore our collections below</i></h4>
@@ -23,7 +23,7 @@
 </div>
 {{else}}
 <section class="jewelry-cards">
-  {{#each searchResult}}
+  {{#each jewelries}}
     <article class="jewelry-card">
       <div class="jewelry-card-thumbnail">
         <a href="/jewelries/{{_id}}/details" title="{{title}}">

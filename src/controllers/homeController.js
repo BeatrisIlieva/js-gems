@@ -2,6 +2,12 @@ const router = require("express").Router();
 const { getBagCount } = require("../middlewares/bagCounterMiddleware");
 const { getLikeCount } = require("../middlewares/likeCounterMiddleware");
 const homeManager = require("../managers/homeManager");
+const {
+  setJewelriesLikedNotAuthUser,
+} = require("../utils/setIsLikedNotAuthUser");
+const {
+  setJewelriesLikedAuthUser,
+} = require("../utils/setIsLikedAuthUser");
 
 router.get("/", getBagCount, getLikeCount, async (req, res) => {
   try {
@@ -15,9 +21,17 @@ router.get("/", getBagCount, getLikeCount, async (req, res) => {
 router.get("/search", async (req, res) => {
   try {
     const search = req.query["search"][1];
-    const searchResult = await homeManager.getSearchResults(search);
+    let jewelries = await homeManager.getSearchResults(search);
 
-    res.render("common/searchResults", { searchResult });
+    if (req.user) {
+      const userId = req.user._id;
+
+      jewelries = await setJewelriesLikedAuthUser(jewelries, userId);
+    } else {
+      jewelries = await setJewelriesLikedNotAuthUser(req, jewelries);
+    }
+
+    res.render("common/searchResults", { jewelries });
   } catch (err) {
     console.log(err.message);
     res.render("500");

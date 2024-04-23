@@ -43,6 +43,13 @@ exports.getSearchResults = async (search) => {
       },
     },
     {
+        $match: {
+          "inventories.quantity": {
+            $gt: 0,
+          },
+        },
+      },
+    {
       $lookup: {
         as: "stonetypes",
         from: "stonetypes",
@@ -119,6 +126,11 @@ exports.getSearchResults = async (search) => {
         categoryTitle: 1,
         jewelryTitle: 1,
       },
+    },
+    {
+        $sort: {
+            _id: 1,
+        }
     },
   ]);
 
