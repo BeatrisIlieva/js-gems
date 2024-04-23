@@ -16,7 +16,7 @@ router.get("/", getBagCount, getLikeCount, async (req, res) => {
   }
 });
 
-router.get("/search", async (req, res) => {
+router.get("/search", getBagCount, getLikeCount, async (req, res) => {
   try {
     const search = req.query["search"][1];
     let jewelries = await homeManager.getSearchResults(search);
