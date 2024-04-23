@@ -1,0 +1,15 @@
+{{#if lastViewedJewelries}}
+  <h4 class="last-seen-jewelries-title">Your Recent Picks</h4>
+  <div class="last-seen-jewelries-images">
+    {{#each lastViewedJewelries}}
+      <div class="last-seen-jewelries-container">
+        <a
+          class="last-seen-jewelries-img"
+          href="/jewelries/{{_id}}/details"
+        >
+          <img src="{{firstImageUrl}}" alt="image1" />
+        </a>
+      </div>
+    {{/each}}
+  </div>
+{{/if}}

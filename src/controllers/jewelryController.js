@@ -75,8 +75,28 @@ router.get(
       } else {
         jewelry = await setJewelryLikedNotAuthUser(req, jewelry);
       }
-      console.log(jewelry);
-      res.render("jewelries/jewelry-details", { jewelry });
+
+      req.session.lastViewedJewelries = req.session.lastViewedJewelries || [];
+
+      let lastViewedJewelries;
+
+      const idToCheck = Number(jewelryId);
+
+      const exists = req.session.lastViewedJewelries.some((innerArray) =>
+        innerArray.some((obj) => obj._id === idToCheck)
+      );
+
+      if (!exists) {
+        if (req.session.lastViewedJewelries.length === 3) {
+          req.session.lastViewedJewelries.splice(0, 1);
+        }
+
+        req.session.lastViewedJewelries.push(jewelry);
+      }
+
+      lastViewedJewelries = req.session.lastViewedJewelries.flat();
+
+      res.render("jewelries/jewelry-details", { jewelry, lastViewedJewelries });
     } catch (err) {
       console.log(err.message);
       res.render("500");
