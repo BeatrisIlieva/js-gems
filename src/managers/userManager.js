@@ -2,15 +2,15 @@ const bcrypt = require("bcrypt");
 const jwt = require("../lib/jwt");
 const User = require("../models/User");
 const profileManager = require("./profileManager");
-const { SECRET, BAG_ITEMS, WISHLIST_ITEMS } = require("../config/config");
+const { SECRET } = require("../config/config");
 
 exports.register = async (userData) => {
-  const user = await User.findOne({email: userData.email});
+  const user = await User.findOne({ email: userData.email });
 
   if (user) {
     throw new Error("Email already exists!");
   }
-  
+
   const createdUser = await User.create(userData);
 
   const userId = createdUser._id;
@@ -19,7 +19,7 @@ exports.register = async (userData) => {
 
   await profileManager.createProfile(createdUser._id);
 
-  return {token, userId};
+  return { token, userId };
 };
 
 exports.login = async (email, password) => {
@@ -37,18 +37,18 @@ exports.login = async (email, password) => {
 
   const token = await generateToken(user);
 
-  return {token, user};
+  return { token, user };
 };
 
 async function generateToken(user) {
   const payload = {
     _id: user._id,
     email: user.email,
-  }
+  };
 
-  const token = await jwt.sign(payload, SECRET, {expiresIn: "7d"});
+  const token = await jwt.sign(payload, SECRET, { expiresIn: "7d" });
 
   return token;
-};
+}
 
 exports.delete = (userId) => User.findByIdAndDelete(userId);
