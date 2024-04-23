@@ -101,18 +101,14 @@ router.post("/:jewelryId/create", async (req, res) => {
 });
 
 router.post("/:jewelryId/update", async (req, res) => {
-  const userId = req.user._id;
-
   let { updatedQuantity, bagItemId, sizeId } = req.body;
   sizeId = Number(sizeId);
 
   try {
-    await bagManager.update({
+    await bagManager.update(
       bagItemId,
       updatedQuantity,
-      userId,
-      sizeId,
-    });
+    );
 
     res.redirect("/bag");
   } catch (err) {

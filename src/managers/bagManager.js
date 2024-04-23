@@ -44,7 +44,7 @@ exports.create = async ({
   );
 };
 
-exports.update = async ({ bagItemId, updatedQuantity }) => {
+exports.update = async (bagItemId, updatedQuantity) => {
   const bagItem = await ShoppingBag.findById(bagItemId);
 
   const jewelryId = bagItem.jewelry.toString();
