@@ -1,59 +1,43 @@
 <section class="order-details-section">
-    <div class="order-title-content">
-        <h4>Thank you for your purchase, {{ fullName }}!</h4>
+  <div class="order-title-content">
+    <h4>Thank you for your purchase, {{fullName}}!</h4>
+  </div>
+  <div class="order-details-wrapper">
+    <div>
+      <h5 class="order-subtitle-content">Order Confirmation:</h5>
+      <p class="order-info">Your order ID: #{{order._id}}
+        has been successfully placed.</p>
+      <p class="order-info">Our team will reach out to you shortly with the
+        confirmed delivery date.</p>
     </div>
-    <div class="order-details-wrapper">
-        <div>
-            <h5 class="order-subtitle-content">Order Confirmation:</h5>
-            <p class="order-info">Your order ID: #{{ order._id }} has been successfully placed.</p>
-            <p class="order-info">Our team will reach out to you shortly with the confirmed delivery date.</p>
-        </div>
-        <div>
-            <h5 class="order-subtitle-content"> Order Details:</h5>
-            <p class="order-info">Total price: {{ order.subTotal }}</p>
-            <p class="order-info">Country: {{ profile.country }}</p>
-            <p class="order-info">City: {{ profile.city }}</p>
-            <p class="order-info">Delivery Address: {{ profile.address }}</p>
-            <p class="order-info">Phone number: {{ profile.phoneNumber }}</p>
-        </div>
+    <div>
+      <h5 class="order-subtitle-content"> Order Details:</h5>
+      <p class="order-info">Total price: {{order.subTotal}}</p>
+      <p class="order-info">Country: {{profile.country}}</p>
+      <p class="order-info">City: {{profile.city}}</p>
+      <p class="order-info">Delivery Address: {{profile.address}}</p>
+      <p class="order-info">Phone number: {{profile.phoneNumber}}</p>
     </div>
+  </div>
 </section>
 <section class="cards">
-    {{#each order.jewelries}}
-        <article class="card">
-            <div class="thumbnail">
-                <img
-                        class="thumbnail__img"
-                        src="{{ jewelry.firstImageUrl }}"
-                        alt="{{ jewelry.title }} image"
-                />
-            </div>
-            <div class="content">
-                <h2 class="content__title">
-                    {{ jewelry.title }}
-                </h2>
-                <p class="content__category">
-                    {{ jewelry.category.title }}
-                </p>
-                <ul class="content__characteristics" role="list">
-                    {{#each jewelry.metals}}
-                    <li class="characteristic">
-                        <i class="metal__icon fa-solid fa-coins"></i>
-                        {{#if this.caratWeight}}{{caratWeight}}ct.{{/if}}
-                        {{kind.title}}{{#unless @last}},{{/unless}}
-                    {{/each}}
-                </li>
-                    {{#each jewelry.stones}}
-                        <li class="characteristic">
-                            <i class="stone__icon fa-solid fa-gem"></i>
-                            {{#if this.caratWeight}}{{caratWeight}}ct.{{/if}}
-                            {{color.title}}
-                            {{kind.title}}{{#unless @last}},{{/unless}}
-                        </li>
-                    {{/each}}
-                </ul>
-            </div>
-        </article>
-    {{/each}}
+  {{#each order.jewelries}}
+    <article class="card">
+      <div class="thumbnail">
+        <img
+          class="thumbnail__img"
+          src="{{firstImageUrl}}"
+          alt="{{title}} image"
+        />
+      </div>
+      <div class="content">
+        <h2 class="content__title">
+          {{jewelryTitle}}
+        </h2>
+        <p class="content__category">
+          {{categoryTitle}}
+        </p>
+      </div>
+    </article>
+  {{/each}}
 </section>
-

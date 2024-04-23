@@ -3,16 +3,16 @@ const bagManager = require("../managers/bagManager");
 
 
 exports.create = async (userId) => {
-  const {bagItems, subTotal} = await bagManager.getAll(userId);
+  const orderData = await bagManager.getAll(userId);
 
   const order = await Order.create({
     user: userId,
     status: "Pending",
   });
 
-  order.jewelries = bagItems;
+  order.jewelries = orderData[0].documents;
 
-  order.subTotal = subTotal;
+  order.subTotal = orderData[0].totalTotalPrice;
 
   await order.save();
 

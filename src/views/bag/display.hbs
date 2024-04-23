@@ -20,22 +20,20 @@
       />
     </div>
   </div>
-  {{#each jewelries}}
     <section class="shopping-cart-wrapper">
       <div class="left-container">
         {{#if bagCountGreaterThanOne}}
           <h4 class="left-container-title">
             <i class="fa-solid fa-truck" style="color: #ffb7ce;"></i>
-            Delivery ({{bagCount}}
-            items)
+            Delivery ({{bagCount}} items)
           </h4>
         {{else}}
           <h4 class="left-container-title">
             <i class="fa-solid fa-truck" style="color: #ffb7ce;"></i>
-            Delivery ({{bagCount}}
-            item)
+            Delivery ({{bagCount}} item)
           </h4>
         {{/if}}
+      {{#each jewelries}}
         <div class="left-subcontainer">
           {{#each documents}}
             <section class="jewelry-container">
@@ -50,23 +48,24 @@
                 <h6 class="composition-category">{{this.categoryTitle}}</h6>
                 <h5 class="composition-title">{{this.jewelryTitle}}</h5>
                 <ul role="list">
-                  <li>
+                  <li class="composition-wrap">
                     {{#each this.metalInfo}}
                       {{#each this}}
                         <span class="composition-item">
                           {{#if this.caratWeight}}{{this.caratWeight}}ct.{{/if}}
-                          {{this.metal}}{{#unless @last}},{{/unless}}
-                        </span>{{/each}}{{#unless @last}},{{/unless}}
+                          {{this.metal}}{{#unless @last}}, &nbsp; {{/unless}}
+                        </span>{{/each}}{{#unless @last}}, &nbsp; {{/unless}}
                     {{/each}}
                   </li>
-                  <li>
+                 
+                  <li class="composition-wrap">
                     {{#each this.stoneInfo}}
                       {{#each this}}
                         <span class="composition-item">
                           {{#if this.caratWeight}}{{this.caratWeight}}ct.{{/if}}
                           {{this.stoneColor}}
-                          {{this.stoneType}}{{#unless @last}},{{/unless}}
-                        </span>{{/each}}{{#unless @last}},{{/unless}}
+                          {{this.stoneType}}{{#unless @last}}, &nbsp; {{/unless}}
+                        </span>{{/each}}{{#unless @last}}, &nbsp; {{/unless}}
                     {{/each}}
                   </li>
                   <li class="composition-item-size">

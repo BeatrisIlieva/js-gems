@@ -26,6 +26,7 @@ router.get("/", isAuth, getBagCount, getLikeCount, async (req, res) => {
         jewelries,
         DEFAULT_MIN_QUANTITY,
         bagCountGreaterThanOne,
+        bagCount,
       });
     } else {
       res.render("bag/display");

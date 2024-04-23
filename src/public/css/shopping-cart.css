@@ -58,7 +58,7 @@
 .shopping-cart-image-container {
     width: 30%;
     height: 30%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1.2;
     background-color: var(--white-pink);
     margin: 18px 22px 18px 18px;
     border-radius: 16px;
@@ -175,6 +175,12 @@
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+}
+
+.composition-wrap {
+    display: flex;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
 }
 
 /*@media screen and (max-width: 767px) {*/

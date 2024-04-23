@@ -4,16 +4,16 @@
             alt="image">
     <div class="wish-list-content-top">
         <h2 class="wish-list-tag">
-            {{!-- {% if count_liked_jewelries %}
-                Your Wish List ({{ count_liked_jewelries }})
-            {% else %}
+            {{#if likeCount}}
+                Your Wish List ({{ likeCount }})
+            <p class="wish-list-title">
+                Your favorite item(s) are below.
+                <br>Wishes can come true, especially when you dream.
+             </p>
+            {{else}}
                 Your Wish List (0)
-            {% endif %} --}}
+            {{/if}}
         </h2>
-        <p class="wish-list-title">
-            Your favorite item(s) are below.
-            <br>Wishes can come true, especially when you dream.
-        </p>
     </div>
     <div class="wish-list-content-bottom">
         <div class="meta-info">
@@ -25,5 +25,7 @@
         </div>
     </div>
 </article>
+{{#if likeCount}}
 {{>jewelry-card}}
+{{/if}}
 

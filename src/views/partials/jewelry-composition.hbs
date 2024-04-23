@@ -1,0 +1,28 @@
+<div class="jewelry-composition">
+  <h6 class="composition-category">{{this.categoryTitle}}</h6>
+  <h5 class="composition-title">{{this.jewelryTitle}}</h5>
+  <ul role="list">
+    <li>
+      {{#each this.metalInfo}}
+        {{#each this}}
+          <span class="composition-item">
+            {{#if this.caratWeight}}{{this.caratWeight}}ct.{{/if}}
+            {{this.metal}}{{#unless @last}},{{/unless}}
+          </span>{{/each}}{{#unless @last}},{{/unless}}
+      {{/each}}
+    </li>
+    <li>
+      {{#each this.stoneInfo}}
+        {{#each this}}
+          <span class="composition-item">
+            {{#if this.caratWeight}}{{this.caratWeight}}ct.{{/if}}
+            {{this.stoneColor}}
+            {{this.stoneType}}{{#unless @last}},{{/unless}}
+          </span>{{/each}}{{#unless @last}},{{/unless}}
+      {{/each}}
+    </li>
+    <li class="composition-item-size">
+      <span>Size: {{this.size}} cm.</span>
+    </li>
+  </ul>
+</div>
