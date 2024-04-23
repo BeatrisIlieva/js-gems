@@ -1,15 +1,57 @@
-{{#each jewelries}}
-  <div>
-    <img src="{{firstImageUrl}}" />
-    <p>{{title}}</p>
-    <p><span>Price:</span> {{price}}</p>
-    <p><span>Category:</span> {{category.title}}</p>
-    {{#each metals}}
-    <p><span>Metal:</span> {{metal.title}}</p>
-    {{/each}}
-    {{#each stones}}
-    <p><span>Stone Type:</span>{{#if this.caratWeight }}{{this.caratWeight}}ct.{{/if}} {{color.title}} {{kind.title}}</p>
-    {{/each}}
-    <a class="btn" href="/earrings/{{_id}}/details">Details</a>
+{{#unless searchResult}}
+<div class="no-results-found">
+  <p><i>No jewelry items matching your search criteria were found.</i></p>
+  <h4><i>Explore our collections below</i></h4>
+</div>
+<div class="discover-container">
+  <div class="discover-element">
+    <a href="/jewelries/2" class="discover-button">Discover</a>
+    <img class="discover-img" src="https://res.cloudinary.com/deztgvefu/image/upload/v1713876616/searchresults/largeherod_l2_hj_incre_heartshape_ea_1_zvhkdz.webp" alt="earrings" class="discover-img">
   </div>
-{{/each}}
+  <div class="discover-element">
+    <a href="/jewelries/3" class="discover-button">Discover</a>
+    <img class="discover-img" src="https://res.cloudinary.com/deztgvefu/image/upload/v1713876615/searchresults/herolarged_l1_fj_a_qxwkjm.jpg" alt="necklaces" class="discover-img">
+  </div>
+  <div class="discover-element">
+    <a href="/jewelries/1" class="discover-button">Discover</a>
+    <img class="discover-img" src="https://res.cloudinary.com/deztgvefu/image/upload/v1713876597/searchresults/herolarged_bracelets_dn8154.png" alt="bracelets" class="discover-img">
+  </div>
+    <div class="discover-element">
+    <a href="/jewelries/4" class="discover-button">Discover</a>
+    <img class="discover-img" src="https://res.cloudinary.com/deztgvefu/image/upload/v1713876614/searchresults/largeherod_l2_hj_hope_3_a_w6xvnn.webp" alt="rings" class="discover-img">
+  </div>
+</div>
+{{else}}
+<section class="jewelry-cards">
+  {{#each searchResult}}
+    <article class="jewelry-card">
+      <div class="jewelry-card-thumbnail">
+        <a href="/jewelries/{{_id}}/details" title="{{title}}">
+          <img
+            class="jewelry-card-img"
+            src="{{firstImageUrl}}"
+            alt="{{title}} image"
+          />
+        </a>
+        {{>like-button-forms}}
+        <div class="jewelry-card-content">
+          <p class="jewelry-card-description">
+            <ul class="jewelry-card-meta" role="list">
+              <li class="jewelry-card-meta-item">
+                <i>{{jewelryTitle}}</i>
+              </li>
+              <li class="jewelry-card-meta-item">
+                {{categoryTitle}}
+              </li>
+              <li class="jewelry-card-meta-item">
+                <i class="price__icon fa-solid fa-sack-dollar"></i>
+                {{price}}
+              </li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </article>
+  {{/each}}
+</section>
+{{/unless}}
