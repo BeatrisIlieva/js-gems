@@ -88,7 +88,7 @@ router.get("/search", async (req, res) => {
             },
             {
               "categories.title": {
-                $regex: new RegExp(search, "i"),
+                $regex: new RegExp(search.replace(/s$/, "(s|)"), "i"),
               },
             },
             {
