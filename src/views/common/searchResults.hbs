@@ -55,4 +55,12 @@
   {{/each}}
 </section>
 {{/unless}}
-
+{{#if loadMoreDisabled}}
+<form action="/search" method="GET">
+    <button class="load-more-button" disabled type="submit" name="loadMore" value="loadMore">LOAD MORE</button>
+</form>
+{{else}}
+<form action="/search" method="GET">
+    <button class="load-more-button" type="submit" name="loadMore" value="loadMore">LOAD MORE</button>
+</form>
+{{/if}}

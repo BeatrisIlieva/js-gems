@@ -124,10 +124,7 @@ exports.getOne = async (jewelryId) => {
                 $arrayElemAt: [
                   "$metals",
                   {
-                    $indexOfArray: [
-                      "$metals._id",
-                      "$$jm.metal",
-                    ],
+                    $indexOfArray: ["$metals._id", "$$jm.metal"],
                   },
                 ],
               },
@@ -172,10 +169,7 @@ exports.getOne = async (jewelryId) => {
                 $arrayElemAt: [
                   "$stonetypes.title",
                   {
-                    $indexOfArray: [
-                      "$stonetypes._id",
-                      "$$js.stoneType",
-                    ],
+                    $indexOfArray: ["$stonetypes._id", "$$js.stoneType"],
                   },
                 ],
               },
@@ -183,10 +177,7 @@ exports.getOne = async (jewelryId) => {
                 $arrayElemAt: [
                   "$stonecolors.title",
                   {
-                    $indexOfArray: [
-                      "$stonecolors._id",
-                      "$$js.stoneColor",
-                    ],
+                    $indexOfArray: ["$stonecolors._id", "$$js.stoneColor"],
                   },
                 ],
               },

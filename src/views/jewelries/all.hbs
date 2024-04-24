@@ -76,10 +76,10 @@
 {{>jewelry-card}}
 {{#if loadMoreDisabled}}
 <form action="/jewelries/{{categoryId}}/" method="GET">
-    <button disabled type="submit" name="loadMore" value="loadMore">LoadMore</button>
+    <button class="load-more-button" disabled type="submit" name="loadMore" value="loadMore">LOAD MORE</button>
 </form>
 {{else}}
 <form action="/jewelries/{{categoryId}}/" method="GET">
-    <button type="submit" name="loadMore" value="loadMore">LoadMore</button>
+    <button class="load-more-button" type="submit" name="loadMore" value="loadMore">LOAD MORE</button>
 </form>
 {{/if}}

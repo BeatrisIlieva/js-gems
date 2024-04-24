@@ -89,3 +89,25 @@ input[type="radio"] {
     cursor: pointer;
 }
 
+.load-more-button {
+    display: flex;
+    margin: auto;
+    color: var(--dark-golden);
+    border: 1px solid  var(--white-golden);
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    overflow: hidden;
+    padding: 2vh 8vw;
+}
+
+.load-more-button:disabled {
+    display: none;
+    color: #89712945;
+    border: 1px solid  #ae8e3045;
+}
+
+.load-more-button:hover {
+    background-color: var(--white-pink);
+  }
+

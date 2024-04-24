@@ -1,6 +1,6 @@
 const Jewelry = require("../models/Jewelry");
 
-exports.getSearchResults = async (search) => {
+exports.getSearchResults = async (search, limit) => {
   const searchResult = await Jewelry.aggregate([
     {
       $lookup: {
@@ -126,6 +126,9 @@ exports.getSearchResults = async (search) => {
         categoryTitle: 1,
         jewelryTitle: 1,
       },
+    },
+    {
+      $limit: limit,
     },
     {
       $sort: {
