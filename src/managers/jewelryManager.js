@@ -2,13 +2,12 @@ const Jewelry = require("../models/Jewelry");
 const { updateSelectionQuery } = require("../utils/updateSelectionQuery");
 const { updateQueryByJewelryIds } = require("../utils/updateQueryByJewelryIds");
 
-exports.getAll = async (categoryId) => {
+exports.getAll = async (jewelryIds, selectionQuery, limit) => {
+  const queryByJewelryIds = await updateQueryByJewelryIds(jewelryIds);
+
   let query = [
-    {
-      $match: {
-        category: categoryId,
-      },
-    },
+    ...queryByJewelryIds,
+    ...selectionQuery,
     {
       $lookup: {
         as: "inventories",
@@ -68,9 +67,13 @@ exports.getAll = async (categoryId) => {
         _id: 1,
       },
     },
+    {
+      $limit: limit,
+    },
   ];
 
   const jewelries = await Jewelry.aggregate(query);
+
   return jewelries;
 };
 

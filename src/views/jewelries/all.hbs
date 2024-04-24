@@ -74,3 +74,12 @@
   </div>
 </form>
 {{>jewelry-card}}
+{{#if loadMoreDisabled}}
+<form action="/jewelries/{{categoryId}}/" method="GET">
+    <button disabled type="submit" name="loadMore" value="loadMore">LoadMore</button>
+</form>
+{{else}}
+<form action="/jewelries/{{categoryId}}/" method="GET">
+    <button type="submit" name="loadMore" value="loadMore">LoadMore</button>
+</form>
+{{/if}}
