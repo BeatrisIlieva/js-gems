@@ -10,6 +10,7 @@ const {
 const {
   transferSessionBagsToModelShoppingBag,
 } = require("../utils/transferSessionBagsToModelShoppingBag");
+const { isAuth } = require("../middlewares/authMiddleware");
 
 router.get("/register", getBagCount, getLikeCount, (req, res) => {
   res.render("users/register");
@@ -74,14 +75,28 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.get("/logout", (req, res) => {
+router.get("/logout", isAuth, (req, res) => {
   res.clearCookie(TOKEN_KEY);
   res.redirect("/users/login");
 });
 
-router.get("/:userId/delete", getBagCount, getLikeCount, async (req, res) => {
+router.get(
+  "/delete-confirmation",
+  isAuth,
+  getBagCount,
+  getLikeCount,
+  async (req, res) => {
+    try {
+      res.render("users/deleteConfirmation");
+    } catch (err) {
+      res.redirect("/", { error: "Unsuccessful deletion!" });
+    }
+  }
+);
+
+router.get("/delete", isAuth, getBagCount, getLikeCount, async (req, res) => {
   try {
-    userId = req.params.userId;
+    userId = req.user._id;
     await userManager.delete(userId);
     res.clearCookie(TOKEN_KEY);
     res.redirect("/users/register");

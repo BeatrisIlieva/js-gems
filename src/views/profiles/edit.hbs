@@ -58,7 +58,13 @@
           City
         </li>
         <li class="form-item">
-          <input type="city" id="city" value="{{profile.city}}" name="city" placeholder="Enter Your City" />
+          <input
+            type="city"
+            id="city"
+            value="{{profile.city}}"
+            name="city"
+            placeholder="Enter Your City"
+          />
         </li>
         <li class="form-item">
           Address
@@ -80,24 +86,24 @@
       </button>
     </form>
   </div>
-  {{! <div class="form-button">
-            <button class="edit-btn button hover filled_green">
-                <a href="{% url 'update_email' pk=request.user.pk %}">
-                    <i class="fa-regular fa-envelope"></i>
-                    Change Email
-                </a>
-            </button>
-            <button class="edit-btn button hover filled_green">
-                <a href="{% url 'update_password' pk=request.user.pk %}">
-                    <i class="fa-solid fa-lock"></i>
-                    Change Password
-                </a>
-            </button>
-            <button class="edit-btn button hover filled_red">
-                <a href="{% url 'delete_user' pk=request.user.pk %}">
-                    <i class="fa-solid fa-user-slash"></i>
-                    Delete Profile
-                </a>
-            </button>
-        </div> }}
+  <div class="form-button">
+    <button class="edit-btn button hover filled_green">
+      <a href="/users/change-email">
+        <i class="fa-regular fa-envelope"></i>
+        Change Email
+      </a>
+    </button>
+    <button class="edit-btn button hover filled_green">
+      <a href="/users/change-password">
+        <i class="fa-solid fa-lock"></i>
+        Change Password
+      </a>
+    </button>
+    <button class="edit-btn button hover filled_red">
+      <a href="/users/delete-confirmation">
+        <i class="fa-solid fa-user-slash"></i>
+        Delete Profile
+      </a>
+    </button>
+  </div>
 </section>

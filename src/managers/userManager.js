@@ -3,6 +3,7 @@ const jwt = require("../lib/jwt");
 const User = require("../models/User");
 const profileManager = require("./profileManager");
 const { SECRET } = require("../config/config");
+const Profile = require("../models/Profile");
 
 exports.register = async (userData) => {
   const user = await User.findOne({ email: userData.email });
@@ -51,4 +52,9 @@ async function generateToken(user) {
   return token;
 }
 
-exports.delete = (userId) => User.findByIdAndDelete(userId);
+exports.delete = async (userId) => {
+
+  await Profile.deleteOne({user:userId});
+  await User.findByIdAndDelete(userId);
+
+};
