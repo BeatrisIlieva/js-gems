@@ -10,6 +10,7 @@ const { SECRET } = require("./config/config");
 const {
   storeOriginalUrl,
 } = require("./middlewares/storeOriginalUrlMiddleware");
+const flash = require('express-flash');
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/JSGems", {
@@ -43,6 +44,8 @@ dbConnect()
   .catch((err) => {
     console.log("DB error: ", err.message);
   });
+
+app.use(flash());
 
 app.use(storeOriginalUrl);
 

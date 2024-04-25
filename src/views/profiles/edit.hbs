@@ -1,3 +1,20 @@
+<div class="success-container">
+  <label for="closeSuccess" class="close-button">×</label>
+  {{#each messages.success}}
+    <input
+      type="checkbox"
+      id="successCheckbox{{forloop.index}}"
+      class="success-checkbox"
+    />
+    <div class="success" id="successContainer{{forloop.index}}">
+      <label
+        for="successCheckbox{{forloop.index}}"
+        class="close-button"
+      >×</label>
+      {{this}}
+    </div>
+  {{/each}}
+</div>
 <section class="form-container">
   <div>
     <form method="POST">
@@ -105,7 +122,6 @@
             type="password"
             id="password"
             placeholder="Enter your password"
-            value="{{password}}"
             name="password"
           />
         </li>
@@ -127,3 +143,8 @@
     </button>
   </div>
 </section>
+{{!-- {{#if messages.success}}
+  <div class="alert alert-success">
+    {{messages.success}}
+  </div>
+{{/if}} --}}

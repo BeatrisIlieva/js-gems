@@ -12,6 +12,7 @@ const {
 } = require("../utils/transferSessionBagsToModelShoppingBag");
 const { isAuth } = require("../middlewares/authMiddleware");
 
+
 router.get("/register", getBagCount, getLikeCount, (req, res) => {
   res.render("users/register");
 });
@@ -44,9 +45,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.get("/change-email", isAuth, getBagCount, getLikeCount, (req, res) => {
-  res.render("users/changeEmail");
-});
 
 router.post("/change-email", isAuth, async (req, res) => {
   const { email, password } = req.body;
@@ -59,12 +57,14 @@ router.post("/change-email", isAuth, async (req, res) => {
       userId,
     );
 
-    res.render("users/credentialsUpdated");
+    req.flash('success', 'Email updated successfully!');
+
+    res.redirect("/profiles/edit");
 
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
 
-    res.status(404).render("users/credentialsUpdated", { errorMessages, email });
+    res.status(404).render("profiles/edit", { errorMessages, email });
   }
 });
 
