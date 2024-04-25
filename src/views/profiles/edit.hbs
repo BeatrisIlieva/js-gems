@@ -129,12 +129,39 @@
       <input type="hidden" name="next" />
       <button class="register-button button filled_green">Submit</button>
     </form>
-    <button class="edit-btn button hover filled_green">
-      <a href="/users/change-password">
-        <i class="fa-solid fa-lock"></i>
-        Change Password
-      </a>
-    </button>
+    <div>
+      <form method="post" action="/users/change-password">
+        <h4 class="form-login-or-register-title">Update Password</h4>
+        <ul role="list">
+          <li class="form-item">
+            <input
+              type="password"
+              id="oldPassword"
+              placeholder="Enter your current password"
+              name="oldPassword"
+            />
+          </li>
+          <li class="form-item">
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              name="password"
+            />
+          </li>
+          <li class="form-item">
+            <input
+              type="password"
+              id="repeatPassword"
+              placeholder="Confirm your password"
+              name="repeatPassword"
+            />
+          </li>
+        </ul>
+        <input type="hidden" name="next" />
+        <button class="register-button button filled_green">Submit</button>
+      </form>
+    </div>
     <button class="edit-btn button hover filled_red">
       <a href="/users/delete-confirmation">
         <i class="fa-solid fa-user-slash"></i>
@@ -143,8 +170,3 @@
     </button>
   </div>
 </section>
-{{!-- {{#if messages.success}}
-  <div class="alert alert-success">
-    {{messages.success}}
-  </div>
-{{/if}} --}}

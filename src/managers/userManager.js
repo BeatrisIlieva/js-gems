@@ -65,6 +65,24 @@ exports.changeEmail = async (email, password, userId) => {
   }
 };
 
+exports.changePassword= async (oldPassword, password, repeatPassword, userId) => {
+  user = await User.findById(userId);
+
+  const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+
+  if (!isPasswordValid) {
+    throw new Error("Ensure you enter a valid password.");
+  } else {
+
+    user.password = password;
+    user.repeatPassword = repeatPassword;
+    await user.save();
+
+    // await User.findByIdAndUpdate(userId, {password: password, repeatPassword: repeatPassword});
+  }
+
+};
+
 exports.delete = async (userId) => {
   await Profile.deleteOne({ user: userId });
   await User.findByIdAndDelete(userId);

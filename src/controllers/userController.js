@@ -68,6 +68,29 @@ router.post("/change-email", isAuth, async (req, res) => {
   }
 });
 
+router.post("/change-password", isAuth, async (req, res) => {
+  const { oldPassword, password, repeatPassword } = req.body;
+  userId = req.user._id;
+
+  try {
+     await userManager.changePassword(
+      oldPassword,
+      password,
+      repeatPassword,
+      userId,
+    );
+
+    req.flash('success', 'Password updated successfully!');
+
+    res.redirect("/profiles/edit");
+
+  } catch (err) {
+    const errorMessages = extractErrorMessages(err);
+
+    res.status(404).render("profiles/edit", { errorMessages, email });
+  }
+});
+
 router.get("/login", getBagCount, getLikeCount, async (req, res) => {
   res.render("users/login");
 });
