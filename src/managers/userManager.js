@@ -52,9 +52,20 @@ async function generateToken(user) {
   return token;
 }
 
+exports.changeEmail = async (email, password, userId) => {
+  user = await User.findById(userId);
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) {
+    throw new Error("Ensure you enter a valid password.");
+  } else {
+
+    await User.findByIdAndUpdate(userId, { email: email});
+  }
+};
+
 exports.delete = async (userId) => {
-
-  await Profile.deleteOne({user:userId});
+  await Profile.deleteOne({ user: userId });
   await User.findByIdAndDelete(userId);
-
 };

@@ -1,113 +1,114 @@
 .button {
-    padding: 6px 16px;
-    top: 4px;
-    bottom: 4px;
-    left: 12px;
-    right: 12px;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 16px;
-    border-top-right-radius: 26px;
-    border-top-left-radius: 26px;
-    overflow: hidden;
-    margin-bottom: 12px;
-    margin-top: 12px;
-    font-weight: 400;
-    cursor: pointer;
+  padding: 6px 16px;
+  top: 4px;
+  bottom: 4px;
+  left: 12px;
+  right: 12px;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 16px;
+  border-top-right-radius: 26px;
+  border-top-left-radius: 26px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  margin-top: 12px;
+  font-weight: 400;
+  cursor: pointer;
 }
 
 .button a {
-    text-decoration: none;
-    color: var(--dark-blue);
+  text-decoration: none;
+  color: var(--dark-blue);
 }
 
 .button a:hover {
-    text-decoration: none;
-    color: var(--white);
+  text-decoration: none;
+  color: var(--white);
 }
 
 .button.filled_green {
-    color: var(--dark-blue);
-    background-color: #d5ff87;
+  color: var(--dark-blue);
+  background-color: #d5ff87;
 }
 
 .button.filled_green:hover {
-    color: var(--white);
-    background-color: #809951;
-    transition: background-color 300ms linear, color 300ms;
+  color: var(--white);
+  background-color: #809951;
+  transition: background-color 300ms linear, color 300ms;
 }
 
-
 .button.filled_blue {
-    color: var(--dark-blue);
-    background-color: #89cff0;
+  color: var(--dark-blue);
+  background-color: #89cff0;
 }
 
 .button.filled_blue:hover {
-    color: white;
-    background-color: #527c90;
-    transition: background-color 300ms linear, color 300ms;
+  color: white;
+  background-color: #527c90;
+  transition: background-color 300ms linear, color 300ms;
 }
 
 .button.filled_red {
-    color: var(--dark-blue);
-    background-color: var(--red-pink);
+  color: var(--dark-blue);
+  background-color: var(--red-pink);
 }
 
 .button.filled_red:hover {
-    color: white;
-    background-color: #961933;
-    transition: background-color 300ms linear, color 300ms;
+  color: white;
+  background-color: #961933;
+  transition: background-color 300ms linear, color 300ms;
 }
 
 .button.filled_pink {
-    color: var(--dark-blue);
-    background-color: #ffd4e2;
+  color: var(--dark-blue);
+  background-color: #ffd4e2;
 }
 
 .button.filled_pink:hover {
-    color: white;
-    background-color: var(--dark-pink);
-    transition: background-color 300ms linear, color 300ms;
+  color: white;
+  background-color: var(--dark-pink);
+  transition: background-color 300ms linear, color 300ms;
 }
-
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"] {
-    color: var(--dark-blue);
+  color: var(--dark-blue);
 }
 
 input[type="radio"] {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .like-button {
-    border:none;
-    background: transparent;
-    cursor: pointer;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .load-more-button {
-    display: flex;
-    margin: auto;
-    color: var(--dark-golden);
-    border: 1px solid  var(--white-golden);
-    background: transparent;
-    cursor: pointer;
-    text-decoration: none;
-    overflow: hidden;
-    padding: 2vh 8vw;
+  display: flex;
+  margin: auto;
+  color: var(--dark-golden);
+  border: 1px solid var(--white-golden);
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  overflow: hidden;
+  padding: 2vh 8vw;
 }
 
 .load-more-button:disabled {
-    display: none;
-    color: #89712945;
-    border: 1px solid  #ae8e3045;
+  color: #89712945;
+  border: 1px solid #ae8e3045;
 }
 
 .load-more-button:hover {
-    background-color: var(--white-pink);
-  }
+  background-color: var(--white-pink);
+}
 
+.load-more-button:disabled:hover {
+  background-color: white;
+  cursor: default;
+}

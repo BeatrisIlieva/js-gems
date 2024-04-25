@@ -44,6 +44,30 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.get("/change-email", isAuth, getBagCount, getLikeCount, (req, res) => {
+  res.render("users/changeEmail");
+});
+
+router.post("/change-email", isAuth, async (req, res) => {
+  const { email, password } = req.body;
+  userId = req.user._id;
+
+  try {
+     await userManager.changeEmail(
+      email,
+      password,
+      userId,
+    );
+
+    res.render("users/credentialsUpdated");
+
+  } catch (err) {
+    const errorMessages = extractErrorMessages(err);
+
+    res.status(404).render("users/credentialsUpdated", { errorMessages, email });
+  }
+});
+
 router.get("/login", getBagCount, getLikeCount, async (req, res) => {
   res.render("users/login");
 });
