@@ -1,6 +1,7 @@
 <section class="jewelry-cards">
   {{#each jewelries}}
     <article class="jewelry-card">
+        {{#unless isSoldOut}}
       <div class="jewelry-card-thumbnail">
         <a href="/jewelries/{{jewelryIds}}/details" title="{{jewelryTitle}}">
           <img
@@ -10,6 +11,17 @@
           />
         </a>
         {{>like-button-forms}}
+        {{else}}
+        <div class="jewelry-card-thumbnail-sold-out">
+          <img
+            class="jewelry-card-img-sold-out"
+            src="{{firstImageUrl}}"
+            alt="{{jewelryTitle}} image"
+          />
+        <span class="sold-out">
+          SOLD OUT
+        </span>
+        {{/unless}}
         <div class="jewelry-card-content">
           <p class="jewelry-card-description">
             <ul class="jewelry-card-meta" role="list">

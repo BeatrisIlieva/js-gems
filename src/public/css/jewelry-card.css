@@ -1,59 +1,87 @@
 .jewelry-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px 32px;
-    padding: 24px 96px;
-    text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 32px;
+  padding: 24px 96px;
+  text-align: center;
 }
 
 .jewelry-card {
-    border-radius: 12px;
-    overflow: hidden;
-    border-style: dotted;
-    border-color: #fff8fa;
-    font-size: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border-style: dotted;
+  border-color: #fff8fa;
+  font-size: 0;
 }
 
 .jewelry-card-thumbnail {
-    aspect-ratio: 1 / 1;
-    border-radius: 12px;
-    background-color: #fff8fa;
-    position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  background-color: #fff8fa;
+  position: relative;
 }
 
 .jewelry-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.jewelry-card-thumbnail-sold-out {
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  background-color: #fff8fa;
+  position: relative;
+  background-color: white;
+  opacity: 0.6;
+}
+
+.jewelry-card-img-sold-out {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .jewelry-card .jewelry-card-content {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    font-size: 18px;
-    color: #040720;
-    padding: 12px;
-    transition: bottom 300ms linear;
-    cursor: pointer;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  font-size: 18px;
+  color: #040720;
+  padding: 12px;
+  transition: bottom 300ms linear;
+  cursor: pointer;
 
-    background: rgb(4, 7, 32);
-    background: linear-gradient(0deg, rgba(4, 7, 32, 0.9262298669467787) 0%, rgba(255, 183, 206, 0.7413559173669468) 30%, rgba(255, 248, 250, 0) 63%);
+  background: rgb(4, 7, 32);
+  background: linear-gradient(
+    0deg,
+    rgba(4, 7, 32, 0.9262298669467787) 0%,
+    rgba(255, 183, 206, 0.7413559173669468) 30%,
+    rgba(255, 248, 250, 0) 63%
+  );
 }
 
 .jewelry-card .jewelry-card-meta {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    color: #040720;
-    margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  color: #040720;
+  margin-bottom: 12px;
 }
 
 .jewelry-card .jewelry-card-description {
-    height: 40px;
-    overflow: hidden;
+  height: 40px;
+  overflow: hidden;
 }
 
 .jewelry-card:hover .jewelry-card-content {
-    bottom: 0px;
+  bottom: 0px;
 }
 
+.sold-out {
+  position: absolute;
+  color: var(--dark-golden);
+  font-size: 16px;
+  right: 20px;
+  top: 10px;
+  padding: 10px;
+}

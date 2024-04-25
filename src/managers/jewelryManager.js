@@ -4,7 +4,6 @@ const { updateQueryByJewelryIds } = require("../utils/updateQueryByJewelryIds");
 
 exports.getAll = async (jewelryIds, selectionQuery, limit) => {
   const queryByJewelryIds = await updateQueryByJewelryIds(jewelryIds);
-
   let query = [
     ...queryByJewelryIds,
     ...selectionQuery,
@@ -22,13 +21,6 @@ exports.getAll = async (jewelryIds, selectionQuery, limit) => {
         from: "categories",
         foreignField: "_id",
         localField: "category",
-      },
-    },
-    {
-      $match: {
-        "inventories.quantity": {
-          $gt: 0,
-        },
       },
     },
     {
@@ -51,6 +43,40 @@ exports.getAll = async (jewelryIds, selectionQuery, limit) => {
         jewelryTitle: {
           $addToSet: "$title",
         },
+        inventories: {
+          $push: "$inventories",
+        },
+      },
+    },
+    {
+      $addFields: {
+        isSoldOut: {
+          $reduce: {
+            input: "$inventories",
+            initialValue: true,
+            in: {
+              $and: [
+                "$$value",
+                {
+                  $eq: [
+                    {
+                      $size: {
+                        $filter: {
+                          input: "$$this",
+                          as: "inv",
+                          cond: {
+                            $gt: ["$$inv.quantity", 0],
+                          },
+                        },
+                      },
+                    },
+                    0,
+                  ],
+                },
+              ],
+            },
+          },
+        },
       },
     },
     {
@@ -60,6 +86,7 @@ exports.getAll = async (jewelryIds, selectionQuery, limit) => {
         jewelryIds: 1,
         categoryTitle: 1,
         jewelryTitle: 1,
+        isSoldOut: 1,
       },
     },
     {
@@ -71,6 +98,72 @@ exports.getAll = async (jewelryIds, selectionQuery, limit) => {
       $limit: limit,
     },
   ];
+  // let query = [
+  //   ...queryByJewelryIds,
+  //   ...selectionQuery,
+  //   {
+  //     $lookup: {
+  //       as: "inventories",
+  //       from: "inventories",
+  //       foreignField: "jewelry",
+  //       localField: "_id",
+  //     },
+  //   },
+  //   {
+  //     $lookup: {
+  //       as: "categories",
+  //       from: "categories",
+  //       foreignField: "_id",
+  //       localField: "category",
+  //     },
+  //   },
+  //   {
+  //     $match: {
+  //       "inventories.quantity": {
+  //         $gt: 0,
+  //       },
+  //     },
+  //   },
+  //   {
+  //     $group: {
+  //       _id: "$_id",
+  //       price: {
+  //         $first: {
+  //           $arrayElemAt: ["$inventories.price", 0],
+  //         },
+  //       },
+  //       firstImageUrl: {
+  //         $addToSet: "$firstImageUrl",
+  //       },
+  //       jewelryIds: {
+  //         $push: "$_id",
+  //       },
+  //       categoryTitle: {
+  //         $addToSet: "$categories.title",
+  //       },
+  //       jewelryTitle: {
+  //         $addToSet: "$title",
+  //       },
+  //     },
+  //   },
+  //   {
+  //     $project: {
+  //       price: 1,
+  //       firstImageUrl: 1,
+  //       jewelryIds: 1,
+  //       categoryTitle: 1,
+  //       jewelryTitle: 1,
+  //     },
+  //   },
+  //   {
+  //     $sort: {
+  //       _id: 1,
+  //     },
+  //   },
+  //   {
+  //     $limit: limit,
+  //   },
+  // ];
 
   const jewelries = await Jewelry.aggregate(query);
 
