@@ -66,5 +66,16 @@
     justify-content: space-around;
 }
 
+input[type="text"] {
+    width: auto; 
+    min-width: 24ch;   
+}
+
+input[type="password"] {
+    width: auto; 
+    min-width: 24ch;   
+}
+
+
 
 

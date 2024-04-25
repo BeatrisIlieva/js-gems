@@ -32,6 +32,11 @@
   background-color: #d5ff87;
 }
 
+.button.filled_yellow {
+  color: var(--dark-blue);
+  background-color: #FFFCC9;
+}
+
 .button.filled_green:hover {
   color: var(--white);
   background-color: #809951;
@@ -51,7 +56,7 @@
 
 .button.filled_red {
   color: var(--dark-blue);
-  background-color: var(--red-pink);
+  background-color: #fa2a54c6;
 }
 
 .button.filled_red:hover {

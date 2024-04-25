@@ -15,10 +15,10 @@
     </div>
   {{/each}}
 </div>
-<section class="form-container">
+<section class="profile-container">
   <div>
     <form method="POST">
-      <h4 class="form-title">Personal Information</h4>
+      <h4 class="form-login-or-register-title">Personal Information</h4>
       <ul role="list">
         <li class="form-item">
           Your First Name
@@ -37,7 +37,7 @@
         </li>
         <li class="form-item">
           <input
-            type="lastName"
+            type="text"
             id="lastName"
             value="{{profile.lastName}}"
             name="lastName"
@@ -49,7 +49,7 @@
         </li>
         <li class="form-item">
           <input
-            type="phoneNumber"
+            type="text"
             id="phoneNumber"
             value="{{profile.phoneNumber}}"
             name="phoneNumber"
@@ -57,14 +57,14 @@
           />
         </li>
       </ul>
-      <h4 class="form-title">Delivery Information</h4>
+      <h4 class="form-login-or-register-title">Delivery Information</h4>
       <ul role="list">
         <li class="form-item">
           Country
         </li>
         <li class="form-item">
           <input
-            type="country"
+            type="text"
             id="country"
             value="{{profile.country}}"
             name="country"
@@ -76,7 +76,7 @@
         </li>
         <li class="form-item">
           <input
-            type="city"
+            type="text"
             id="city"
             value="{{profile.city}}"
             name="city"
@@ -88,7 +88,7 @@
         </li>
         <li class="form-item">
           <input
-            type="address"
+            type="text"
             id="address"
             value="{{profile.address}}"
             name="address"
@@ -96,17 +96,17 @@
           />
         </li>
       </ul>
-      <button class="edit-btn button hover filled_green" type="submit"><i
-          class="fa-regular fa-floppy-disk"
-        ></i>
+      <button
+        class="edit-btn button hover filled_green profile-buttons"
+        type="submit"
+      ><i class="fa-regular fa-floppy-disk"></i>
         Confirm and Save
       </button>
     </form>
   </div>
   <div>
     <form method="post" action="/users/change-email">
-      <h4 class="form-login-or-register-title">Login Information</h4>
-      <h5>Update Email Address</h5>
+      <h4 class="form-login-or-register-title">Update Email Address</h4>
       <ul role="list">
         <li class="form-item">
           <input
@@ -127,46 +127,80 @@
         </li>
       </ul>
       <input type="hidden" name="next" />
-      <button class="register-button button filled_green">Submit</button>
+      <button
+        class="register-button button filled_green profile-buttons"
+      >Submit</button>
     </form>
-    <div>
-      <form method="post" action="/users/change-password">
-        <h4 class="form-login-or-register-title">Update Password</h4>
-        <ul role="list">
-          <li class="form-item">
-            <input
-              type="password"
-              id="oldPassword"
-              placeholder="Enter your current password"
-              name="oldPassword"
-            />
-          </li>
-          <li class="form-item">
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter your password"
-              name="password"
-            />
-          </li>
-          <li class="form-item">
-            <input
-              type="password"
-              id="repeatPassword"
-              placeholder="Confirm your password"
-              name="repeatPassword"
-            />
-          </li>
-        </ul>
-        <input type="hidden" name="next" />
-        <button class="register-button button filled_green">Submit</button>
-      </form>
-    </div>
-    <button class="edit-btn button hover filled_red">
-      <a href="/users/delete-confirmation">
-        <i class="fa-solid fa-user-slash"></i>
-        Delete Profile
-      </a>
-    </button>
   </div>
+  <div>
+    <form method="post" action="/users/change-password">
+      <h4 class="form-login-or-register-title">Update Password</h4>
+      <ul role="list">
+        <li class="form-item">
+          <input
+            type="password"
+            id="oldPassword"
+            placeholder="Enter your current password"
+            name="oldPassword"
+          />
+        </li>
+        <li class="form-item">
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            name="password"
+          />
+        </li>
+        <li class="form-item">
+          <input
+            type="password"
+            id="repeatPassword"
+            placeholder="Confirm your password"
+            name="repeatPassword"
+          />
+        </li>
+      </ul>
+      <input type="hidden" name="next" />
+      <button
+        class="register-button button filled_green profile-buttons"
+      >Submit</button>
+    </form>
+  </div>
+  <div>
+    <div>
+      <button
+        style="margin-top: 4vh;"
+        class="edit-btn button hover filled_pink profile-buttons"
+      >
+        <a href="/orders-history/{{user._id}}">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          Orders History
+        </a>
+      </button>
+    </div>
+    <div>
+      <button
+        style="margin-top: 4vh;"
+        class="edit-btn button hover filled_yellow profile-buttons"
+      >
+        <a href="/users/logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          Logout
+        </a>
+      </button>
+    </div>
+    <div>
+      <button
+        style="margin-top: 4vh;"
+        class="edit-btn button hover filled_red profile-buttons"
+      >
+        <a href="/users/delete-confirmation">
+          <i class="fa-solid fa-user-slash"></i>
+          Delete Profile
+        </a>
+      </button>
+    </div>
+  </div>
+
 </section>

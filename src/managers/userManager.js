@@ -60,12 +60,16 @@ exports.changeEmail = async (email, password, userId) => {
   if (!isPasswordValid) {
     throw new Error("Ensure you enter a valid password.");
   } else {
-
-    await User.findByIdAndUpdate(userId, { email: email});
+    await User.findByIdAndUpdate(userId, { email: email });
   }
 };
 
-exports.changePassword= async (oldPassword, password, repeatPassword, userId) => {
+exports.changePassword = async (
+  oldPassword,
+  password,
+  repeatPassword,
+  userId
+) => {
   user = await User.findById(userId);
 
   const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
@@ -73,14 +77,10 @@ exports.changePassword= async (oldPassword, password, repeatPassword, userId) =>
   if (!isPasswordValid) {
     throw new Error("Ensure you enter a valid password.");
   } else {
-
     user.password = password;
     user.repeatPassword = repeatPassword;
     await user.save();
-
-    // await User.findByIdAndUpdate(userId, {password: password, repeatPassword: repeatPassword});
   }
-
 };
 
 exports.delete = async (userId) => {

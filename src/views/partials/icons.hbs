@@ -51,11 +51,6 @@
       </a>
     </button>
   {{/if}}
-  <button class="btn">
-    <a href="/orders-history/{{user._id}}">
-      <i class="fa-solid fa-clock-rotate-left"></i>
-    </a>
-  </button>
   {{#unless isAuthenticated}}
     <button class="btn">
       <a href="/users/login">
@@ -69,9 +64,4 @@
       </a>
     </button>
   {{/unless}}
-  <button class="btn">
-    <a href="/users/logout">
-      <i class="fa-solid fa-arrow-right-from-bracket"></i>
-    </a>
-  </button>
 </div>

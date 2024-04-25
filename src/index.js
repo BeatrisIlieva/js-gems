@@ -10,7 +10,7 @@ const { SECRET } = require("./config/config");
 const {
   storeOriginalUrl,
 } = require("./middlewares/storeOriginalUrlMiddleware");
-const flash = require('express-flash');
+const flash = require("express-flash");
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/JSGems", {

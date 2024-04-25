@@ -12,7 +12,6 @@ const {
 } = require("../utils/transferSessionBagsToModelShoppingBag");
 const { isAuth } = require("../middlewares/authMiddleware");
 
-
 router.get("/register", getBagCount, getLikeCount, (req, res) => {
   res.render("users/register");
 });
@@ -45,22 +44,16 @@ router.post("/register", async (req, res) => {
   }
 });
 
-
 router.post("/change-email", isAuth, async (req, res) => {
   const { email, password } = req.body;
   userId = req.user._id;
 
   try {
-     await userManager.changeEmail(
-      email,
-      password,
-      userId,
-    );
+    await userManager.changeEmail(email, password, userId);
 
-    req.flash('success', 'Email updated successfully!');
+    req.flash("success", "Email updated successfully!");
 
     res.redirect("/profiles/edit");
-
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
 
@@ -73,17 +66,16 @@ router.post("/change-password", isAuth, async (req, res) => {
   userId = req.user._id;
 
   try {
-     await userManager.changePassword(
+    await userManager.changePassword(
       oldPassword,
       password,
       repeatPassword,
-      userId,
+      userId
     );
 
-    req.flash('success', 'Password updated successfully!');
+    req.flash("success", "Password updated successfully!");
 
     res.redirect("/profiles/edit");
-
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
 

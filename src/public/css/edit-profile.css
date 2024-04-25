@@ -1,6 +1,8 @@
-.flex-form-container{
-    display: flex;
-    justify-content: space-evenly;
-    
+.profile-container {
+  display: flex;
+  justify-content: space-evenly;
 }
 
+.profile-buttons {
+  width: 14vw;
+}
