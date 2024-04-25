@@ -1,95 +1,88 @@
 .header .navigation {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .header .nav-list {
-    display: flex;
-    gap: 32px;
+  display: flex;
+  gap: 32px;
 }
 
 .header .nav-list a {
-    text-decoration: none;
-    color: var(--white);
-    text-transform: uppercase;
+  text-decoration: none;
+  color: var(--white);
+  text-transform: uppercase;
 }
 
 .nav-item a {
-    transition: transform 0.3s ease-in-out;
-    display: inline-block;
+  transition: transform 0.3s ease-in-out;
+  display: inline-block;
 }
 
 .nav-item:hover a {
-    transform: scale(1.2);
-}
-
-
-.header .icon-container {
-    /* display: flex; */
-    /* gap:30px; */
-    /* justify-content: space-between; */
-    
+  transform: scale(1.2);
 }
 
 .header .btn {
-    display: inline-block;
-    color: var(--white);
-    text-decoration: none;  
-    border:none;
-    background: transparent;
-    cursor: pointer;
-    /* margin-left: 2px; */
-} 
+  display: inline-block;
+  color: var(--white);
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  /* margin-left: 2px; */
+}
 
 .header i {
-    color: var(--white); 
+  color: var(--white);
 }
 
 .header a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .likes-count-nav {
-    font-size: 16px;
-    font-family: Arial;
-    font-weight: 200;
-    color: var(--white);
+  font-size: 16px;
+  font-family: Arial;
+  font-weight: 200;
+  color: var(--white);
 }
 
 .cart-count-nav {
-    font-size: 16px;
-    font-family: Arial;
-    font-weight: 200;
-    color: var(--white);
+  font-size: 16px;
+  font-family: Arial;
+  font-weight: 200;
+  color: var(--white);
 }
 
-.header i:hover, .header li:hover {
-    color: var(--dark-pink);
+.header i:hover,
+.header li:hover {
+  color: var(--dark-pink);
 }
 
 .search-toggle {
-    display: none;
+  display: none;
 }
 
 .search {
-    display: none;
-    position: absolute;
-    top: 144px;
-    right: 180px;
-    z-index: 1;
-    border-radius: 12px;
-    border-color: var(--white);
-    width: 30vw;
+  display: none;
+  position: absolute;
+  top: 12.6vh;
+  right: 180px;
+  z-index: 1;
+  border-radius: 12px;
+  border-color: var(--white);
+  width: 30vw;
 }
 
 .search input {
-    border-radius: 12px;
+  border-radius: 12px;
 }
 
 .search-toggle:checked + .search {
-    display: inline-block;
+  display: inline-block;
 }
 
 label.search-icon {
-    cursor: pointer;
+  cursor: pointer;
 }

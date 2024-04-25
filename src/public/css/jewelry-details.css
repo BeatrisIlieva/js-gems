@@ -16,12 +16,12 @@
 
 .jewelry-details-right-container {
   position: sticky;
-  top: calc(30% + 12px);
+  top: calc(20vh + 12px);
 }
 
 .right-sticky {
   position: sticky;
-  top: calc(30% + 12px);
+  top: calc(20vh + 12px);
 }
 
 .jewelry-details-image-first,

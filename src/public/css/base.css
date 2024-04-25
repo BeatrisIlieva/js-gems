@@ -8,7 +8,7 @@
     font-family: FranklinGothic;
     color: var(--white);
     grid-template-columns: 100vw;
-    grid-template-rows: 28vh auto 6vh;
+    grid-template-rows: 20vh auto 6vh;
     grid-template-areas:
       "header"
       "main"
