@@ -12,6 +12,13 @@ const JewelryStones = require("../src/models/JewelryStones");
 const Size = require("../src/models/Size");
 const Inventory = require("../src/models/Inventory");
 
+const testVariables = {
+  categoryId: 2,
+  firstMetal: 1,
+  secondMetal: 3,
+  stoneTypesDataIndex: 0,
+};
+
 beforeAll(async () => {
   await mongoose.connect("mongodb://127.0.0.1:27017/TestDatabaseJSGems", {
     useNewUrlParser: true,
@@ -1546,10 +1553,8 @@ beforeAll(async () => {
 
 describe("get all jewelries by category", () => {
   it("GET jewelries/:categoryId - should fetch jewelries; pagination limit 6", async () => {
-    const categoryId = 2;
-
     return await request(app)
-      .get(`/jewelries/${categoryId}`)
+      .get(`/jewelries/${testVariables.categoryId}`)
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
       .expect(200)
@@ -1566,14 +1571,10 @@ describe("get all jewelries by category", () => {
   });
 
   it("GET jewelries/:categoryId/?Metal=1&Metal=3 - should fetch two jewelries", async () => {
-    const categoryId = 2;
-    const firstMetal = 1;
-    const secondMetal = 3;
-
     let sessionCookie;
 
     await request(app)
-      .get(`/jewelries/${categoryId}`)
+      .get(`/jewelries/${testVariables.categoryId}`)
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
       .expect(200)
@@ -1582,9 +1583,11 @@ describe("get all jewelries by category", () => {
       });
 
     await request(app)
-      .get(`/jewelries/${categoryId}?Metal=${firstMetal}&Metal=${secondMetal}`)
+      .get(
+        `/jewelries/${testVariables.categoryId}?Metal=${testVariables.firstMetal}&Metal=${testVariables.secondMetal}`
+      )
       .set("Accept", "application/json")
-      .set("Cookie", sessionCookie) 
+      .set("Cookie", sessionCookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then((res) => {
@@ -1593,6 +1596,7 @@ describe("get all jewelries by category", () => {
         expect(_.isArray(res.body.jewelries)).toBeTruthy();
         expect(res.body.metalsData).toBeDefined();
         expect(res.body.stoneTypesData).toBeDefined();
+        expect(res.body.stoneTypesData[testVariables.stoneTypesDataIndex].count).toEqual(1);
         expect(res.body.stoneColorsData).toBeDefined();
         expect(res.body.jewelries.length).toEqual(2);
         expect(res.body.loadMoreDisabled).toEqual(true);

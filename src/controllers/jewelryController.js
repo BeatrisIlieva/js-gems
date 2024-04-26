@@ -56,7 +56,7 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
         stoneColorsData = await getStoneColorsData(jewelryIds);
       } else {
         selectionQuery = await updateSelectionQuery(selection);
-        console.log(req.session.jewelryIds);
+
         jewelries = await jewelryManager.getAll(
           jewelryIds,
           selectionQuery,
@@ -127,9 +127,6 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
       return result
  
     }
-
-    console.log(here);
-    console.log(selection);
 
     res.render("jewelries/all", {
       jewelries,
