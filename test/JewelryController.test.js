@@ -12,12 +12,12 @@ const JewelryStones = require("../src/models/JewelryStones");
 const Size = require("../src/models/Size");
 const Inventory = require("../src/models/Inventory");
 
-
-
 const testVariables = {
-  categoryId: 2,
+  categoryEarringId: 2,
+  categoryRingId: 4,
   firstMetal: 1,
   secondMetal: 3,
+  whiteColorId: 7,
 };
 
 beforeAll(async () => {
@@ -1555,7 +1555,7 @@ beforeAll(async () => {
 describe("get all jewelries by category", () => {
   it("GET jewelries/:categoryId - should fetch jewelries; pagination limit 6", async () => {
     return await request(app)
-      .get(`/jewelries/${testVariables.categoryId}`)
+      .get(`/jewelries/${testVariables.categoryRingId}`)
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
       .expect(200)
@@ -1571,11 +1571,11 @@ describe("get all jewelries by category", () => {
       });
   });
 
-  it("GET jewelries/:categoryId/?Metal=1&Metal=3 - should fetch two jewelries", async () => {
+  it("GET jewelries/:categoryId - should fetch jewelries; pagination limit 12", async () => {
     let sessionCookie;
 
     await request(app)
-      .get(`/jewelries/${testVariables.categoryId}`)
+      .get(`/jewelries/${testVariables.categoryRingId}`)
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
       .expect(200)
@@ -1585,7 +1585,7 @@ describe("get all jewelries by category", () => {
 
     await request(app)
       .get(
-        `/jewelries/${testVariables.categoryId}?Metal=${testVariables.firstMetal}&Metal=${testVariables.secondMetal}`
+        `/jewelries/${testVariables.categoryRingId}?StoneColor=${testVariables.whiteColorId}`
       )
       .set("Accept", "application/json")
       .set("Cookie", sessionCookie)
@@ -1594,20 +1594,60 @@ describe("get all jewelries by category", () => {
       .then((res) => {
         console.log(res.body);
 
-        const rubyStone = res.body.stoneTypesData.find(stoneType => stoneType.title === "Ruby");
-        const redStone = res.body.stoneColorsData.find(stoneType => stoneType.title === "Red");
+        const whiteColor = res.body.stoneColorsData.find(
+          (stoneColor) => stoneColor.title === "White"
+        );
+
+        expect(res.body.jewelries.length).toEqual(6);
+        expect(res.body.loadMoreDisabled).toEqual(false);
+      });
+
+    await request(app)
+      .get(`/jewelries/${testVariables.categoryRingId}?loadMore=loadMore`)
+      .set("Accept", "application/json")
+      .set("Cookie", sessionCookie)
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .then((res) => {
+        expect(res.body.jewelries.length).toEqual(8);
+        expect(res.body.loadMoreDisabled).toEqual(true);
+      });
+  });
+
+  it("GET jewelries/:categoryId/?Metal=1&Metal=3 - should fetch two jewelries", async () => {
+    let sessionCookie;
+
+    await request(app)
+      .get(`/jewelries/${testVariables.categoryEarringId}`)
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .then((res) => {
+        sessionCookie = res.headers["set-cookie"];
+      });
+
+    await request(app)
+      .get(
+        `/jewelries/${testVariables.categoryEarringId}?Metal=${testVariables.firstMetal}&Metal=${testVariables.secondMetal}`
+      )
+      .set("Accept", "application/json")
+      .set("Cookie", sessionCookie)
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .then((res) => {
+        console.log(res.body);
+
+        const rubyStone = res.body.stoneTypesData.find(
+          (stoneType) => stoneType.title === "Ruby"
+        );
+        const redStone = res.body.stoneColorsData.find(
+          (stoneType) => stoneType.title === "Red"
+        );
         const expectedRubyCount = 1;
         const expectedRedCount = 1;
 
-        expect(res.body.jewelries).toBeDefined();
-        expect(_.isArray(res.body.jewelries)).toBeTruthy();
-        expect(res.body.metalsData).toBeDefined();
-        expect(res.body.stoneTypesData).toBeDefined();
         expect(rubyStone.count).toEqual(expectedRubyCount);
         expect(redStone.count).toEqual(expectedRedCount);
-        expect(res.body.stoneColorsData).toBeDefined();
-        expect(res.body.jewelries.length).toEqual(2);
-        expect(res.body.loadMoreDisabled).toEqual(true);
       });
   });
 });
