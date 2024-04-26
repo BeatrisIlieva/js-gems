@@ -1554,25 +1554,26 @@ beforeAll(async () => {
 
 describe("get all jewelries by category", () => {
   it("GET jewelries/:categoryId - should fetch jewelries; pagination limit 6", async () => {
+    const expectedLimit = 6;
     return await request(app)
       .get(`/jewelries/${testVariables.categoryRingId}`)
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
       .expect(200)
       .then((res) => {
-        console.log(res.body);
         expect(res.body.jewelries).toBeDefined();
         expect(_.isArray(res.body.jewelries)).toBeTruthy();
         expect(res.body.metalsData).toBeDefined();
         expect(res.body.stoneTypesData).toBeDefined();
         expect(res.body.stoneColorsData).toBeDefined();
-        expect(res.body.jewelries.length).toEqual(6);
+        expect(res.body.jewelries.length).toEqual(expectedLimit);
         expect(res.body.loadMoreDisabled).toEqual(false);
       });
   });
 
   it("GET jewelries/:categoryId - should fetch jewelries; pagination limit 12", async () => {
     let sessionCookie;
+    const expectedJewelriesLength = 8;
 
     await request(app)
       .get(`/jewelries/${testVariables.categoryRingId}`)
@@ -1590,13 +1591,7 @@ describe("get all jewelries by category", () => {
       .set("Accept", "application/json")
       .set("Cookie", sessionCookie)
       .expect("Content-Type", /json/)
-      .expect(200)
-      .then((res) => {
-        console.log(res.body);
-
-        expect(res.body.jewelries.length).toEqual(6);
-        expect(res.body.loadMoreDisabled).toEqual(false);
-      });
+      .expect(200);
 
     await request(app)
       .get(`/jewelries/${testVariables.categoryRingId}?loadMore=loadMore`)
@@ -1605,7 +1600,7 @@ describe("get all jewelries by category", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body.jewelries.length).toEqual(8);
+        expect(res.body.jewelries.length).toEqual(expectedJewelriesLength);
         expect(res.body.loadMoreDisabled).toEqual(true);
       });
   });
@@ -1631,7 +1626,6 @@ describe("get all jewelries by category", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then((res) => {
-        console.log(res.body);
 
         const rubyStone = res.body.stoneTypesData.find(
           (stoneType) => stoneType.title === "Ruby"
