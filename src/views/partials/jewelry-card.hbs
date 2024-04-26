@@ -1,8 +1,8 @@
 <section class="jewelry-cards">
   {{#each jewelries}}
+      {{#unless isSoldOut}}
     <article class="jewelry-card">
-        {{#unless isSoldOut}}
-      <div class="jewelry-card-thumbnail">
+      <article class="jewelry-card-thumbnail">
         <a href="/jewelries/{{jewelryIds}}/details" title="{{jewelryTitle}}">
           <img
             class="jewelry-card-img"
@@ -11,17 +11,6 @@
           />
         </a>
         {{>like-button-forms}}
-        {{else}}
-        <div class="jewelry-card-thumbnail-sold-out">
-          <img
-            class="jewelry-card-img-sold-out"
-            src="{{firstImageUrl}}"
-            alt="{{jewelryTitle}} image"
-          />
-        <span class="sold-out">
-          SOLD OUT
-        </span>
-        {{/unless}}
         <div class="jewelry-card-content">
           <p class="jewelry-card-description">
             <ul class="jewelry-card-meta" role="list">
@@ -38,7 +27,38 @@
             </ul>
           </p>
         </div>
-      </div>
-    </article>
+        </article>
+        </article>
+        {{else}}
+            <article class="jewelry-card">
+              <article class="jewelry-card">
+        <div class="jewelry-card-thumbnail-sold-out">
+          <img
+            class="jewelry-card-img-sold-out"
+            src="{{firstImageUrl}}"
+            alt="{{jewelryTitle}} image"
+          />
+        <span class="sold-out">
+          SOLD OUT
+        </span>
+        <div class="jewelry-card-content-sold-out">
+          <p class="jewelry-card-description">
+            <ul class="jewelry-card-meta" role="list">
+              <li class="jewelry-card-meta-item">
+                <i>{{jewelryTitle}}</i>
+              </li>
+              <li class="jewelry-card-meta-item">
+                {{categoryTitle}}
+              </li>
+              <li class="jewelry-card-meta-item">
+                <i class="price__icon fa-solid fa-sack-dollar"></i>
+                {{price}}
+              </li>
+            </ul>
+          </p>
+        </div>
+        </article>
+        </article>
+      {{/unless}}
   {{/each}}
 </section>

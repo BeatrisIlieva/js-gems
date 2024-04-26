@@ -9,11 +9,16 @@
 
 .orders-history-title {
     text-align: center;
+
     border-bottom-right-radius: 24px;
     border-bottom-left-radius: 24px;
     border-bottom-style: dotted;
     border-bottom-width: 2px;
     border-bottom-color: var(--dark-pink);
+}
+
+.orders-history-sub-title{
+    margin-bottom: 12vh;
 }
 
 .orders-section .order-title {
@@ -43,5 +48,7 @@
 .orders-history-container {
     padding: 12px 96px;
 }
+
+
 
 

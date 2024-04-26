@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 const inventorySchema = new mongoose.Schema({
-  // jewelry: {
-  //   type: mongoose.Types.ObjectId,
-  //   ref: "Jewelry",
-  //   required: true,
-  // },
   jewelry: {
     type: Number,
     ref: "Jewelry",
@@ -23,7 +18,7 @@ const inventorySchema = new mongoose.Schema({
   price: {
     type: Number,
     required: true,
-  }
+  },
 });
 
 const inventory = mongoose.model("Inventory", inventorySchema);

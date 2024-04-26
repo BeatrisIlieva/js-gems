@@ -98,72 +98,6 @@ exports.getAll = async (jewelryIds, selectionQuery, limit) => {
       $limit: limit,
     },
   ];
-  // let query = [
-  //   ...queryByJewelryIds,
-  //   ...selectionQuery,
-  //   {
-  //     $lookup: {
-  //       as: "inventories",
-  //       from: "inventories",
-  //       foreignField: "jewelry",
-  //       localField: "_id",
-  //     },
-  //   },
-  //   {
-  //     $lookup: {
-  //       as: "categories",
-  //       from: "categories",
-  //       foreignField: "_id",
-  //       localField: "category",
-  //     },
-  //   },
-  //   {
-  //     $match: {
-  //       "inventories.quantity": {
-  //         $gt: 0,
-  //       },
-  //     },
-  //   },
-  //   {
-  //     $group: {
-  //       _id: "$_id",
-  //       price: {
-  //         $first: {
-  //           $arrayElemAt: ["$inventories.price", 0],
-  //         },
-  //       },
-  //       firstImageUrl: {
-  //         $addToSet: "$firstImageUrl",
-  //       },
-  //       jewelryIds: {
-  //         $push: "$_id",
-  //       },
-  //       categoryTitle: {
-  //         $addToSet: "$categories.title",
-  //       },
-  //       jewelryTitle: {
-  //         $addToSet: "$title",
-  //       },
-  //     },
-  //   },
-  //   {
-  //     $project: {
-  //       price: 1,
-  //       firstImageUrl: 1,
-  //       jewelryIds: 1,
-  //       categoryTitle: 1,
-  //       jewelryTitle: 1,
-  //     },
-  //   },
-  //   {
-  //     $sort: {
-  //       _id: 1,
-  //     },
-  //   },
-  //   {
-  //     $limit: limit,
-  //   },
-  // ];
 
   const jewelries = await Jewelry.aggregate(query);
 
@@ -300,6 +234,45 @@ exports.getOne = async (jewelryId) => {
       $addFields: {
         price: {
           $arrayElemAt: ["$inventories.price", 0],
+        },
+      },
+    },
+    {
+      $addFields: {
+        sizes: {
+          $map: {
+            input: "$sizes",
+            as: "size",
+            in: {
+              $cond: {
+                if: {
+                  $gt: [
+                    {
+                      $size: {
+                        $filter: {
+                          input: "$inventories",
+                          as: "inventory",
+                          cond: {
+                            $and: [
+                              {
+                                $eq: ["$$inventory.size", "$$size._id"],
+                              },
+                              {
+                                $gt: ["$$inventory.quantity", 0],
+                              },
+                            ],
+                          },
+                        },
+                      },
+                    },
+                    0,
+                  ],
+                },
+                then: "$$size",
+                else: "$$REMOVE",
+              },
+            },
+          },
         },
       },
     },

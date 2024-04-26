@@ -2,18 +2,18 @@ const express = require("express");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const mongoose = require("mongoose");
-const expressConfig = require("./config/expressConfig");
-const handlebarsConfig = require("./config/handlebarsConfig");
-const dbConnect = require("./config/dbConfig");
-const routes = require("./routes");
-const { SECRET } = require("./config/config");
+const expressConfig = require("../../src/config/expressConfig");
+const handlebarsConfig = require("../../src/config/handlebarsConfig");
+const dbConnect = require("./dbConnect");
+const routes = require("../../src/routes");
+const { SECRET } = require("../../src/config/config");
 const {
   storeOriginalUrl,
-} = require("./middlewares/storeOriginalUrlMiddleware");
+} = require("../../src/middlewares/storeOriginalUrlMiddleware");
 const flash = require("express-flash");
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/JSGems", {
+  .connect("mongodb://127.0.0.1:27017/TestDatabaseJSGems", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -28,7 +28,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: "mongodb://127.0.0.1:27017/JSGems",
+      mongoUrl: "mongodb://127.0.0.1:27017/TestDatabaseJSGems",
     }),
     cookie: { maxAge: 180 * 60 * 1000 },
   })

@@ -1,8 +1,37 @@
 .profile-container {
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
+  gap: 8vw;
+  margin-left: 8vw;
+  margin-right: 12vw;
 }
 
 .profile-buttons {
   width: 14vw;
+}
+
+.flex-profile-container {
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 8vw;
+}
+
+.flex-sub-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.orders-history-img-container {
+  width: 32vw;
+  height: 32vh;
+  margin: auto;
+}
+
+.profile-container-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  border-bottom-style: dotted;
+  border-bottom-width: 2px;
+  border-bottom-color: var(--dark-pink);
 }

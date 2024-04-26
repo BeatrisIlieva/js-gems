@@ -44,16 +44,23 @@ exports.create = async ({
   );
 };
 
-exports.update = async (bagItemId, updatedQuantity) => {
+exports.update = async (bagItemId, updatedQuantity, sizeId) => {
   const bagItem = await ShoppingBag.findById(bagItemId);
 
   const jewelryId = bagItem.jewelry.toString();
 
-  const jewelry = await Jewelry.findById(jewelryId);
+  // const jewelry = await Jewelry.findById(jewelryId);
 
-  alreadyAddedQuantity = bagItem.quantity;
+  const alreadyAddedQuantity = bagItem.quantity;
 
-  availableQuantity = jewelry.quantity + alreadyAddedQuantity;
+  const inventoryItem = Inventory.findOne({
+    jewelry: Number(jewelryId),
+    size: sizeId,
+  });
+
+  const quantity = inventoryItem.quantity || 0;
+
+  const availableQuantity = quantity + alreadyAddedQuantity;
 
   if (updatedQuantity < DEFAULT_MIN_QUANTITY) {
     throw new Error("Quantity must be greater than zero");
@@ -64,14 +71,21 @@ exports.update = async (bagItemId, updatedQuantity) => {
   } else {
     await bagItem.updateOne({ quantity: updatedQuantity });
 
+    let newQuantity;
+
     if (alreadyAddedQuantity < updatedQuantity) {
       difference = updatedQuantity - alreadyAddedQuantity;
-      newQuantity = jewelry.quantity - difference;
+      newQuantity = quantity - difference;
     } else {
       difference = alreadyAddedQuantity - updatedQuantity;
-      newQuantity = jewelry.quantity + difference;
+      newQuantity = quantity + difference;
     }
-    await jewelry.updateOne({ quantity: newQuantity });
+
+    await Inventory.findOneAndUpdate(
+      { jewelry: jewelryId, size: sizeId },
+      { quantity: newQuantity },
+      { new: true }
+    );
 
     if (Number(updatedQuantity) === 0) {
       await bagItem.deleteOne();

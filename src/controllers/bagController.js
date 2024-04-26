@@ -25,6 +25,9 @@ router.get("/", getBagCount, getLikeCount, async (req, res) => {
       sessionId = req.session.id;
     }
 
+    const errorMessages = req.session.errorMessages;
+    delete req.session.errorMessages;
+
     if (!isEmpty) {
       jewelries = await bagManager.getAll(userId, sessionId);
 
@@ -33,12 +36,13 @@ router.get("/", getBagCount, getLikeCount, async (req, res) => {
         DEFAULT_MIN_QUANTITY,
         bagCountGreaterThanOne,
         bagCount,
+        errorMessages,
       });
     } else {
       res.render("bag/display");
     }
   } catch (err) {
-    console.log(err.message);
+    console.log(err.messages);
     res.render("500");
   }
 });
@@ -105,16 +109,19 @@ router.post("/:jewelryId/update", async (req, res) => {
   sizeId = Number(sizeId);
 
   try {
-    await bagManager.update(
-      bagItemId,
-      updatedQuantity,
-    );
+    await bagManager.update(bagItemId, updatedQuantity, sizeId);
 
     res.redirect("/bag");
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
+    req.session.errorMessages = errorMessages; // Store error messages in session
+    res.redirect("/bag");
+    // const errorMessages = extractErrorMessages(err);
 
-    res.redirect("/bag", { errorMessages });
+    // const queryParams = new URLSearchParams({
+    //   errorMessages: JSON.stringify(errorMessages),
+    // });
+    // res.redirect(`/bag?${queryParams.toString()}`);
   }
 });
 

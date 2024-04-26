@@ -1,6 +1,6 @@
 <div class="success-container">
-  <label for="closeSuccess" class="close-button">×</label>
   {{#each messages.success}}
+    <label for="closeSuccess" class="close-button">×</label>
     <input
       type="checkbox"
       id="successCheckbox{{forloop.index}}"
@@ -18,7 +18,7 @@
 <section class="profile-container">
   <div>
     <form method="POST">
-      <h4 class="form-login-or-register-title">Personal Information</h4>
+      <h4 class="profile-container-title">Personal Information</h4>
       <ul role="list">
         <li class="form-item">
           Your First Name
@@ -57,7 +57,7 @@
           />
         </li>
       </ul>
-      <h4 class="form-login-or-register-title">Delivery Information</h4>
+      <h4 class="profile-container-title">Delivery Information</h4>
       <ul role="list">
         <li class="form-item">
           Country
@@ -104,102 +104,114 @@
       </button>
     </form>
   </div>
-  <div>
-    <form method="post" action="/users/change-email">
-      <h4 class="form-login-or-register-title">Update Email Address</h4>
-      <ul role="list">
-        <li class="form-item">
-          <input
-            type="text"
-            id="email"
-            placeholder="Enter your email"
-            value="{{email}}"
-            name="email"
-          />
-        </li>
-        <li class="form-item">
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            name="password"
-          />
-        </li>
-      </ul>
-      <input type="hidden" name="next" />
-      <button
-        class="register-button button filled_green profile-buttons"
-      >Submit</button>
-    </form>
-  </div>
-  <div>
-    <form method="post" action="/users/change-password">
-      <h4 class="form-login-or-register-title">Update Password</h4>
-      <ul role="list">
-        <li class="form-item">
-          <input
-            type="password"
-            id="oldPassword"
-            placeholder="Enter your current password"
-            name="oldPassword"
-          />
-        </li>
-        <li class="form-item">
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            name="password"
-          />
-        </li>
-        <li class="form-item">
-          <input
-            type="password"
-            id="repeatPassword"
-            placeholder="Confirm your password"
-            name="repeatPassword"
-          />
-        </li>
-      </ul>
-      <input type="hidden" name="next" />
-      <button
-        class="register-button button filled_green profile-buttons"
-      >Submit</button>
-    </form>
-  </div>
-  <div>
-    <div>
-      <button
-        style="margin-top: 4vh;"
-        class="edit-btn button hover filled_pink profile-buttons"
-      >
-        <a href="/orders-history/{{user._id}}">
-          <i class="fa-solid fa-clock-rotate-left"></i>
-          Orders History
-        </a>
-      </button>
+  <div class="flex-sub-container">
+    <div class="flex-profile-container">
+      <div>
+        <form method="post" action="/users/change-password">
+          <h4 class="profile-container-title">Update Password</h4>
+          <ul role="list">
+            <li class="form-item">
+              <input
+                type="password"
+                id="oldPassword"
+                placeholder="Enter your current password"
+                name="oldPassword"
+              />
+            </li>
+            <li class="form-item">
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                name="password"
+              />
+            </li>
+            <li class="form-item">
+              <input
+                type="password"
+                id="repeatPassword"
+                placeholder="Confirm your password"
+                name="repeatPassword"
+              />
+            </li>
+          </ul>
+          <input type="hidden" name="next" />
+          <button
+            class="register-button button filled_green profile-buttons"
+          >Submit</button>
+        </form>
+      </div>
+      <div>
+        <form method="post" action="/users/change-email">
+          <h4 class="profile-container-title">Update Email Address</h4>
+          <ul role="list">
+            <li class="form-item">
+              <input
+                type="text"
+                id="email"
+                placeholder="Enter your email"
+                value="{{email}}"
+                name="email"
+              />
+            </li>
+            <li class="form-item">
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                name="password"
+              />
+            </li>
+          </ul>
+          <input type="hidden" name="next" />
+          <button
+            class="register-button button filled_green profile-buttons"
+          >Submit</button>
+        </form>
+      </div>
+
+      <div>
+        <div>
+          <button
+            style="margin-top: 4vh;"
+            class="edit-btn button hover filled_pink profile-buttons"
+          >
+            <a href="/orders-history/{{user._id}}">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              Orders History
+            </a>
+          </button>
+        </div>
+        <div>
+          <button
+            style="margin-top: 4vh;"
+            class="edit-btn button hover filled_yellow profile-buttons"
+          >
+            <a href="/users/logout">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              Logout
+            </a>
+          </button>
+        </div>
+        <div>
+          <button
+            style="margin-top: 4vh;"
+            class="edit-btn button hover filled_red profile-buttons"
+          >
+            <a href="/users/delete-confirmation">
+              <i class="fa-solid fa-user-slash"></i>
+              Delete Profile
+            </a>
+          </button>
+        </div>
+      </div>
     </div>
-    <div>
-      <button
-        style="margin-top: 4vh;"
-        class="edit-btn button hover filled_yellow profile-buttons"
-      >
-        <a href="/users/logout">
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          Logout
-        </a>
-      </button>
-    </div>
-    <div>
-      <button
-        style="margin-top: 4vh;"
-        class="edit-btn button hover filled_red profile-buttons"
-      >
-        <a href="/users/delete-confirmation">
-          <i class="fa-solid fa-user-slash"></i>
-          Delete Profile
-        </a>
-      </button>
+    <div class="orders-history-img-container">
+      <img
+        class="hero-img"
+        src="https://res.cloudinary.com/deztgvefu/image/upload/v1707674135/template_images/newshero19_candyny_gm6tqg.webp"
+        alt=""
+      />
     </div>
   </div>
 

@@ -112,6 +112,17 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
       loadMoreDisabled = true;
     }
 
+    if (req.headers.accept && req.headers.accept.includes("application/json")) {
+      return res.json({
+        jewelries,
+        metalsData,
+        stoneTypesData,
+        stoneColorsData,
+        loadMoreDisabled,
+        categoryId,
+      });
+    }
+
     res.render("jewelries/all", {
       jewelries,
       metalsData,

@@ -1,6 +1,6 @@
 .success-container {
   position: absolute;
-  top: 0;
+  top: 20vh;
   left: 0;
   width: 100%;
   z-index: 1000;

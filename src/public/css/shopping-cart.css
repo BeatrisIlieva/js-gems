@@ -6,7 +6,7 @@
 }
 
 .cart-img-container {
-  width: 24%;
+  width: 18vw;
   aspect-ratio: 1 / 1;
   margin: 18px;
   border-radius: 16px;
@@ -20,10 +20,10 @@
 }
 
 .shopping-cart-title {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
   position: absolute;
-  top: 56%;
+  top: 24.4vh;
   /*top: 32vh;*/
   /*top: 182px;*/
 }
