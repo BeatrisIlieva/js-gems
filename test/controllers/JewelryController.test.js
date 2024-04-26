@@ -1,22 +1,22 @@
 const request = require("supertest");
 const mongoose = require("mongoose");
-const app = require("../test/testDatabaseConfig/app");
+const app = require("../testDatabaseConfig/app");
 const _ = require("lodash");
-const Jewelry = require("../src/models/Jewelry");
-const Category = require("../src/models/Category");
-const Metal = require("../src/models/Metal");
-const JewelryMetals = require("../src/models/JewelryMetals");
-const StoneType = require("../src/models/StoneType");
-const StoneColor = require("../src/models/StoneColor");
-const JewelryStones = require("../src/models/JewelryStones");
-const Size = require("../src/models/Size");
-const Inventory = require("../src/models/Inventory");
+const Jewelry = require("../../src/models/Jewelry");
+const Category = require("../../src/models/Category");
+const Metal = require("../../src/models/Metal");
+const JewelryMetals = require("../../src/models/JewelryMetals");
+const StoneType = require("../../src/models/StoneType");
+const StoneColor = require("../../src/models/StoneColor");
+const JewelryStones = require("../../src/models/JewelryStones");
+const Size = require("../../src/models/Size");
+const Inventory = require("../../src/models/Inventory");
 
 const testVariables = {
   categoryEarringId: 2,
   categoryRingId: 4,
-  firstMetal: 1,
-  secondMetal: 3,
+  yellowGoldId: 1,
+  whiteGoldId: 3,
   whiteColorId: 7,
 };
 
@@ -1594,10 +1594,6 @@ describe("get all jewelries by category", () => {
       .then((res) => {
         console.log(res.body);
 
-        const whiteColor = res.body.stoneColorsData.find(
-          (stoneColor) => stoneColor.title === "White"
-        );
-
         expect(res.body.jewelries.length).toEqual(6);
         expect(res.body.loadMoreDisabled).toEqual(false);
       });
@@ -1628,7 +1624,7 @@ describe("get all jewelries by category", () => {
 
     await request(app)
       .get(
-        `/jewelries/${testVariables.categoryEarringId}?Metal=${testVariables.firstMetal}&Metal=${testVariables.secondMetal}`
+        `/jewelries/${testVariables.categoryEarringId}?Metal=${testVariables.yellowGoldId}&Metal=${testVariables.whiteGoldId}`
       )
       .set("Accept", "application/json")
       .set("Cookie", sessionCookie)
