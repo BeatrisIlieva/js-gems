@@ -12,11 +12,12 @@ const JewelryStones = require("../src/models/JewelryStones");
 const Size = require("../src/models/Size");
 const Inventory = require("../src/models/Inventory");
 
+
+
 const testVariables = {
   categoryId: 2,
   firstMetal: 1,
   secondMetal: 3,
-  stoneTypesDataIndex: 0,
 };
 
 beforeAll(async () => {
@@ -1592,11 +1593,18 @@ describe("get all jewelries by category", () => {
       .expect(200)
       .then((res) => {
         console.log(res.body);
+
+        const rubyStone = res.body.stoneTypesData.find(stoneType => stoneType.title === "Ruby");
+        const redStone = res.body.stoneColorsData.find(stoneType => stoneType.title === "Red");
+        const expectedRubyCount = 1;
+        const expectedRedCount = 1;
+
         expect(res.body.jewelries).toBeDefined();
         expect(_.isArray(res.body.jewelries)).toBeTruthy();
         expect(res.body.metalsData).toBeDefined();
         expect(res.body.stoneTypesData).toBeDefined();
-        expect(res.body.stoneTypesData[testVariables.stoneTypesDataIndex].count).toEqual(1);
+        expect(rubyStone.count).toEqual(expectedRubyCount);
+        expect(redStone.count).toEqual(expectedRedCount);
         expect(res.body.stoneColorsData).toBeDefined();
         expect(res.body.jewelries.length).toEqual(2);
         expect(res.body.loadMoreDisabled).toEqual(true);
