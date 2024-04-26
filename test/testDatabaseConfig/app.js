@@ -34,7 +34,7 @@ app.use(
   })
 );
 
-const PORT = 5050;
+const PORT = 5070;
 
 expressConfig(app);
 handlebarsConfig(app);

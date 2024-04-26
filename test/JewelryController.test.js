@@ -1545,7 +1545,7 @@ beforeAll(async () => {
 });
 
 describe("get all jewelries by category", () => {
-  it("GET jewelries/:categoryId - should fetch jewelries", async () => {
+  it("GET jewelries/:categoryId - should fetch jewelries; pagination limit 6", async () => {
     const categoryId = 2;
 
     return await request(app)
@@ -1561,6 +1561,41 @@ describe("get all jewelries by category", () => {
         expect(res.body.stoneTypesData).toBeDefined();
         expect(res.body.stoneColorsData).toBeDefined();
         expect(res.body.jewelries.length).toEqual(6);
+        expect(res.body.loadMoreDisabled).toEqual(false);
+      });
+  });
+
+  it("GET jewelries/:categoryId/?Metal=1&Metal=3 - should fetch two jewelries", async () => {
+    const categoryId = 2;
+    const firstMetal = 1;
+    const secondMetal = 3;
+
+    let sessionCookie;
+
+    await request(app)
+      .get(`/jewelries/${categoryId}`)
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .then((res) => {
+        sessionCookie = res.headers["set-cookie"];
+      });
+
+    await request(app)
+      .get(`/jewelries/${categoryId}?Metal=${firstMetal}&Metal=${secondMetal}`)
+      .set("Accept", "application/json")
+      .set("Cookie", sessionCookie) 
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .then((res) => {
+        console.log(res.body);
+        expect(res.body.jewelries).toBeDefined();
+        expect(_.isArray(res.body.jewelries)).toBeTruthy();
+        expect(res.body.metalsData).toBeDefined();
+        expect(res.body.stoneTypesData).toBeDefined();
+        expect(res.body.stoneColorsData).toBeDefined();
+        expect(res.body.jewelries.length).toEqual(2);
+        expect(res.body.loadMoreDisabled).toEqual(true);
       });
   });
 });
@@ -1568,4 +1603,3 @@ describe("get all jewelries by category", () => {
 afterAll(async () => {
   await mongoose.connection.close();
 });
-

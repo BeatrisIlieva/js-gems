@@ -56,13 +56,14 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
         stoneColorsData = await getStoneColorsData(jewelryIds);
       } else {
         selectionQuery = await updateSelectionQuery(selection);
-
+        console.log(req.session.jewelryIds);
         jewelries = await jewelryManager.getAll(
           jewelryIds,
           selectionQuery,
           10000
         );
 
+        
         totalLength = jewelries.length;
 
         jewelryIds = jewelries.map((jewelry) => jewelry._id);
@@ -112,8 +113,9 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
       loadMoreDisabled = true;
     }
 
+
     if (req.headers.accept && req.headers.accept.includes("application/json")) {
-      return res.json({
+      result = res.json({
         jewelries,
         metalsData,
         stoneTypesData,
@@ -121,7 +123,13 @@ router.get("/:categoryId", getBagCount, getLikeCount, async (req, res) => {
         loadMoreDisabled,
         categoryId,
       });
+      console.log(result);
+      return result
+ 
     }
+
+    console.log(here);
+    console.log(selection);
 
     res.render("jewelries/all", {
       jewelries,
