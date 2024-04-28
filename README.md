@@ -90,3 +90,33 @@
 ##### Purchase Process:
 - Upon clicking on the 'Checkout' button, customers are redirected to a page where they can enter their essential personal details, including names, phone number, and delivery address. This mandatory step, ensures that customers provide the necessary information before proceeding.
 - Proceeding to the next step in the checkout process, customers are required to provide valid card details to complete the payment. This ensures a secure and reliable transaction, adhering to industry standards for payment processing.
+
+5. #### Search:
+   
+     The search button allows users to input keywords or phrases, and in real-time, it dynamically displays related products from our extensive database.
+
+6. #### Wishlist:
+   
+     For non-registered users, their likes are stored temporarily in the session, allowing them to enjoy a personalized experience during their current visit. Registered users benefit from having their likes stored in the database, ensuring that their preferences are maintained across sessions.
+
+7. #### Last Seen Products:
+   
+     The system stores the last three products viewed by users in their session. This recent product history is displayed on pages where it is most relevant. Users can easily revisit and consider these recently viewed products, by clicking on them.
+
+8. #### Size Selection:
+   
+     A radio select button must be chosen before adding items to the shopping bag. This ensures clarity and precision in product selection, allowing customers to specify their preferences before proceeding to the checkout.
+
+9. #### Order Confirmation and Details:
+   
+     After the successful completion of the payment transaction, customers are redirected to an Order Details page, providing a comprehensive overview of their purchase. This page lists each product's characteristics, individual total price, and the overall total order price.
+
+    Included in this detailed confirmation is a unique Order ID for reference. Users will also find a summary of their personal information, ensuring transparency and facilitating future reference. 
+
+10. #### Order History:
+   
+     Registered users can enjoy a shopping experience with the added convenience of an order history feature. Every purchase made by a registered user is recorded and stored, allowing them to effortlessly track their order history.
+
+11. #### Load More Button:
+   
+     Implemented a "Load More" button to dynamically display more content.
