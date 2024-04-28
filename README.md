@@ -13,6 +13,7 @@
   <a href="#demo-video">Demo Video</a> ·
   <a href="#built-with">Built With</a> ·
   <a href="#features">Features</a> ·
+  <a href="#features">Error Handling</a> ·
   <a href="#installation">Installation</a> ·
   <a href="#usage">Usage</a> ·
   <a href="#license">License</a>
@@ -123,9 +124,10 @@
 
 <p align="right" dir="auto"><a href="#js-gems">Back To Top</a></p>
 
-11. #### User-Friendly Error Messages:
-   
-     Our system features custom error messages that provide clear and concise feedback. Notably, these error messages are conveniently dismissible with a simple click, ensuring a non-intrusive interaction.
+## Error Handling
+  Our system features custom error messages that provide clear and concise feedback. Notably, these error messages are conveniently dismissible with a simple click, ensuring a non-intrusive interaction.
+
+<p align="right" dir="auto"><a href="#js-gems">Back To Top</a></p>
 
 ## Installation
 
