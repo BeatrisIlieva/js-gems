@@ -100,7 +100,7 @@ router.post("/:jewelryId/create", async (req, res) => {
   } catch (err) {
     const errorMessages = extractErrorMessages(err);
     const jewelry = await jewelryManager.getOne(jewelryId);
-    res.render("jewelries/jewelry-details", { errorMessages, jewelry });
+    res.render("jewelries/jewelryDetails", { errorMessages, jewelry });
   }
 });
 
