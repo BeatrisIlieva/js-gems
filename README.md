@@ -56,3 +56,22 @@
 > Currently optimized for desktop; future plans include implementing media queries for responsiveness on various devices.
 
 <p align="right" dir="auto"><a href="#js-gems">Back To Top</a></p>
+
+## Features 
+
+1. #### User Models:
+- Implemented two distinct user models:
+  - logging credentials
+  - personal details
+    
+- Change Email functionality
+- Change Password functionality
+- Change Personal Details functionality
+- Detele Profile functionality
+- Logout functionality
+
+3. #### Advanced Product Filtering and Real-time Availability Tracking:
+- When a customer selects a choice from the dropdown menu, they are redirected to the chosen page.
+- Here, an advanced product filtering system awaits, allowing users to refine their search further.
+  - The selection menu not only filters the displayed products based on user preferences but also dynamically adjusts other checkboxes based on the available products.
+  - A counter is placed next to each checkbox within the multiple checkboxes form. These counters provide real-time feedback, indicating the exact number of products available for each checkbox selection.
