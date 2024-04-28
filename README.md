@@ -75,3 +75,14 @@
 - Here, an advanced product filtering system awaits, allowing users to refine their search further.
   - The selection menu not only filters the displayed products based on user preferences but also dynamically adjusts other checkboxes based on the available products.
   - A counter is placed next to each checkbox within the multiple checkboxes form. These counters provide real-time feedback, indicating the exact number of products available for each checkbox selection.
+ 
+4. #### Shopping Cart:
+##### Adding to Cart:
+- After successfully adding items to the shopping bag, customers are redirected to their personalized shopping cart. This page provides a detailed overview, including information about the quantity of each product, the total price based on the selected quantity, and the overall order total.
+  
+- Customers have the flexibility to adjust the quantity directly on the shopping cart page. Increasing or decreasing the quantity dynamically updates both the displayed total price and the inventory quantity in real-time.
+- For added convenience, if a product is added for a first or a second time from the product page, a quantity of one is automatically appended. Conversely, using the 'Update Quantity' button to set the quantity to zero removes the product from the shopping cart. Customers can also add as much quantity as available in the inventory, ensuring a flexible and tailored shopping experience.
+- Non-registered users can add items to their shopping cart without creating an account. 
+  - When users add items to their shopping cart, a cart is created in our database and linked to their current session ID. This session key serves as a temporary identifier.
+  - Our system is designed with dedicated settings and functions to ensure that the session key remains associated with the user's cart and account even after completing the registration process.
+  - After a customer completes the registration, they will be redirected back to their shopping cart. All the items they had selected before registering will still be there, ready for them to proceed with their purchase.
