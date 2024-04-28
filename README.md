@@ -141,7 +141,7 @@
 
 2. #### Install nodemon:
 
-        ```bash
+     ```bash
     npm i -D nodemon
     ```
     
