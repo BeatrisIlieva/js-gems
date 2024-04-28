@@ -120,3 +120,5 @@
 11. #### Load More Button:
    
      Implemented a "Load More" button to dynamically display more content.
+
+<p align="right" dir="auto"><a href="#js-gems">Back To Top</a></p>
