@@ -122,3 +122,51 @@
      Implemented a "Load More" button to dynamically display more content.
 
 <p align="right" dir="auto"><a href="#js-gems">Back To Top</a></p>
+
+13. #### User-Friendly Error Messages:
+   
+     Our system features custom error messages that provide clear and concise feedback. Notably, these error messages are conveniently dismissible with a simple click, ensuring a non-intrusive interaction.
+
+14. #### Email Notifications:
+- Upon successful registration on our platform, users will receive a confirmation email. This email includes a button that, when clicked, will direct users to our website.
+- After a successful purchase, users will receive a purchase confirmation email.
+
+## Installation
+
+1. #### Clone the repository:
+
+    ```bash
+    git clone https://github.com/BeatrisIlieve/JSGems.git
+    ```
+
+2. #### Install nodemon:
+
+        ```bash
+    npm i -D nodemon
+    ```
+    
+6. #### Populate the database by running the following command:
+
+    ```bash
+    npm run populate
+    ```
+
+<p align="right" dir="auto"><a href="#js-gems">Back To Top</a></p>
+
+## Usage
+1. #### Run the development server:
+
+    ```bash
+    npm start
+    ```
+  
+2. #### Visit [localhost:5050](http://localhost:5050) in your web browser to access the application.
+
+<p align="right" dir="auto"><a href="#js-gems">Back To Top</a></p>
+
+## License
+This project is licensed under the [MIT License](LICENSE).
+
+<p align="right" dir="auto"><a href="#js-gems">Back To Top</a></p>
+
+
