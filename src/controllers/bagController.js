@@ -31,12 +31,15 @@ router.get("/", getBagCount, getLikeCount, async (req, res) => {
     if (!isEmpty) {
       jewelries = await bagManager.getAll(userId, sessionId);
 
+      lastViewedJewelries = req.session.lastViewedJewelries.flat() || [];
+
       res.render("bag/display", {
         jewelries,
         DEFAULT_MIN_QUANTITY,
         bagCountGreaterThanOne,
         bagCount,
         errorMessages,
+        lastViewedJewelries
       });
     } else {
       res.render("bag/display");

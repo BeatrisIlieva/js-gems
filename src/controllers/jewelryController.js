@@ -177,9 +177,9 @@ router.get(
         req.session.lastViewedJewelries.push(jewelry);
       }
 
-      lastViewedJewelries = req.session.lastViewedJewelries.flat();
+      
 
-      res.render("jewelries/jewelryDetails", { jewelry, lastViewedJewelries });
+      res.render("jewelries/jewelryDetails", { jewelry });
     } catch (err) {
       console.log(err.message);
       res.render("500");
