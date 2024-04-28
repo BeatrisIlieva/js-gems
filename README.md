@@ -13,7 +13,7 @@
   <a href="#demo-video">Demo Video</a> ·
   <a href="#built-with">Built With</a> ·
   <a href="#features">Features</a> ·
-  <a href="#features">Error Handling</a> ·
+  <a href="#error-handling">Error Handling</a> ·
   <a href="#installation">Installation</a> ·
   <a href="#usage">Usage</a> ·
   <a href="#license">License</a>
