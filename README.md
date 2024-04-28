@@ -45,3 +45,14 @@
 </table>
 
 <br>
+
+1. #### Backend:
+- Followed  Model-View-Controller (MVC) architecture.
+2. #### Database:
+- MongoDB: Data aggregation and dynamic filtration.
+3. #### Frontend:
+- Styled the user interface with CSS for an intuitive shopping experience tailored for desktop users.
+> [!NOTE]
+> Currently optimized for desktop; future plans include implementing media queries for responsiveness on various devices.
+
+<p align="right" dir="auto"><a href="#js-gems">Back To Top</a></p>
