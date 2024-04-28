@@ -86,3 +86,7 @@
   - When users add items to their shopping cart, a cart is created in our database and linked to their current session ID. This session key serves as a temporary identifier.
   - Our system is designed with dedicated settings and functions to ensure that the session key remains associated with the user's cart and account even after completing the registration process.
   - After a customer completes the registration, they will be redirected back to their shopping cart. All the items they had selected before registering will still be there, ready for them to proceed with their purchase.
+ 
+##### Purchase Process:
+- Upon clicking on the 'Checkout' button, customers are redirected to a page where they can enter their essential personal details, including names, phone number, and delivery address. This mandatory step, ensures that customers provide the necessary information before proceeding.
+- Proceeding to the next step in the checkout process, customers are required to provide valid card details to complete the payment. This ensures a secure and reliable transaction, adhering to industry standards for payment processing.
