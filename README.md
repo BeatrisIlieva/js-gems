@@ -24,7 +24,7 @@
 ---
 
 ## Introduction
-<p><i>Welcome to our Online Jewelry Store! This web application serves as a platform for showcasing and selling a stunning collection of exquisite jewelry. With a user-friendly       interface and seamless navigation, customers can explore, select, and purchase their favorite pieces effortlessly..</i></p>
+<p><i>Welcome to our Online Jewelry Store! This web application serves as a platform for showcasing and selling a stunning collection of exquisite jewelry. With a user-friendly       interface and seamless navigation, customers can explore, select, and purchase their favorite pieces effortlessly.</i></p>
 
 <br>
 
