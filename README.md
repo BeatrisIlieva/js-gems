@@ -30,7 +30,7 @@
 
 ## Demo Video
 
-[![Watch the video](https://img.youtube.com/vi/ZVYsiTEC7DU/maxresdefault.jpg)](https://www.youtube.com/watch?v=ZVYsiTEC7DU)
+[![Watch the video](https://img.youtube.com/vi/G62I2oleWCg/maxresdefault.jpg)](https://www.youtube.com/watch?v=G62I2oleWCg)
 
 <p align="right" dir="auto"><a href="#js-gems">Back To Top</a></p>
 
